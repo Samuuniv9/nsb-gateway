@@ -1,0 +1,71 @@
+/* === NSB Style — identité visuelle unifiée === */
+
+body {
+  font-family: "Poppins", "Inter", sans-serif;
+  background-color: #f7f9fc;
+  color: #0a192f;
+}
+
+#nsb-app {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+#nsb-app:hover {
+  transform: scale(1.01);
+}
+
+#nsb-app h1 {
+  font-weight: 700;
+  color: #0a192f;
+  margin-bottom: 12px;
+}
+
+#nsb-app p {
+  font-size: 15px;
+  color: #5a6a85;
+  margin-bottom: 20px;
+}
+
+/* Boutons principaux */
+.nsb-btn {
+  display: inline-block;
+  margin: 6px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.nsb-btn-primary {
+  background-color: #00c6ff;
+  color: #fff;
+}
+
+.nsb-btn-primary:hover {
+  background-color: #009be0;
+}
+
+.nsb-btn-dark {
+  background-color: #0a192f;
+  color: #fff;
+}
+
+.nsb-btn-dark:hover {
+  background-color: #142b47;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  #nsb-app {
+    padding: 15px;
+  }
+}
