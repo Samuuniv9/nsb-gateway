@@ -3,6 +3,15 @@
 // Objectif : Créer un module dynamique "NSB Gateway" pour Landing Page Pwofeel
 // Date : 2025-10-21
 
+
+// Charger dynamiquement le style NSB
+const style = document.createElement("link");
+style.rel = "stylesheet";
+style.href = "https://samuuniv9.github.io/nsb-gateway/docs/nsb-style.css";
+document.head.appendChild(style);
+
+
+
 function nsbMount() {
   const config = {
     decouverte: {
