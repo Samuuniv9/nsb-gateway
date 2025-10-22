@@ -16,7 +16,7 @@ Son rôle n’est pas de vendre, mais d’éveiller — avant de conduire vers l
    - Sous-accroche : “Bâtir une culture IA locale.”
 
 2. **Section Héros (Hero)**
-   - Titre principal : **NORTH★STAR // GATE ✴︎**
+   - Titre principal : **NORTH★STAR // GATE **
    - Phrase d’intro : “Point d’entrée individuel vers une culture collective.”
    - Image : portrait de dos de Sam (dans un environnement végétal)
    - Nom affiché : “Sam // NSB”
