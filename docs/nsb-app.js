@@ -55,7 +55,7 @@ function renderApp(copy, routes) {
     </header>
 
     <section class="nsb-hero">
-      <h1>NORTH★STAR // GATE ✴︎</h1>
+      <h1>NORTH★STAR // GATE </h1>
       <p>Point d’entrée individuel vers une culture collective.</p>
       <blockquote>
         Tu as croisé ma route — et ce n’est sans doute pas un hasard.<br>
