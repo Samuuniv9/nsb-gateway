@@ -11,7 +11,7 @@
 ---
 
 ## HÉRO
-**Titre :** NORTH★STAR // GATE ✴︎  
+**Titre :** NORTH★STAR // GATE   
 **Sous-titre :** Point d’entrée individuel vers une culture collective.  
 **Image :** Sam, de dos, marchant dans un environnement végétal.  
 **Nom affiché :** Sam // NSB  
