@@ -1,71 +1,144 @@
-/* === NSB Style — identité visuelle unifiée === */
+/* =========================================================
+   NSB Gateway — Feuille de style principale
+   Version : 2.0 | Auteur : Samuel Nubery
+   ========================================================= */
 
-body {
-  font-family: "Poppins", "Inter", sans-serif;
-  background-color: #f7f9fc;
-  color: #0a192f;
+/* 1️⃣ VARIABLES GLOBALES */
+:root {
+  --color-bg: #0a0f14;
+  --color-text: #e0f2ff;
+  --color-accent: #00c6ff;
+  --color-accent2: #007bff;
+  --color-muted: #73859c;
+  --font-main: 'Inter', 'Segoe UI', Roboto, sans-serif;
+  --radius: 16px;
+}
+
+/* 2️⃣ RESET + LAYOUT GÉNÉRAL */
+#nsb-app, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
 }
 
 #nsb-app {
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 25px;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* 3️⃣ HEADER */
+.nsb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: var(--color-muted);
+  opacity: 0.85;
+}
+
+.nsb-logo {
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--color-accent);
+}
+
+.nsb-badge {
+  border: 1px solid var(--color-accent);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+}
+
+/* 4️⃣ SECTION HÉRO */
+.nsb-hero {
   text-align: center;
-  transition: all 0.3s ease;
+  padding: 20px 10px;
 }
 
-#nsb-app:hover {
-  transform: scale(1.01);
-}
-
-#nsb-app h1 {
+.nsb-hero h1 {
+  font-size: 32px;
   font-weight: 700;
-  color: #0a192f;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-#nsb-app p {
-  font-size: 15px;
-  color: #5a6a85;
-  margin-bottom: 20px;
+.nsb-hero p {
+  font-size: 16px;
+  color: var(--color-muted);
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
-/* Boutons principaux */
-.nsb-btn {
+.nsb-hero blockquote {
+  margin: 0 auto 20px;
+  padding: 12px;
+  border-left: 2px solid var(--color-accent);
+  color: #b8cde5;
+  font-style: italic;
+}
+
+/* CTA principal */
+.nsb-cta {
   display: inline-block;
-  margin: 6px;
-  padding: 10px 20px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
   transition: 0.25s;
 }
 
-.nsb-btn-primary {
-  background-color: #00c6ff;
-  color: #fff;
+.nsb-cta:hover {
+  transform: scale(1.04);
+  filter: brightness(1.2);
 }
 
-.nsb-btn-primary:hover {
-  background-color: #009be0;
+/* 5️⃣ BARRE SOCIALE */
+.nsb-social {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
 
-.nsb-btn-dark {
-  background-color: #0a192f;
-  color: #fff;
+.nsb-social a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
 }
 
-.nsb-btn-dark:hover {
-  background-color: #142b47;
+.nsb-social a:hover {
+  color: var(--color-accent2);
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  #nsb-app {
-    padding: 15px;
-  }
+/* 6️⃣ FOOTER */
+.nsb-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+}
+
+.nsb-footer em {
+  display: block;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+/* 7️⃣ RESPONSIVITÉ MOBILE */
+@media (max-width: 480px) {
+  .nsb-hero h1 { font-size: 26px; }
+  .nsb-hero p { font-size: 15px; }
+  #nsb-app { padding: 14px; }
 }
