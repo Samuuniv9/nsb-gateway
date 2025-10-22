@@ -1,0 +1,26 @@
+{
+  "fr": {
+    "cta_univers": "/univers",
+    "whatsapp_flux": "#",
+    "site_officiel": "#",
+    "linkedin": "linkedin.com/in/samuel-nubéry-946768214",
+    "instagram": "https://www.instagram.com/lachambre200/",
+    "twitch": "#"
+  },
+  "en": {
+    "cta_univers": "/en/universe",
+    "whatsapp_flux": "#",
+    "site_officiel": "#",
+    "linkedin": "linkedin.com/in/samuel-nubéry-946768214",
+    "instagram": "https://www.instagram.com/lachambre200",
+    "twitch": "#"
+  },
+  "es": {
+    "cta_univers": "/es/universo",
+    "whatsapp_flux": "#",
+    "site_officiel": "#",
+    "linkedin": "linkedin.com/in/samuel-nubéry-946768214",
+    "instagram": "https://www.instagram.com/lachambre200",
+    "twitch": "#"
+  }
+}
