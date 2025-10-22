@@ -1,3 +1,7 @@
+console.log("✅ NSB Gateway script loaded");
+document.body.innerHTML = "<h1>Bienvenue sur NSB Gateway</h1>";
+
+
 /* =========================================================
    NSB Gateway — Moteur principal (v2.0)
    Auteur : Samuel Nubery
