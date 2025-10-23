@@ -8,18 +8,31 @@
   <!-- Style principal -->
   <link rel="stylesheet" href="docs/nsb-style.css" />
 
-  <style>
-    /* === LAYOUT PRINCIPAL === */
-    body {
-      position: relative;
-      background: radial-gradient(circle at center, rgba(0,198,255,0.1) 0%, rgba(0,10,20,1) 60%, #000 100%);
-      color: var(--color-text);
-      font-family: var(--font-main);
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 32px 16px;
-      overflow: hidden;
-    }
+ <style>
+  /* === LAYOUT PRINCIPAL (corrigé pour mobile + effet spatial fixe) === */
+  body {
+    position: relative;
+    background: radial-gradient(circle at center, rgba(0,198,255,0.1) 0%, rgba(0,10,20,1) 60%, #000 100%);
+    color: var(--color-text);
+    font-family: var(--font-main);
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    overflow-x: hidden; /* empêche le débordement horizontal */
+    overflow-y: auto;   /* autorise le scroll vertical */
+    min-height: 100vh;  /* garantit que le fond couvre tout l’écran */
+  }
+
+  /* Les étoiles et le halo spatial restent fixes à l’arrière-plan */
+  .stars, body::before {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* permet de cliquer/faire défiler sans gêne */
+    z-index: -1;
+  }
 
     h1, h2 {
       text-align: center;
