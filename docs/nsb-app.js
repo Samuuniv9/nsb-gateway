@@ -59,10 +59,8 @@ function renderApp(copy, routes) {
       <p>Point d’entrée individuel vers une culture collective.</p>
       <blockquote>
         Tu as croisé ma route — et ce n’est sans doute pas un hasard.<br>
-        Ici commence une conversation entre toi, l’intelligence artificielle et le monde réel.<br>
-        Ce n’est pas un programme. Ce n’est pas un réseau.<br>
-        C’est un mouvement : une façon d’apprendre, de créer et de penser ensemble.<br>
-        Si tu ressens une forme d’écho, c’est que tu es déjà sur la bonne fréquence.
+        Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.<br>
+        Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas.
       </blockquote>
       <a class="nsb-cta" href="${routes.fr.cta_univers}" target="_blank">🌠 Entrer dans l’univers NSB</a>
     </section>
