@@ -16,16 +16,11 @@ Son rôle n’est pas de vendre, mais d’éveiller — avant de conduire vers l
    - Sous-accroche : “Bâtir une culture IA locale.”
 
 2. **Section Héros (Hero)**
-   - Titre principal : **NORTH★STAR // GATE **
-   - Phrase d’intro : “Point d’entrée individuel vers une culture collective.”
-   - Image : portrait de dos de Sam (dans un environnement végétal)
-   - Nom affiché : “Sam // NSB”
-   - Texte narratif :
-     > “Tu as croisé ma route — et ce n’est sans doute pas un hasard.  
-     > Ici commence une conversation entre toi, l’intelligence artificielle et le monde réel.  
-     > Ce n’est pas un programme. Ce n’est pas un réseau.  
-     > C’est un mouvement : une façon d’apprendre, de créer et de penser ensemble.  
-     > Si tu ressens une forme d’écho, c’est que tu es déjà sur la bonne fréquence.”
+   - Titre principal : **NORTH★STAR // GATE**
+   - Sous-titre : "La passerelle entre le monde numérique et la réalité locale"
+   - Image : logo NSB
+   - Nom affiché : "Logo // NSB"
+   - Texte narratif : voir `COPY.fr.md`
    - **CTA principal unique :** “🌠 Entrer dans l’univers NSB” → `/univers`
 
 3. **Barre sociale**
@@ -41,21 +36,7 @@ Son rôle n’est pas de vendre, mais d’éveiller — avant de conduire vers l
 Page d’orientation indépendante, non indexée dans le site principal.  
 Son but : prolonger la Gate, donner du sens, et guider vers la communauté.
 
-### Contenu par blocs :
-1. **Bloc 1 – Ce que tu peux faire maintenant**  
-   → Rejoindre le flux WhatsApp, ou partager ton intention.  
-
-2. **Bloc 2 – Bientôt**  
-   → Présenter les prochaines thématiques (workshops IA locale, culture data, créativité).  
-
-3. **Bloc 3 – Pourquoi NSB existe**  
-   → Mission courte : relier la jeunesse, la donnée et le territoire.  
-
-4. **Bloc 4 – Le mouvement**  
-   → Micro-preuves (citations, partenaires, images, phrases inspirantes).  
-
-5. **Bloc 5 – CTA final**  
-   → “Rejoins le flux NSB” (WhatsApp officiel).
+- Texte narratif : voir `copy.univers.fr.md`
 
 ---
 
@@ -103,7 +84,7 @@ Scan de la carte → NORTH★STAR // GATE
 ↓ (CTA unique)
 Page /univers (éveil, sens, lien WhatsApp)
 ↓
-Canal WhatsApp NSB
+CANDIDATURE NSB
 ↓
 Site officiel (offres, ressources, communauté)
 
@@ -126,7 +107,7 @@ Site officiel (offres, ressources, communauté)
 |------|----------------|
 | Trafic | Nombre de scans et visites sur la Gate |
 | Conversion | % clics sur “Entrer dans l’univers NSB” |
-| Engagement | % rejoignant le flux WhatsApp |
+| Engagement | % Candidature envoyée |
 | Perception | Feedback qualitatif (mystère, cohérence, envie) |
 
 ---
