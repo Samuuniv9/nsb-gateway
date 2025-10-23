@@ -62,7 +62,7 @@ function renderApp(copy, routes) {
         Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.<br>
         Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas.
       </blockquote>
-      <a class="nsb-cta" href="${routes.fr.cta_univers}" target="_blank">🌠 Entrer dans l’univers NSB</a>
+      <a class="nsb-cta" href="${routes.fr.cta_univers}" target="_blank">💡 En savoir plus</a>
     </section>
 
     <section class="nsb-social">
