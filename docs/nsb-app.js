@@ -62,7 +62,7 @@ function renderApp(copy, routes) {
 
       <div class="nsb-logo-container">
         <img 
-          src="https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/nsb-logo.png" 
+          src="./nsb-logo.png" alt="Logo NSB" class="nsb-hero-logo"
           alt="Logo NSB" 
           class="nsb-hero-logo"
           loading="lazy"
