@@ -1,6 +1,6 @@
 /* =========================================================
    NSB Gateway — Feuille de style principale
-   Version : 2.0 | Auteur : Samuel Nubery
+   Version : 2.1 | Auteur : Samuel Nubery
    ========================================================= */
 
 /* 1️⃣ VARIABLES GLOBALES */
@@ -56,10 +56,12 @@
   font-size: 11px;
 }
 
-/* 4️⃣ SECTION HÉRO */
+/* =========================================================
+   4️⃣ SECTION HÉRO — VERSION AVEC LOGO + ESPACEMENTS
+   ========================================================= */
 .nsb-hero {
   text-align: center;
-  padding: 20px 10px;
+  padding: 40px 20px;
 }
 
 .nsb-hero h1 {
@@ -69,103 +71,6 @@
   background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
   -webkit-background-clip: text;
   color: transparent;
-}
-
-.nsb-hero p {
-  font-size: 16px;
-  color: var(--color-muted);
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-
-.nsb-hero blockquote {
-  margin: 0 auto 20px;
-  padding: 12px;
-  border-left: 2px solid var(--color-accent);
-  color: #b8cde5;
-  font-style: italic;
-}
-
-/* CTA principal */
-.nsb-cta {
-  display: inline-block;
-  padding: 14px 22px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  transition: 0.25s;
-}
-
-.nsb-cta:hover {
-  transform: scale(1.04);
-  filter: brightness(1.2);
-}
-
-/* 5️⃣ BARRE SOCIALE */
-.nsb-social {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.nsb-social a {
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.nsb-social a:hover {
-  color: var(--color-accent2);
-}
-
-/* 6️⃣ FOOTER */
-.nsb-footer {
-  text-align: center;
-  font-size: 13px;
-  color: var(--color-muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 16px;
-}
-
-.nsb-footer em {
-  display: block;
-  color: var(--color-accent);
-  margin-bottom: 6px;
-}
-
-/* 7️⃣ RESPONSIVITÉ MOBILE */
-@media (max-width: 480px) {
-  .nsb-hero h1 { font-size: 26px; }
-  .nsb-hero p { font-size: 15px; }
-  #nsb-app { padding: 14px; }
-}
-
-/* ✴️ Effet spatial "Portail vers Univers" */
-#nsb-transition {
-  position: fixed;
-  top: 0; 
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(
-    circle at center,
-    rgba(0,198,255,0.9) 0%,
-    rgba(0,10,20,0.95) 60%,
-    #000 100%
-  );
-  box-shadow: 0 0 60px rgba(0,198,255,0.5) inset;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  z-index: 9999;
-}
-
-/* === STYLE HERO AVEC LOGO === */
-.nsb-hero {
-  text-align: center;
-  padding: 40px 20px;
 }
 
 .nsb-subtitle {
@@ -189,6 +94,7 @@
   filter: drop-shadow(0 0 12px rgba(0,198,255,0.4));
   transition: transform 0.3s ease;
 }
+
 .nsb-hero-logo:hover {
   transform: scale(1.05);
 }
@@ -210,7 +116,101 @@
   line-height: 1.7;
 }
 
-/* === RESPONSIVE === */
+/* =========================================================
+   5️⃣ CTA (Boutons)
+   ========================================================= */
+.nsb-cta {
+  display: inline-block;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: 0.25s;
+  box-shadow: 0 0 20px rgba(0,198,255,0.3);
+}
+
+.nsb-cta:hover {
+  transform: scale(1.04);
+  filter: brightness(1.2);
+  box-shadow: 0 0 40px rgba(0,198,255,0.6);
+}
+
+/* CTA secondaire */
+.nsb-cta.secondary {
+  margin-top: -10px;
+  background: none;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.nsb-cta.secondary:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* =========================================================
+   6️⃣ BARRE SOCIALE
+   ========================================================= */
+.nsb-social {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.nsb-social a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nsb-social a:hover {
+  color: var(--color-accent2);
+}
+
+/* =========================================================
+   7️⃣ FOOTER
+   ========================================================= */
+.nsb-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
+}
+
+.nsb-footer em {
+  display: block;
+  color: var(--color-accent);
+  margin-bottom: 6px;
+}
+
+/* =========================================================
+   8️⃣ TRANSITION VISUELLE "PORTAIL VERS UNIVERS"
+   ========================================================= */
+#nsb-transition {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(
+    circle at center,
+    rgba(0,198,255,0.9) 0%,
+    rgba(0,10,20,0.95) 60%,
+    #000 100%
+  );
+  box-shadow: 0 0 60px rgba(0,198,255,0.5) inset;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 9999;
+}
+
+/* =========================================================
+   9️⃣ RESPONSIVITÉ MOBILE
+   ========================================================= */
 @media (max-width: 480px) {
   .nsb-hero h1 {
     font-size: 26px;
@@ -224,5 +224,7 @@
     font-size: 16px;
     line-height: 1.8;
   }
+  body, #nsb-app {
+    padding-bottom: 40px;
+  }
 }
-
