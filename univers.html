@@ -11,22 +11,15 @@
   <style>
     /* =========================================================
        🎯 STYLES SPÉCIFIQUES À LA PAGE "UNIVERS"
-       Version : 2.2 | Auteur : Samuel Nubery
+       Version : 2.3 | Auteur : Samuel Nubery
+       Objectif : suppression du halo blanc et fond spatial uniforme
        ========================================================= */
 
-    /* 🌌 Fond spatial profond (halo blanc supprimé)
-       ------------------------------------------------------------
-       Ancienne valeur : rgba(0,198,255,0.08)
-       Provoquait un effet clair/blanchâtre au centre.
-       Désormais : gradient subtil bleu-nuit / noir profond.
-    */
+    /* 🌌 Fond spatial profond — halo supprimé et CSS externe neutralisé */
     body {
-      background: radial-gradient(
-        circle at center,
-        rgba(0,50,100,0.05) 0%,
-        rgba(0,10,20,1) 60%,
-        #000 100%
-      );
+      background: #000 !important;               /* Fond noir uniforme */
+      background-image: none !important;         /* Supprime tout gradient hérité */
+      background-color: #000 !important;         /* Double sécurité */
       color: var(--color-text);
       font-family: var(--font-main);
       max-width: 720px;
@@ -148,6 +141,18 @@
       .nsb-cta { font-size: 15px; padding: 12px 20px; }
     }
   </style>
+
+  <!-- 🚫 Script pour empêcher l’injection du style global (supprime le conflit du halo) -->
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      // Empêche l’injection automatique de nsb-style.css sur cette page
+      if (window.location.pathname.includes("univers.html")) {
+        const injectedLinks = [...document.querySelectorAll('link[href*="nsb-style.css"]')];
+        injectedLinks.forEach(link => link.remove());
+        console.log("🛡️ Style injecté désactivé sur univers.html — fond propre garanti");
+      }
+    });
+  </script>
 </head>
 
 <body>
