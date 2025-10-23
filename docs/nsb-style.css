@@ -161,3 +161,68 @@
   transition: opacity 0.8s ease;
   z-index: 9999;
 }
+
+/* === STYLE HERO AVEC LOGO === */
+.nsb-hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.nsb-subtitle {
+  margin: 10px auto 24px auto;
+  font-size: 18px;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.nsb-logo-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 20px 0;
+}
+
+.nsb-hero-logo {
+  width: 120px;
+  max-width: 40%;
+  height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 12px rgba(0,198,255,0.4));
+  transition: transform 0.3s ease;
+}
+.nsb-hero-logo:hover {
+  transform: scale(1.05);
+}
+
+.nsb-hero blockquote {
+  color: var(--color-text);
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 24px 0;
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.nsb-hero-quote {
+  margin: 16px auto 32px auto;
+  font-size: 16px;
+  color: #bcd6ff;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 480px) {
+  .nsb-hero h1 {
+    font-size: 26px;
+  }
+  .nsb-subtitle {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .nsb-hero blockquote,
+  .nsb-hero-quote {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+}
+
