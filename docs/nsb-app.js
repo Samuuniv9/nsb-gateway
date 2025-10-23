@@ -62,7 +62,7 @@ function renderApp(copy, routes) {
         Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.<br>
         Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas.
       </blockquote>
-      <a class="nsb-cta" href="${routes.fr.cta_univers}" target="_blank">💡 En savoir plus</a>
+      <button class="nsb-cta" id="go-univers">➡️ En savoir plus</button>
     </section>
 
     <section class="nsb-social">
@@ -84,8 +84,30 @@ function renderApp(copy, routes) {
     const [copy, routes] = await Promise.all([loadCopy(), loadRoutes()]);
     mountApp();
     renderApp(copy, routes);
+
+    /* ✴️ Transition "portail" vers UNIVERS === */
+    document.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'go-univers') {
+        const overlay = document.createElement('div');
+        overlay.id = 'nsb-transition';
+        document.body.appendChild(overlay);
+
+        // Animation visuelle (fade + glow)
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+          overlay.style.opacity = '1';
+        }, 20);
+
+        // Après l'effet, ouvrir la page Univers
+        setTimeout(() => {
+          window.location.href = routes.fr.cta_univers;
+        }, 800); // durée 0.8s
+      }
+    });
+
     console.log('✅ NSB Gateway chargée avec succès');
   } catch (err) {
     console.error('Erreur lors du chargement de la NSB Gateway:', err);
   }
 })();
+
