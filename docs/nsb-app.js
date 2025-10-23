@@ -1,8 +1,7 @@
 console.log("✅ NSB Gateway script loaded");
-document.body.innerHTML = "<h1>Bienvenue sur NSB Gateway</h1>";
 
 /* =========================================================
-   NSB Gateway — Moteur principal (v2.0)
+   NSB Gateway — Moteur principal (v2.1 corrigée)
    Auteur : Samuel Nubery
    ========================================================= */
 
@@ -12,6 +11,9 @@ const LANG_DEFAULT = 'fr';
 const COPY_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/copy.fr.md';
 const ROUTES_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/routes.json';
 const STYLE_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/nsb-style.css';
+
+/* === LOGO NSB — chemin absolu pour GitHub Pages === */
+const NSB_LOGO_URL = 'https://samuuniv9.github.io/nsb-gateway/docs/nsb-logo.png';
 
 /* === 1️⃣ Injection du style === */
 (function injectStyle() {
@@ -62,10 +64,11 @@ function renderApp(copy, routes) {
 
       <div class="nsb-logo-container">
         <img 
-          src="./docs/nsb-logo.png" alt="Logo NSB" class="nsb-hero-logo"
+          src="${NSB_LOGO_URL}" 
           alt="Logo NSB" 
           class="nsb-hero-logo"
           loading="lazy"
+          onerror="this.style.display='none'; console.warn('⚠️ Logo NSB introuvable :', this.src);"
         >
       </div>
 
@@ -107,21 +110,19 @@ function renderApp(copy, routes) {
         overlay.id = 'nsb-transition';
         document.body.appendChild(overlay);
 
-        // Animation visuelle (fade + glow)
         overlay.style.opacity = '0';
         setTimeout(() => {
           overlay.style.opacity = '1';
         }, 20);
 
-        // Après l'effet, ouvrir la page Univers
         setTimeout(() => {
           window.location.href = routes.fr.cta_univers;
-        }, 800); // durée 0.8s
+        }, 800);
       }
     });
 
     console.log('✅ NSB Gateway chargée avec succès');
   } catch (err) {
-    console.error('Erreur lors du chargement de la NSB Gateway:', err);
+    console.error('❌ Erreur lors du chargement de la NSB Gateway:', err);
   }
 })();
