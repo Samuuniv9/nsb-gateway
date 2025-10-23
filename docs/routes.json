@@ -1,27 +1,32 @@
 {
   "fr": {
-    "cta_univers": "/univers",
+    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.fr.md",
+    "univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.fr.md",
+    "univers_info": "/univers/info",
     "whatsapp_flux": "#",
     "site_officiel": "#",
-    "linkedin": "linkedin.com/in/samuel-nubéry-946768214",
+    "linkedin": "https://linkedin.com/in/samuel-nubéry-946768214",
     "instagram": "https://www.instagram.com/lachambre200/",
-    "twitch": "#",
-    "univers_info": "/univers/info"
+    "twitch": "#"
   },
   "en": {
-    "cta_univers": "/en/universe",
+    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.en.md",
+    "univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.en.md",
+    "univers_info": "/en/universe/info",
     "whatsapp_flux": "#",
     "site_officiel": "#",
-    "linkedin": "linkedin.com/in/samuel-nubéry-946768214",
-    "instagram": "https://www.instagram.com/lachambre200",
+    "linkedin": "https://linkedin.com/in/samuel-nubéry-946768214",
+    "instagram": "https://www.instagram.com/lachambre200/",
     "twitch": "#"
   },
   "es": {
-    "cta_univers": "/es/universo",
+    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.es.md",
+    "univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.es.md",
+    "univers_info": "/es/universo/info",
     "whatsapp_flux": "#",
     "site_officiel": "#",
-    "linkedin": "linkedin.com/in/samuel-nubéry-946768214",
-    "instagram": "https://www.instagram.com/lachambre200",
+    "linkedin": "https://linkedin.com/in/samuel-nubéry-946768214",
+    "instagram": "https://www.instagram.com/lachambre200/",
     "twitch": "#"
   }
 }
