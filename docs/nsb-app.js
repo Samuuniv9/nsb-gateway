@@ -1,7 +1,6 @@
 console.log("✅ NSB Gateway script loaded");
 document.body.innerHTML = "<h1>Bienvenue sur NSB Gateway</h1>";
 
-
 /* =========================================================
    NSB Gateway — Moteur principal (v2.0)
    Auteur : Samuel Nubery
@@ -55,13 +54,30 @@ function renderApp(copy, routes) {
     </header>
 
     <section class="nsb-hero">
-      <h1>NORTH★STAR // GATE </h1>
-      <p>Point d’entrée individuel vers une culture collective.</p>
+      <h1>NORTH★STAR // GATE</h1>
+
+      <p class="nsb-subtitle">
+        Point d’entrée individuel vers une culture collective.
+      </p>
+
+      <div class="nsb-logo-container">
+        <img 
+          src="https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/nsb-logo.png" 
+          alt="Logo NSB" 
+          class="nsb-hero-logo"
+          loading="lazy"
+        >
+      </div>
+
       <blockquote>
-        Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.<br>
-        Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas.
+        Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.
       </blockquote>
-      <button class="nsb-cta" id="go-univers">➡️ En savoir plus</button>
+
+      <p class="nsb-hero-quote">
+        Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas.
+      </p>
+
+      <a class="nsb-cta" href="${routes.fr.cta_univers}" target="_blank">💡 En savoir plus</a>
     </section>
 
     <section class="nsb-social">
@@ -109,4 +125,3 @@ function renderApp(copy, routes) {
     console.error('Erreur lors du chargement de la NSB Gateway:', err);
   }
 })();
-
