@@ -12,16 +12,13 @@
 
 ## HÉRO
 **Titre :** NORTH★STAR // GATE   
-**Sous-titre :** Point d’entrée individuel vers une culture collective.  
-**Image :** Sam, de dos, marchant dans un environnement végétal.  
-**Nom affiché :** Sam // NSB  
+**Sous-titre :** La passerelle entre le monde numérique et la réalité locale  
+**Image :** Logo NSB  
+**Nom affiché :** Logo // NSB  
 
 **Texte narratif :**  
-> Tu as croisé ma route — et ce n’est sans doute pas un hasard.  
-> Ici commence une conversation entre toi, l’intelligence artificielle et le monde réel.  
-> Ce n’est pas un programme. Ce n’est pas un réseau.  
-> C’est un mouvement : une façon d’apprendre, de créer et de penser ensemble.  
-> Si tu ressens une forme d’écho, c’est que tu es déjà sur la bonne fréquence.
+> Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective
+> Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas
 
 **CTA principal :**  
 > 🌠 **Entrer dans l’univers NSB**  
