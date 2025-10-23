@@ -35,7 +35,7 @@ async function loadRoutes() {
 
 /* === 3️⃣ Construction du conteneur === */
 function mountApp() {
-  const shell = document.querySelector('.container.main-section') || document.body;
+  const shell = document.body;
   if (REPLACE_MODE) shell.innerHTML = '';
   const root = document.createElement('div');
   root.id = 'nsb-app';
