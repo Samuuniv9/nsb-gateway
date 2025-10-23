@@ -10,7 +10,7 @@ document.body.innerHTML = "<h1>Bienvenue sur NSB Gateway</h1>";
 /* === CONFIGURATION === */
 const REPLACE_MODE = true; // passe à false pour tester sans effacer le template Pwofeel
 const LANG_DEFAULT = 'fr';
-const COPY_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/COPY.fr.md';
+const COPY_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/copy.fr.md';
 const ROUTES_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/routes.json';
 const STYLE_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/nsb-style.css';
 
