@@ -4,24 +4,45 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NORTH★STAR // UNIVERS</title>
+
+  <!-- Style principal -->
   <link rel="stylesheet" href="./nsb-style.css" />
+
   <style>
+    /* === LAYOUT PRINCIPAL === */
     body {
-      background: var(--color-bg);
+      position: relative;
+      background: radial-gradient(circle at center, rgba(0,198,255,0.1) 0%, rgba(0,10,20,1) 60%, #000 100%);
       color: var(--color-text);
       font-family: var(--font-main);
       max-width: 720px;
       margin: 0 auto;
       padding: 32px 16px;
+      overflow: hidden;
     }
+
     h1, h2 {
-      color: var(--color-accent);
       text-align: center;
     }
+
+    h1 {
+      background: linear-gradient(90deg, var(--color-accent2), var(--color-accent), #00ffe1);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 8px rgba(0,198,255,0.4);
+      font-weight: 700;
+    }
+
+    h2 {
+      color: var(--color-accent);
+      margin-top: 32px;
+    }
+
     p, li {
       color: var(--color-muted);
       line-height: 1.6;
     }
+
     blockquote {
       border-left: 3px solid var(--color-accent);
       padding-left: 12px;
@@ -29,6 +50,8 @@
       color: #bcd6ff;
       font-style: italic;
     }
+
+    /* === BOUTON CTA === */
     .nsb-cta {
       display: block;
       text-align: center;
@@ -40,12 +63,17 @@
       border-radius: 999px;
       font-weight: 600;
       width: fit-content;
+      box-shadow: 0 0 20px rgba(0,198,255,0.3);
       transition: 0.3s;
     }
+
     .nsb-cta:hover {
       transform: scale(1.05);
       filter: brightness(1.2);
+      box-shadow: 0 0 40px rgba(0,198,255,0.6);
     }
+
+    /* === FOOTER === */
     footer {
       text-align: center;
       margin-top: 40px;
@@ -54,15 +82,64 @@
       border-top: 1px solid rgba(255,255,255,0.1);
       padding-top: 16px;
     }
+
     footer em {
       display: block;
       color: var(--color-accent);
       margin-bottom: 6px;
     }
+
+    /* === EFFET SPATIAL === */
+    body::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(0,198,255,0.15) 0%, transparent 70%);
+      animation: rotateGlow 20s linear infinite;
+      z-index: -1;
+      filter: blur(60px);
+      opacity: 0.5;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* === PARTICULES (ÉTOILES MOUVANTES) === */
+    .stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -2;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(0,198,255,0.8);
+      border-radius: 50%;
+      animation: twinkle 4s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; transform: scale(0.8); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
   </style>
 </head>
 
 <body>
+  <!-- Étoiles animées -->
+  <div class="stars" id="stars"></div>
+
   <header class="nsb-header">
     <div class="nsb-logo">NSB</div>
     <div class="nsb-badge">✴︎ Univers</div>
@@ -102,5 +179,20 @@
     <em>La donnée devient culture. La culture devient action.</em>
     <p>© 2025 North Star Business — Guadeloupe.</p>
   </footer>
+
+  <!-- Génération des particules -->
+  <script>
+    const starsContainer = document.getElementById('stars');
+    const numStars = 100; // tu peux augmenter à 200 si tu veux plus denses
+
+    for (let i = 0; i < numStars; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 5 + 's';
+      starsContainer.appendChild(star);
+    }
+  </script>
 </body>
 </html>
