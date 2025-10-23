@@ -4,32 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NORTH★STAR // UNIVERS</title>
-
-  <!-- Style principal -->
-  <link rel="stylesheet" href="docs/nsb-style.css" />
-
- <style>
- /* === LAYOUT PRINCIPAL — version standard sans effet spatial === */
-body {
-  background: #000; /* fond noir pur, sans halo */
-  color: var(--color-text);
-  font-family: var(--font-main);
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 32px 16px;
-  overflow-x: hidden; /* évite les débordements horizontaux */
-  overflow-y: auto;   /* autorise le scroll vertical */
-  min-height: 100vh;  /* s’adapte à la hauteur d’écran */
-}
-
-/* On désactive toute couche visuelle additionnelle */
-.stars, 
-body::before {
-  display: none !important;
-}
+  <link rel="stylesheet" href="./nsb-style.css" />
+  <style>
+    /* Ajustements spécifiques à la page Univers */
+    body {
+      background: radial-gradient(circle at center, rgba(0,198,255,0.08) 0%, rgba(0,10,20,1) 70%, #000 100%);
+      color: var(--color-text);
+      font-family: var(--font-main);
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 32px 16px;
+      line-height: 1.7;
+    }
 
     h1, h2 {
+      color: var(--color-accent);
       text-align: center;
+      margin: 28px 0 16px;
     }
 
     h1 {
@@ -37,41 +28,42 @@ body::before {
       -webkit-background-clip: text;
       color: transparent;
       text-shadow: 0 0 8px rgba(0,198,255,0.4);
-      font-weight: 700;
-    }
-
-    h2 {
-      color: var(--color-accent);
-      margin-top: 32px;
     }
 
     p, li {
-      color: var(--color-muted);
-      line-height: 1.6;
+      color: var(--color-text);
+      line-height: 1.8;
+      margin-bottom: 18px;
+      font-size: 17px;
     }
 
     blockquote {
       border-left: 3px solid var(--color-accent);
-      padding-left: 12px;
-      margin: 16px 0;
+      padding-left: 14px;
+      margin: 24px 0;
       color: #bcd6ff;
       font-style: italic;
+      line-height: 1.8;
     }
 
-    /* === BOUTON CTA === */
+    ul {
+      margin: 18px 0;
+      padding-left: 24px;
+    }
+
     .nsb-cta {
       display: block;
       text-align: center;
-      margin: 40px auto;
+      margin: 40px auto 20px auto;
       text-decoration: none;
       color: white;
       background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
-      padding: 14px 22px;
+      padding: 14px 24px;
       border-radius: 999px;
       font-weight: 600;
       width: fit-content;
-      box-shadow: 0 0 20px rgba(0,198,255,0.3);
       transition: 0.3s;
+      box-shadow: 0 0 20px rgba(0,198,255,0.3);
     }
 
     .nsb-cta:hover {
@@ -80,11 +72,24 @@ body::before {
       box-shadow: 0 0 40px rgba(0,198,255,0.6);
     }
 
-    /* === FOOTER === */
+    /* CTA secondaire : site officiel */
+    .nsb-cta.secondary {
+      background: none;
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      box-shadow: none;
+    }
+
+    .nsb-cta.secondary:hover {
+      background: var(--color-accent);
+      color: #fff;
+      box-shadow: 0 0 25px rgba(0,198,255,0.4);
+    }
+
     footer {
       text-align: center;
-      margin-top: 40px;
-      font-size: 13px;
+      margin-top: 60px;
+      font-size: 14px;
       color: var(--color-muted);
       border-top: 1px solid rgba(255,255,255,0.1);
       padding-top: 16px;
@@ -93,60 +98,23 @@ body::before {
     footer em {
       display: block;
       color: var(--color-accent);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
-    /* === EFFET SPATIAL === */
-    body::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at center, rgba(0,198,255,0.15) 0%, transparent 70%);
-      animation: rotateGlow 20s linear infinite;
-      z-index: -1;
-      filter: blur(60px);
-      opacity: 0.5;
-    }
-
-    @keyframes rotateGlow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* === PARTICULES (ÉTOILES MOUVANTES) === */
-    .stars {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: -2;
-    }
-
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: rgba(0,198,255,0.8);
-      border-radius: 50%;
-      animation: twinkle 4s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.1; transform: scale(0.8); }
-      50% { opacity: 1; transform: scale(1.4); }
+    /* === Responsive === */
+    @media (max-width: 480px) {
+      body {
+        padding: 20px;
+      }
+      h1 { font-size: 26px; }
+      h2 { font-size: 20px; }
+      p, li, blockquote { font-size: 16px; line-height: 1.8; }
+      .nsb-cta { font-size: 15px; padding: 12px 20px; }
     }
   </style>
 </head>
 
 <body>
-  <!-- Étoiles animées -->
-  <div class="stars" id="stars"></div>
-
   <header class="nsb-header">
     <div class="nsb-logo">NSB</div>
     <div class="nsb-badge">✴︎ Univers</div>
@@ -166,6 +134,7 @@ body::before {
     <p>On a les talents, les idées, la volonté — mais pas les bons outils pour les transformer en résultats. Et pendant que d’autres territoires avancent (grâce à la donnée), nous observons leurs progrès à distance, frustrés de savoir que nous pourrions, nous aussi, faire mieux.</p>
 
     <h2>NSB EST NÉ D’UNE IDÉE SIMPLE</h2>
+
     <blockquote>
       Et si l’intelligence artificielle devenait un outil d’émancipation, pas seulement de performance ?
     </blockquote>
@@ -173,33 +142,23 @@ body::before {
     <p>NSB (North Star Business) aide une nouvelle génération à utiliser la technologie pour mieux s’organiser, créer, décider — et comprendre leur environnement à travers leurs propres données.</p>
 
     <h2>CE QUE NOUS FAISONS</h2>
+
     <ul>
       <li>Transformer la <strong>technologie</strong> en langage commun,</li>
       <li>Transformer la <strong>donnée</strong> en levier de progrès,</li>
       <li>Transformer la <strong>créativité</strong> en mouvement collectif.</li>
     </ul>
 
+    <!-- CTA principal -->
     <a class="nsb-cta" href="https://forms.gle/benR9rEEGsouaMBM6" target="_blank">🚀 Postuler pour rejoindre le groupe NSB Explorer</a>
+
+    <!-- CTA secondaire -->
+    <a class="nsb-cta secondary" href="https://pwofeel.com" target="_blank">🌐 Visiter le site officiel NSB</a>
   </main>
 
   <footer>
     <em>La donnée devient culture. La culture devient action.</em>
     <p>© 2025 North Star Business — Guadeloupe.</p>
   </footer>
-
-  <!-- Génération des particules -->
-  <script>
-    const starsContainer = document.getElementById('stars');
-    const numStars = 100; // tu peux augmenter à 200 si tu veux plus denses
-
-    for (let i = 0; i < numStars; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.top = Math.random() * 100 + '%';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.animationDelay = Math.random() * 5 + 's';
-      starsContainer.appendChild(star);
-    }
-  </script>
 </body>
 </html>
