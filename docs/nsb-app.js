@@ -58,7 +58,6 @@ function renderApp(copy, routes) {
       <h1>NORTH★STAR // GATE </h1>
       <p>Point d’entrée individuel vers une culture collective.</p>
       <blockquote>
-        Tu as croisé ma route — et ce n’est sans doute pas un hasard.<br>
         Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.<br>
         Parce que nous ne pouvons pas bâtir notre avenir avec des systèmes qui ne nous comprennent pas.
       </blockquote>
