@@ -4,11 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NORTH★STAR // UNIVERS</title>
+
+  <!-- 🎨 Feuille de style principale -->
   <link rel="stylesheet" href="./nsb-style.css" />
+
   <style>
-    /* Ajustements spécifiques à la page Univers */
+    /* =========================================================
+       🎯 STYLES SPÉCIFIQUES À LA PAGE "UNIVERS"
+       Version : 2.2 | Auteur : Samuel Nubery
+       ========================================================= */
+
+    /* 🌌 Fond spatial profond (halo blanc supprimé)
+       ------------------------------------------------------------
+       Ancienne valeur : rgba(0,198,255,0.08)
+       Provoquait un effet clair/blanchâtre au centre.
+       Désormais : gradient subtil bleu-nuit / noir profond.
+    */
     body {
-      background: radial-gradient(circle at center, rgba(0,198,255,0.08) 0%, rgba(0,10,20,1) 70%, #000 100%);
+      background: radial-gradient(
+        circle at center,
+        rgba(0,50,100,0.05) 0%,
+        rgba(0,10,20,1) 60%,
+        #000 100%
+      );
       color: var(--color-text);
       font-family: var(--font-main);
       max-width: 720px;
@@ -17,12 +35,16 @@
       line-height: 1.7;
     }
 
+    /* =========================================================
+       TITRES
+       ========================================================= */
     h1, h2 {
       color: var(--color-accent);
       text-align: center;
       margin: 28px 0 16px;
     }
 
+    /* ✴️ Effet de dégradé sur le titre principal */
     h1 {
       background: linear-gradient(90deg, var(--color-accent2), var(--color-accent), #00ffe1);
       -webkit-background-clip: text;
@@ -30,6 +52,9 @@
       text-shadow: 0 0 8px rgba(0,198,255,0.4);
     }
 
+    /* =========================================================
+       PARAGRAPHES ET LISTES
+       ========================================================= */
     p, li {
       color: var(--color-text);
       line-height: 1.8;
@@ -37,6 +62,14 @@
       font-size: 17px;
     }
 
+    ul {
+      margin: 18px 0;
+      padding-left: 24px;
+    }
+
+    /* =========================================================
+       BLOCS DE CITATION
+       ========================================================= */
     blockquote {
       border-left: 3px solid var(--color-accent);
       padding-left: 14px;
@@ -46,17 +79,15 @@
       line-height: 1.8;
     }
 
-    ul {
-      margin: 18px 0;
-      padding-left: 24px;
-    }
-
+    /* =========================================================
+       BOUTONS CTA
+       ========================================================= */
     .nsb-cta {
       display: block;
       text-align: center;
       margin: 40px auto 20px auto;
       text-decoration: none;
-      color: white;
+      color: #fff;
       background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
       padding: 14px 24px;
       border-radius: 999px;
@@ -72,7 +103,7 @@
       box-shadow: 0 0 40px rgba(0,198,255,0.6);
     }
 
-    /* CTA secondaire : site officiel */
+    /* 🌐 CTA secondaire : lien vers site officiel */
     .nsb-cta.secondary {
       background: none;
       border: 1px solid var(--color-accent);
@@ -86,6 +117,9 @@
       box-shadow: 0 0 25px rgba(0,198,255,0.4);
     }
 
+    /* =========================================================
+       PIED DE PAGE
+       ========================================================= */
     footer {
       text-align: center;
       margin-top: 60px;
@@ -101,7 +135,9 @@
       margin-bottom: 8px;
     }
 
-    /* === Responsive === */
+    /* =========================================================
+       📱 RESPONSIVITÉ MOBILE
+       ========================================================= */
     @media (max-width: 480px) {
       body {
         padding: 20px;
@@ -115,11 +151,13 @@
 </head>
 
 <body>
+  <!-- 🧭 En-tête de page -->
   <header class="nsb-header">
     <div class="nsb-logo">NSB</div>
     <div class="nsb-badge">✴︎ Univers</div>
   </header>
 
+  <!-- 🚀 Contenu principal -->
   <main>
     <h1>NORTH★STAR // UNIVERS</h1>
 
@@ -150,12 +188,17 @@
     </ul>
 
     <!-- CTA principal -->
-    <a class="nsb-cta" href="https://forms.gle/benR9rEEGsouaMBM6" target="_blank">🚀 Postuler pour rejoindre le groupe NSB Explorer</a>
+    <a class="nsb-cta" href="https://forms.gle/benR9rEEGsouaMBM6" target="_blank">
+      🚀 Postuler pour rejoindre le groupe NSB Explorer
+    </a>
 
     <!-- CTA secondaire -->
-    <a class="nsb-cta secondary" href="https://pwofeel.com" target="_blank">🌐 Visiter le site officiel NSB</a>
+    <a class="nsb-cta secondary" href="https://pwofeel.com" target="_blank">
+      🌐 Visiter le site officiel NSB
+    </a>
   </main>
 
+  <!-- 🌠 Pied de page -->
   <footer>
     <em>La donnée devient culture. La culture devient action.</em>
     <p>© 2025 North Star Business — Guadeloupe.</p>
