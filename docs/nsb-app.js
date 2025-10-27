@@ -1,7 +1,7 @@
 console.log("✅ NSB Gateway script loaded");
 
 /* =========================================================
-   NSB Gateway — Moteur principal (v2.1 corrigée)
+   NSB Gateway — Moteur principal (v2.1 sans image)
    Auteur : Samuel Nubery
    ========================================================= */
 
@@ -11,9 +11,6 @@ const LANG_DEFAULT = 'fr';
 const COPY_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/copy.fr.md';
 const ROUTES_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/routes.json';
 const STYLE_URL = 'https://raw.githubusercontent.com/Samuuniv9/nsb-gateway/main/docs/nsb-style.css';
-
-/* === LOGO NSB — chemin absolu pour GitHub Pages === */
-const NSB_LOGO_URL = 'https://samuuniv9.github.io/nsb-gateway/docs/nsb-logo.png';
 
 /* === 1️⃣ Injection du style === */
 (function injectStyle() {
@@ -61,16 +58,6 @@ function renderApp(copy, routes) {
       <p class="nsb-subtitle">
         Point d’entrée individuel vers une culture collective.
       </p>
-
-      <div class="nsb-logo-container">
-        <img 
-          src="${NSB_LOGO_URL}" 
-          alt="Logo NSB" 
-          class="nsb-hero-logo"
-          loading="lazy"
-          onerror="this.style.display='none'; console.warn('⚠️ Logo NSB introuvable :', this.src);"
-        >
-      </div>
 
       <blockquote>
         Nous aidons une nouvelle génération à apprendre, créer et agir ensemble grâce aux nouvelles technologies et à l’intelligence collective.
@@ -126,3 +113,4 @@ function renderApp(copy, routes) {
     console.error('❌ Erreur lors du chargement de la NSB Gateway:', err);
   }
 })();
+
