@@ -2,34 +2,233 @@
   "vague_active": 1,
   "stand": "Stand dégustation le mercredi midi, à la sortie du RU — campus Camp Jacob, Saint-Claude.",
   "moods": {
-    "energie": { "label": "Énergie", "emoji": "⚡" },
-    "tropical": { "label": "Tropical", "emoji": "🥭" },
-    "leger": { "label": "Léger", "emoji": "🫧" },
-    "decouverte": { "label": "Découverte", "emoji": "🧪" }
+    "energie": {
+      "label": "Énergie",
+      "emoji": "⚡"
+    },
+    "tropical": {
+      "label": "Tropical",
+      "emoji": "🥭"
+    },
+    "leger": {
+      "label": "Léger",
+      "emoji": "🫧"
+    },
+    "decouverte": {
+      "label": "Découverte",
+      "emoji": "🧪"
+    }
   },
   "boissons": [
-    { "vague": 1, "mood": "tropical", "marque": "Maya", "nom": "Passion · Ananas · Mangue", "type": "Jus", "format": "Canette 33 cl", "bio": false },
-    { "vague": 1, "mood": "tropical", "marque": "Jomo", "nom": "Citronnade glacée Mangue", "type": "Citronnade", "format": "Bouteille 35 cl", "bio": true },
-    { "vague": 1, "mood": "decouverte", "marque": "Living Things", "nom": "Pastèque · Citron vert", "type": "Soda prébiotique", "format": "Canette 33 cl", "bio": false },
-    { "vague": 1, "mood": "leger", "marque": "Embrace", "nom": "Athens — Pastèque · Menthe", "type": "Eau pétillante", "format": "Canette 33 cl", "bio": false },
-    { "vague": 1, "mood": "energie", "marque": "Vitamin Well", "nom": "Boost — Myrtille · Framboise", "type": "Boisson vitaminée", "format": "Bouteille 50 cl", "bio": false },
-    { "vague": 1, "mood": "energie", "marque": "Gimber", "nom": "Focus — Gingembre · Mangue · Matcha", "type": "Pétillant", "format": "Canette 25 cl", "bio": true },
-    { "vague": 1, "mood": "decouverte", "marque": "Jomo", "nom": "Thé glacé Maté · Grenade · Litchi", "type": "Thé glacé", "format": "Bouteille 35 cl", "bio": true },
-
-    { "vague": 2, "mood": "tropical", "marque": "Maya", "nom": "Litchi", "type": "Jus", "format": "Canette 33 cl", "bio": false },
-    { "vague": 2, "mood": "tropical", "marque": "Jomo", "nom": "Citronnade glacée Fruits rouges", "type": "Citronnade", "format": "Bouteille 35 cl", "bio": true },
-    { "vague": 2, "mood": "decouverte", "marque": "Living Things", "nom": "Framboise · Grenade", "type": "Soda prébiotique", "format": "Canette 33 cl", "bio": false },
-    { "vague": 2, "mood": "leger", "marque": "Embrace", "nom": "Palermo — Citron · Pamplemousse", "type": "Eau pétillante", "format": "Canette 33 cl", "bio": false },
-    { "vague": 2, "mood": "leger", "marque": "Vitamin Well", "nom": "Hydrate — Fraise · Rhubarbe", "type": "Boisson vitaminée", "format": "Bouteille 50 cl", "bio": false },
-    { "vague": 2, "mood": "energie", "marque": "Gimber", "nom": "Énergie — Gingembre · Pêche · Ginseng", "type": "Pétillant", "format": "Canette 25 cl", "bio": true },
-    { "vague": 2, "mood": "decouverte", "marque": "Fizz", "nom": "Cerise · Hibiscus", "type": "Soda", "format": "Bouteille verre 33 cl", "bio": true },
-
-    { "vague": 3, "mood": "leger", "marque": "Embrace", "nom": "Copenhagen — Citron · Gingembre", "type": "Eau pétillante", "format": "Canette 33 cl", "bio": false },
-    { "vague": 3, "mood": "decouverte", "marque": "Embrace", "nom": "Berlin — Grenade · Cassis", "type": "Soda", "format": "Canette 33 cl", "bio": false },
-    { "vague": 3, "mood": "leger", "marque": "Vitamin Well", "nom": "Refresh — Kiwi · Citron", "type": "Boisson vitaminée", "format": "Bouteille 50 cl", "bio": false },
-    { "vague": 3, "mood": "energie", "marque": "Gimber", "nom": "Immunité — Gingembre · Framboise · Thé", "type": "Pétillant", "format": "Canette 25 cl", "bio": true },
-    { "vague": 3, "mood": "energie", "marque": "QNT", "nom": "Eau protéinée Citron · Gingembre", "type": "Eau protéinée", "format": "33 cl", "bio": false },
-    { "vague": 3, "mood": "energie", "marque": "QNT", "nom": "Eau protéinée Orange sanguine · Ginseng", "type": "Eau protéinée", "format": "33 cl", "bio": false },
-    { "vague": 3, "mood": "decouverte", "marque": "Les Filles de l'Ouest", "nom": "Schorle Rhubarbe", "type": "Schorle", "format": "Bouteille verre 33 cl", "bio": true }
+    {
+      "vague": 1,
+      "mood": "tropical",
+      "marque": "Maya",
+      "nom": "Passion · Ananas · Mangue",
+      "type": "Jus",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/maya-passion-ananas-mangue.jpg"
+    },
+    {
+      "vague": 1,
+      "mood": "tropical",
+      "marque": "Jomo",
+      "nom": "Citronnade glacée Mangue",
+      "type": "Citronnade",
+      "format": "Bouteille 35 cl",
+      "bio": true,
+      "image": "img/jomo-citronnade-mangue.jpg"
+    },
+    {
+      "vague": 1,
+      "mood": "decouverte",
+      "marque": "Living Things",
+      "nom": "Pastèque · Citron vert",
+      "type": "Soda prébiotique",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/living-things-pasteque-citron-vert.jpg"
+    },
+    {
+      "vague": 1,
+      "mood": "leger",
+      "marque": "Embrace",
+      "nom": "Athens — Pastèque · Menthe",
+      "type": "Eau pétillante",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/embrace-athens.jpg"
+    },
+    {
+      "vague": 1,
+      "mood": "energie",
+      "marque": "Vitamin Well",
+      "nom": "Boost — Myrtille · Framboise",
+      "type": "Boisson vitaminée",
+      "format": "Bouteille 50 cl",
+      "bio": false,
+      "image": "img/vitamin-well-boost.jpg"
+    },
+    {
+      "vague": 1,
+      "mood": "energie",
+      "marque": "Gimber",
+      "nom": "Focus — Gingembre · Mangue · Matcha",
+      "type": "Pétillant",
+      "format": "Canette 25 cl",
+      "bio": true,
+      "image": "img/gimber-focus.jpg"
+    },
+    {
+      "vague": 1,
+      "mood": "decouverte",
+      "marque": "Jomo",
+      "nom": "Thé glacé Maté · Grenade · Litchi",
+      "type": "Thé glacé",
+      "format": "Bouteille 35 cl",
+      "bio": true,
+      "image": "img/jomo-mate-grenade-litchi.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "tropical",
+      "marque": "Maya",
+      "nom": "Litchi",
+      "type": "Jus",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/maya-litchi.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "tropical",
+      "marque": "Jomo",
+      "nom": "Citronnade glacée Fruits rouges",
+      "type": "Citronnade",
+      "format": "Bouteille 35 cl",
+      "bio": true,
+      "image": "img/jomo-citronnade-fruits-rouges.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "decouverte",
+      "marque": "Living Things",
+      "nom": "Framboise · Grenade",
+      "type": "Soda prébiotique",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/living-things-framboise-grenade.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "leger",
+      "marque": "Embrace",
+      "nom": "Palermo — Citron · Pamplemousse",
+      "type": "Eau pétillante",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/embrace-palermo.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "leger",
+      "marque": "Vitamin Well",
+      "nom": "Hydrate — Fraise · Rhubarbe",
+      "type": "Boisson vitaminée",
+      "format": "Bouteille 50 cl",
+      "bio": false,
+      "image": "img/vitamin-well-hydrate.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "energie",
+      "marque": "Gimber",
+      "nom": "Énergie — Gingembre · Pêche · Ginseng",
+      "type": "Pétillant",
+      "format": "Canette 25 cl",
+      "bio": true,
+      "image": "img/gimber-energie.jpg"
+    },
+    {
+      "vague": 2,
+      "mood": "decouverte",
+      "marque": "Fizz",
+      "nom": "Cerise · Hibiscus",
+      "type": "Soda",
+      "format": "Bouteille verre 33 cl",
+      "bio": true,
+      "image": ""
+    },
+    {
+      "vague": 3,
+      "mood": "leger",
+      "marque": "Embrace",
+      "nom": "Copenhagen — Citron · Gingembre",
+      "type": "Eau pétillante",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/embrace-copenhagen.jpg"
+    },
+    {
+      "vague": 3,
+      "mood": "decouverte",
+      "marque": "Embrace",
+      "nom": "Berlin — Grenade · Cassis",
+      "type": "Soda",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/embrace-berlin.jpg"
+    },
+    {
+      "vague": 3,
+      "mood": "leger",
+      "marque": "Vitamin Well",
+      "nom": "Refresh — Kiwi · Citron",
+      "type": "Boisson vitaminée",
+      "format": "Bouteille 50 cl",
+      "bio": false,
+      "image": "img/vitamin-well-refresh.jpg"
+    },
+    {
+      "vague": 3,
+      "mood": "energie",
+      "marque": "Gimber",
+      "nom": "Immunité — Gingembre · Framboise · Thé",
+      "type": "Pétillant",
+      "format": "Canette 25 cl",
+      "bio": true,
+      "image": "img/gimber-immunite.jpg"
+    },
+    {
+      "vague": 3,
+      "mood": "energie",
+      "marque": "QNT",
+      "nom": "Eau protéinée Citron · Gingembre",
+      "type": "Eau protéinée",
+      "format": "33 cl",
+      "bio": false,
+      "image": ""
+    },
+    {
+      "vague": 3,
+      "mood": "energie",
+      "marque": "QNT",
+      "nom": "Eau protéinée Orange sanguine · Ginseng",
+      "type": "Eau protéinée",
+      "format": "33 cl",
+      "bio": false,
+      "image": "img/qnt-orange-sanguine.jpg"
+    },
+    {
+      "vague": 3,
+      "mood": "decouverte",
+      "marque": "Les Filles de l'Ouest",
+      "nom": "Schorle Rhubarbe",
+      "type": "Schorle",
+      "format": "Bouteille verre 33 cl",
+      "bio": true,
+      "image": "img/filles-de-l-ouest-rhubarbe.jpg"
+    }
   ]
 }

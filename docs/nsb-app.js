@@ -47,31 +47,21 @@
     return root;
   }
 
-  function card(b, moods) {
-    const m = moods[b.mood] || { label: b.mood, emoji: '' };
+  function slide(b) {
     return `
-      <article class="nb-card" data-mood="${esc(b.mood)}">
-        <div class="nb-card-top">
-          <span class="nb-tag nb-tag-${esc(b.mood)}">${esc(m.emoji)} ${esc(m.label)}</span>
-          ${b.bio ? '<span class="nb-bio">BIO</span>' : ''}
-        </div>
-        <p class="nb-brand">${esc(b.marque)}</p>
-        <h3 class="nb-name">${esc(b.nom)}</h3>
-        <p class="nb-meta">${esc(b.type)} · ${esc(b.format)}</p>
-      </article>`;
+      <figure class="nb-slide">
+        <div class="nb-photo">${b.image
+          ? `<img src="${esc(BASE + b.image)}" alt="${esc(b.marque + ' ' + b.nom)}" loading="lazy">`
+          : `<span>${esc(b.marque)}</span>`}</div>
+        <figcaption><strong>${esc(b.marque)}</strong>${esc(b.nom)}</figcaption>
+      </figure>`;
   }
 
   function render(root, cat, r) {
     const v = cat.vague_active;
     const list = cat.boissons.filter((b) => b.vague === v);
-    const restantes = cat.boissons.filter((b) => b.vague > v).length;
     const total = cat.boissons.length;
     const vagues = Math.max(...cat.boissons.map((b) => b.vague));
-
-    const chips = ['tout', ...Object.keys(cat.moods)].map((k, i) => {
-      const label = k === 'tout' ? 'Tout' : cat.moods[k].emoji + ' ' + cat.moods[k].label;
-      return `<button class="nb-chip${i === 0 ? ' is-on' : ''}" data-filter="${esc(k)}">${esc(label)}</button>`;
-    }).join('');
 
     const vote = withSource(r.test_visuel_stock);
     const avis = withSource(r.test_degustation);
@@ -88,20 +78,16 @@
         <h1>Des boissons qu'on ne trouve pas ici.</h1>
         <p class="nb-lead">${total} boissons importées en petite quantité, présentées en ${vagues} vagues de 7.
           <strong>C'est toi qui décides lesquelles restent.</strong></p>
+      </section>
+
+      <section class="nb-wave">
+        <h2>La vague ${v}</h2>
+        <div class="nb-carousel" tabindex="0">${list.map(slide).join('')}</div>
+        <div class="nb-dots">${list.map((_, i) => `<span class="${i === 0 ? 'is-on' : ''}"></span>`).join('')}</div>
         ${vote
           ? `<a class="nb-cta" href="${esc(vote)}" target="_blank" rel="noopener">🗳️ Choisis tes préférées</a>
              <p class="nb-hint">1 minute · pas besoin de goûter, juste au feeling</p>`
           : `<span class="nb-cta is-off">🗳️ Vote bientôt ouvert</span>`}
-      </section>
-
-      <section class="nb-wave">
-        <div class="nb-wave-head">
-          <h2>La vague ${v}</h2>
-          <p>Choisis ton mood :</p>
-        </div>
-        <div class="nb-chips">${chips}</div>
-        <div class="nb-grid">${list.map((b) => card(b, cat.moods)).join('')}</div>
-        ${restantes ? `<p class="nb-next">+ ${restantes} autres boissons dans les prochaines vagues.</p>` : ''}
       </section>
 
       <section class="nb-block">
@@ -139,16 +125,22 @@
       </footer>
     `;
 
-    root.querySelectorAll('.nb-chip').forEach((chip) => {
-      chip.addEventListener('click', () => {
-        root.querySelectorAll('.nb-chip').forEach((c) => c.classList.remove('is-on'));
-        chip.classList.add('is-on');
-        const f = chip.dataset.filter;
-        root.querySelectorAll('.nb-card').forEach((c) => {
-          c.hidden = !(f === 'tout' || c.dataset.mood === f);
-        });
-      });
-    });
+    // Carrousel : glisse au doigt + défilement auto toutes les 3 s (pause au toucher)
+    const track = root.querySelector('.nb-carousel');
+    const dots = root.querySelectorAll('.nb-dots span');
+    const slides = track.children;
+    let idx = 0, paused = false;
+    const show = (i) => {
+      idx = (i + slides.length) % slides.length;
+      track.scrollTo({ left: slides[idx].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    };
+    track.addEventListener('scroll', () => {
+      const i = Math.round(track.scrollLeft / slides[0].offsetWidth);
+      dots.forEach((d, k) => d.classList.toggle('is-on', k === i));
+      idx = i;
+    }, { passive: true });
+    ['touchstart', 'mousedown'].forEach((e) => track.addEventListener(e, () => { paused = true; }, { passive: true }));
+    setInterval(() => { if (!paused && slides.length > 1) show(idx + 1); }, 3000);
   }
 
   Promise.all([get('catalogue.json', 'json'), get('routes.json', 'json'), get('nsb-style.css', 'text')])
