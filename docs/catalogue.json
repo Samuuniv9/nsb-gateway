@@ -1,23 +1,24 @@
 {
-  "theme": "tropique",
+  "theme": "nuit",
   "vague_active": 1,
+  "rituel": "Choisis ton mood · Goûte une boisson · Vote pour qu'elle reste",
   "stand": "Stand dégustation le mercredi midi, à la sortie du RU — campus Camp Jacob, Saint-Claude.",
   "moods": {
     "energie": {
       "label": "Énergie",
-      "emoji": "⚡"
+      "icon": "bolt"
     },
     "tropical": {
       "label": "Tropical",
-      "emoji": "🥭"
+      "icon": "sun"
     },
     "leger": {
       "label": "Léger",
-      "emoji": "🫧"
+      "icon": "drop"
     },
     "decouverte": {
       "label": "Découverte",
-      "emoji": "🧪"
+      "icon": "flask"
     }
   },
   "boissons": [

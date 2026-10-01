@@ -44,7 +44,11 @@
     pen: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
     radar: '<circle cx="12" cy="12" r="10"/><path d="m16.2 7.8-2.1 6.3-6.3 2.1 2.1-6.3Z"/>',
     bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',
-    chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>'
+    chat: '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+    bolt: '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+    drop: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5 12 2.5c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7Z"/>',
+    flask: '<path d="M10 2v7.3L4.5 18A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 9.3V2"/><path d="M8.5 2h7M7 16h10"/>'
   };
   const ico = (n) => `<svg class="nb-ico" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
 
@@ -62,9 +66,11 @@
     return root;
   }
 
-  function slide(b) {
+  function slide(b, moods) {
+    const m = moods[b.mood] || { label: b.mood, icon: 'sparkle' };
     return `
-      <figure class="nb-slide">
+      <figure class="nb-slide" data-mood="${esc(b.mood)}">
+        <span class="nb-mood nb-mood-${esc(b.mood)}">${ico(m.icon)} ${esc(m.label)}</span>
         <div class="nb-photo">${b.image
           ? `<img src="${esc(BASE + b.image)}" alt="${esc(b.marque + ' ' + b.nom)}" loading="lazy">`
           : `<span>${esc(b.marque)}</span>`}</div>
@@ -72,7 +78,7 @@
       </figure>`;
   }
 
-  let THEME = 'tropique';
+  let THEME = 'nuit';
 
   function render(root, cat, r) {
     const v = cat.vague_active;
@@ -87,22 +93,30 @@
     root.innerHTML = `
       <header class="nb-header">
         <span class="nb-logo">NSB</span>
-        <span class="nb-badge">${ico('waves')} Vague ${v} / ${vagues} en cours</span>
+        <span class="nb-badge">${ico('waves')} Drop ${v} / ${vagues} en cours</span>
       </header>
 
       <section class="nb-hero">
-        <p class="nb-kicker">${ico('sparkle')} Nouveau à Saint-Claude</p>
-        <h1>Des boissons qu'on ne trouve pas ici.</h1>
-        <p class="nb-lead">${total} boissons importées en petite quantité, présentées en ${vagues} vagues de 7.
-          <strong>C'est toi qui décides lesquelles restent.</strong></p>
+        <p class="nb-kicker">${ico('sparkle')} Nouveau</p>
+        <h1>Des boissons qu'on ne trouve nulle part ailleurs en Guadeloupe.</h1>
+        <p class="nb-lead">Un labo de découverte local : ${total} boissons, ${vagues} drops.
+          <strong>À chaque drop, c'est toi qui décides lesquelles restent.</strong></p>
       </section>
 
+      <ol class="nb-ritual">
+        ${(cat.rituel || '').split('·').map((t, i) => `<li><span>${i + 1}</span>${esc(t.trim())}</li>`).join('')}
+      </ol>
+
       <section class="nb-wave">
-        <h2>${ico('cup')} La vague ${v}</h2>
-        <div class="nb-carousel" tabindex="0">${list.map(slide).join('')}</div>
-        <div class="nb-dots">${list.map((_, i) => `<span class="${i === 0 ? 'is-on' : ''}"></span>`).join('')}</div>
+        <h2>${ico('cup')} Le drop ${v}</h2>
+        <div class="nb-chips">
+          <button class="nb-chip is-on" data-filter="tout">Tout</button>
+          ${Object.entries(cat.moods).map(([k, m]) => `<button class="nb-chip nb-chip-${esc(k)}" data-filter="${esc(k)}">${ico(m.icon)} ${esc(m.label)}</button>`).join('')}
+        </div>
+        <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods)).join('')}</div>
+        <div class="nb-dots"></div>
         ${vote
-          ? `<a class="nb-cta" href="${esc(vote)}" target="_blank" rel="noopener">${ico('vote')} Choisis tes préférées</a>
+          ? `<a class="nb-cta" href="${esc(vote)}" target="_blank" rel="noopener">${ico('vote')} Vote pour tes préférées</a>
              <p class="nb-hint">1 minute · pas besoin de goûter, juste au feeling</p>`
           : `<span class="nb-cta is-off">${ico('vote')} Vote bientôt ouvert</span>`}
       </section>
@@ -128,8 +142,8 @@
 
       ${r.whatsapp_groupe ? `
       <section class="nb-block nb-soft">
-        <h2>${ico('bell')} Être prévenu de la prochaine vague</h2>
-        <p>Annonces uniquement : nouvelles vagues et dates du stand.</p>
+        <h2>${ico('bell')} Être prévenu du prochain drop</h2>
+        <p>Annonces uniquement : nouveaux drops et dates du stand.</p>
         <a class="nb-btn nb-btn-ghost" href="${esc(r.whatsapp_groupe)}" target="_blank" rel="noopener">${ico('chat')} Rejoindre les annonces WhatsApp</a>
       </section>` : ''}
 
@@ -142,22 +156,36 @@
       </footer>
     `;
 
-    // Carrousel : glisse au doigt + défilement auto toutes les 3 s (pause au toucher)
+    // Carrousel : moods (filtre) + glisse au doigt + défilement auto (pause au toucher)
     const track = root.querySelector('.nb-carousel');
-    const dots = root.querySelectorAll('.nb-dots span');
-    const slides = track.children;
-    let idx = 0, paused = false;
+    const dotsBox = root.querySelector('.nb-dots');
+    const all = [...track.children];
+    let visible = all, idx = 0, paused = false;
+    const drawDots = () => {
+      dotsBox.innerHTML = visible.map((_, i) => `<span class="${i === idx ? 'is-on' : ''}"></span>`).join('');
+    };
     const show = (i) => {
-      idx = (i + slides.length) % slides.length;
-      track.scrollTo({ left: slides[idx].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      if (!visible.length) return;
+      idx = (i + visible.length) % visible.length;
+      track.scrollTo({ left: visible[idx].offsetLeft - track.offsetLeft, behavior: 'smooth' });
     };
     track.addEventListener('scroll', () => {
-      const i = Math.round(track.scrollLeft / slides[0].offsetWidth);
-      dots.forEach((d, k) => d.classList.toggle('is-on', k === i));
-      idx = i;
+      if (!visible.length) return;
+      const w = visible[0].offsetWidth + 12;
+      idx = Math.min(visible.length - 1, Math.round(track.scrollLeft / w));
+      dotsBox.querySelectorAll('span').forEach((d, k) => d.classList.toggle('is-on', k === idx));
     }, { passive: true });
+    root.querySelectorAll('.nb-chip').forEach((chip) => chip.addEventListener('click', () => {
+      root.querySelectorAll('.nb-chip').forEach((c) => c.classList.remove('is-on'));
+      chip.classList.add('is-on');
+      const f = chip.dataset.filter;
+      all.forEach((el) => { el.hidden = !(f === 'tout' || el.dataset.mood === f); });
+      visible = all.filter((el) => !el.hidden);
+      idx = 0; track.scrollLeft = 0; drawDots(); paused = true;
+    }));
     ['touchstart', 'mousedown'].forEach((e) => track.addEventListener(e, () => { paused = true; }, { passive: true }));
-    setInterval(() => { if (!paused && slides.length > 1) show(idx + 1); }, 3000);
+    drawDots();
+    setInterval(() => { if (!paused && visible.length > 1) show(idx + 1); }, 3000);
   }
 
   Promise.all([get('catalogue.json', 'json'), get('routes.json', 'json'), get('nsb-style.css', 'text')])
@@ -167,7 +195,7 @@
       style.textContent = css;
       document.head.appendChild(style);
       // Thème : catalogue.json → "theme" (ou ?theme=… pour tester)
-      THEME = new URLSearchParams(location.search).get('theme') || cat.theme || 'tropique';
+      THEME = new URLSearchParams(location.search).get('theme') || cat.theme || 'nuit';
       render(mount(), cat, routes.fr || {});
     })
     .catch((err) => console.error('NSB Gateway :', err));

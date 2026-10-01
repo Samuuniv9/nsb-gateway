@@ -173,3 +173,60 @@ body.nb-body {
 .nb-footer a { color: var(--brand) !important; text-decoration: none; }
 .nb-footer span { color: var(--muted) !important; }
 #nb-app .nb-footer p { font-size: 13px; color: var(--muted) !important; }
+
+/* Couleurs des moods (teintes distinctes, clarté haute pour fond sombre) */
+body.nb-body {
+  --m-energie: hsl(50 95% 60%);
+  --m-tropical: hsl(25 95% 64%);
+  --m-leger: hsl(185 75% 62%);
+  --m-decouverte: hsl(275 85% 78%);
+}
+body.nb-body[data-nb-theme="tropique"] {
+  --m-energie: hsl(45 90% 32%);
+  --m-tropical: hsl(20 85% 42%);
+  --m-leger: hsl(185 80% 28%);
+  --m-decouverte: hsl(275 55% 45%);
+}
+
+/* Phrase rituelle : 3 étapes */
+.nb-ritual {
+  list-style: none; margin: 0; padding: 14px; display: grid; gap: 10px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+}
+.nb-ritual li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 17px; font-weight: 800; color: var(--ink);
+}
+.nb-ritual li span {
+  flex: none; width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; background: var(--brand); color: var(--bg);
+}
+.nb-ritual li:nth-child(2) span { background: var(--kick); }
+.nb-ritual li:nth-child(3) span { background: var(--m-leger); }
+
+/* Filtres mood */
+.nb-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 0 16px 2px; }
+.nb-chips::-webkit-scrollbar { display: none; }
+.nb-chip {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  font: inherit; font-size: 15px; font-weight: 700; padding: 9px 14px; border-radius: 999px;
+  background: var(--surface); color: var(--ink); border: 2px solid var(--line);
+}
+.nb-chip-energie { color: var(--m-energie); }
+.nb-chip-tropical { color: var(--m-tropical); }
+.nb-chip-leger { color: var(--m-leger); }
+.nb-chip-decouverte { color: var(--m-decouverte); }
+.nb-chip.is-on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.nb-slide[hidden] { display: none; }
+
+/* Étiquette mood sur chaque boisson */
+.nb-mood {
+  align-self: center; display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+}
+.nb-mood-energie { color: var(--m-energie); }
+.nb-mood-tropical { color: var(--m-tropical); }
+.nb-mood-leger { color: var(--m-leger); }
+.nb-mood-decouverte { color: var(--m-decouverte); }
+.nb-hero h1 { font-size: clamp(30px, 8.4vw, 40px); }
