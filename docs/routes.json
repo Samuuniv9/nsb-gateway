@@ -1,32 +1,11 @@
 {
   "fr": {
-    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/univers.html",
-    "univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.fr.md",
-    "univers_info": "/univers/info",
-    "whatsapp_flux": "#",
-    "site_officiel": "#",
-    "linkedin": "https://linkedin.com/in/samuel-nubéry-946768214",
-    "instagram": "https://www.instagram.com/lachambre200/",
-    "twitch": "#"
-  },
-  "en": {
-    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.en.md",
-    "univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.en.md",
-    "univers_info": "/en/universe/info",
-    "whatsapp_flux": "#",
-    "site_officiel": "#",
-    "linkedin": "https://linkedin.com/in/samuel-nubéry-946768214",
-    "instagram": "https://www.instagram.com/lachambre200/",
-    "twitch": "#"
-  },
-  "es": {
-    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.es.md",
-    "univers": "https://samuuniv9.github.io/nsb-gateway/docs/copy.univers.es.md",
-    "univers_info": "/es/universo/info",
-    "whatsapp_flux": "#",
-    "site_officiel": "#",
-    "linkedin": "https://linkedin.com/in/samuel-nubéry-946768214",
-    "instagram": "https://www.instagram.com/lachambre200/",
-    "twitch": "#"
+    "test_visuel_stock": "",
+    "test_degustation": "",
+    "test_radar": "",
+    "whatsapp_groupe": "",
+    "tiktok": "",
+    "instagram": "",
+    "cta_univers": "https://samuuniv9.github.io/nsb-gateway/univers.html"
   }
 }

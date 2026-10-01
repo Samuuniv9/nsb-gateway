@@ -1,224 +1,132 @@
 /* =========================================================
-   NSB Gateway — Feuille de style principale
-   Version : 2.1 | Auteur : Samuel Nubery
+   NSB Gateway — v3.0 « Vagues »
+   Mobile d'abord : la page s'ouvre sur le téléphone après le scan.
    ========================================================= */
 
-/* 1️⃣ VARIABLES GLOBALES */
 :root {
-  --color-bg: #0a0f14;
-  --color-text: #e0f2ff;
-  --color-accent: #00c6ff;
-  --color-accent2: #007bff;
-  --color-muted: #73859c;
-  --font-main: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  --radius: 16px;
+  --nb-bg: #0b1016;
+  --nb-panel: #131b24;
+  --nb-line: #22303d;
+  --nb-text: #eaf4fb;
+  --nb-muted: #8a9bab;
+  --nb-accent: #2fc4ff;
+  --nb-accent-2: #1f7bff;
+  --nb-energie: #ffd23f;
+  --nb-tropical: #ff9f43;
+  --nb-leger: #5ee6c4;
+  --nb-decouverte: #c58bff;
+  --nb-radius: 16px;
 }
 
-/* 2️⃣ RESET + LAYOUT GÉNÉRAL */
-#nsb-app, body {
-  margin: 0;
-  padding: 0;
-  font-family: var(--font-main);
-  color: var(--color-text);
-  background: var(--color-bg);
+body.nb-body {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: var(--nb-bg) !important;
+  color: var(--nb-text) !important;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif !important;
   -webkit-font-smoothing: antialiased;
 }
 
-#nsb-app {
-  max-width: 720px;
+#nb-app {
+  max-width: 560px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 20px 16px 40px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
+  box-sizing: border-box;
+}
+#nb-app *, #nb-app *::before, #nb-app *::after { box-sizing: border-box; }
+#nb-app h1, #nb-app h2, #nb-app h3, #nb-app p { margin: 0; }
+
+/* Header */
+.nb-header { display: flex; justify-content: space-between; align-items: center; }
+.nb-logo { font-weight: 800; letter-spacing: 2px; color: var(--nb-accent); }
+.nb-badge {
+  font-size: 12px; color: var(--nb-accent);
+  border: 1px solid var(--nb-accent); border-radius: 999px; padding: 5px 12px;
 }
 
-/* 3️⃣ HEADER */
-.nsb-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  color: var(--color-muted);
-  opacity: 0.85;
+/* Hero */
+.nb-hero { display: flex; flex-direction: column; gap: 14px; padding-top: 12px; }
+.nb-kicker {
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--nb-tropical);
 }
+.nb-hero h1 { font-size: clamp(30px, 8vw, 40px); line-height: 1.1; font-weight: 800; }
+.nb-lead { color: var(--nb-muted); font-size: 17px; line-height: 1.5; }
+.nb-lead strong { color: var(--nb-text); }
 
-.nsb-logo {
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--color-accent);
+.nb-cta {
+  display: block; text-align: center; text-decoration: none;
+  margin-top: 6px; padding: 17px 20px; border-radius: 999px;
+  font-size: 18px; font-weight: 700; color: #04121c;
+  background: linear-gradient(135deg, var(--nb-accent), var(--nb-leger));
+  box-shadow: 0 8px 24px rgba(47, 196, 255, .25);
 }
+.nb-cta:active { transform: scale(.98); }
+.nb-cta.is-off { background: var(--nb-panel); color: var(--nb-muted); box-shadow: none; }
+.nb-hint { text-align: center; font-size: 13px; color: var(--nb-muted); }
 
-.nsb-badge {
-  border: 1px solid var(--color-accent);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 11px;
-}
+/* Vague */
+.nb-wave { display: flex; flex-direction: column; gap: 14px; }
+.nb-wave-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.nb-wave h2 { font-size: 22px; }
+.nb-wave-head p { color: var(--nb-muted); font-size: 14px; }
 
-/* =========================================================
-   4️⃣ SECTION HÉRO — VERSION AVEC LOGO + ESPACEMENTS
-   ========================================================= */
-.nsb-hero {
-  text-align: center;
-  padding: 40px 20px;
+.nb-chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+.nb-chips::-webkit-scrollbar { display: none; }
+.nb-chip {
+  flex: none; font: inherit; font-size: 14px; cursor: pointer;
+  padding: 8px 14px; border-radius: 999px;
+  background: var(--nb-panel); color: var(--nb-text); border: 1px solid var(--nb-line);
 }
+.nb-chip.is-on { background: var(--nb-text); color: var(--nb-bg); border-color: var(--nb-text); }
 
-.nsb-hero h1 {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
-  -webkit-background-clip: text;
-  color: transparent;
+.nb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.nb-card {
+  background: var(--nb-panel); border: 1px solid var(--nb-line);
+  border-radius: var(--nb-radius); padding: 14px;
+  display: flex; flex-direction: column; gap: 6px;
 }
+.nb-card[hidden] { display: none; }
+.nb-card-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.nb-tag { font-size: 11px; font-weight: 700; }
+.nb-tag-energie { color: var(--nb-energie); }
+.nb-tag-tropical { color: var(--nb-tropical); }
+.nb-tag-leger { color: var(--nb-leger); }
+.nb-tag-decouverte { color: var(--nb-decouverte); }
+.nb-bio {
+  font-size: 10px; font-weight: 800; color: #0b1016; background: #8fd16a;
+  border-radius: 4px; padding: 2px 5px;
+}
+.nb-brand { font-size: 12px; color: var(--nb-muted); text-transform: uppercase; letter-spacing: 1px; }
+.nb-name { font-size: 15px; line-height: 1.3; font-weight: 700; }
+.nb-meta { font-size: 12px; color: var(--nb-muted); margin-top: auto !important; }
+.nb-next { font-size: 14px; color: var(--nb-muted); text-align: center; }
 
-.nsb-subtitle {
-  margin: 10px auto 24px auto;
-  font-size: 18px;
-  color: var(--color-muted);
-  line-height: 1.6;
+/* Blocs */
+.nb-block {
+  background: var(--nb-panel); border: 1px solid var(--nb-line);
+  border-radius: var(--nb-radius); padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
 }
+.nb-block h2 { font-size: 18px; }
+.nb-block p { color: var(--nb-muted); line-height: 1.5; font-size: 15px; }
+.nb-soft { background: transparent; border-style: dashed; }
 
-.nsb-logo-container {
-  display: flex;
-  justify-content: center;
-  margin: 16px 0 20px 0;
+.nb-btn {
+  display: block; text-align: center; text-decoration: none;
+  padding: 13px 16px; border-radius: 12px; font-weight: 700;
+  background: var(--nb-accent-2); color: #fff;
 }
+.nb-btn-ghost { background: transparent; color: var(--nb-text); border: 1px solid var(--nb-line); }
 
-.nsb-hero-logo {
-  width: 120px;
-  max-width: 40%;
-  height: auto;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 12px rgba(0,198,255,0.4));
-  transition: transform 0.3s ease;
-}
+/* Footer */
+.nb-footer { text-align: center; display: flex; flex-direction: column; gap: 10px; padding-top: 8px; }
+.nb-footer nav { display: flex; justify-content: center; gap: 20px; font-size: 15px; }
+.nb-footer a { color: var(--nb-accent); text-decoration: none; }
+.nb-footer span { color: var(--nb-muted); }
+.nb-footer p { font-size: 12px; color: var(--nb-muted); }
 
-.nsb-hero-logo:hover {
-  transform: scale(1.05);
-}
-
-.nsb-hero blockquote {
-  color: var(--color-text);
-  font-size: 17px;
-  line-height: 1.7;
-  margin: 24px 0;
-  font-style: italic;
-  opacity: 0.9;
-}
-
-.nsb-hero-quote {
-  margin: 16px auto 32px auto;
-  font-size: 16px;
-  color: #bcd6ff;
-  font-style: italic;
-  line-height: 1.7;
-}
-
-/* =========================================================
-   5️⃣ CTA (Boutons)
-   ========================================================= */
-.nsb-cta {
-  display: inline-block;
-  padding: 14px 22px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-accent2), var(--color-accent));
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  transition: 0.25s;
-  box-shadow: 0 0 20px rgba(0,198,255,0.3);
-}
-
-.nsb-cta:hover {
-  transform: scale(1.04);
-  filter: brightness(1.2);
-  box-shadow: 0 0 40px rgba(0,198,255,0.6);
-}
-
-/* CTA secondaire */
-.nsb-cta.secondary {
-  margin-top: -10px;
-  background: none;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-}
-
-.nsb-cta.secondary:hover {
-  background: var(--color-accent);
-  color: #fff;
-}
-
-/* =========================================================
-   6️⃣ BARRE SOCIALE
-   ========================================================= */
-.nsb-social {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.nsb-social a {
-  color: var(--color-accent);
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.nsb-social a:hover {
-  color: var(--color-accent2);
-}
-
-/* =========================================================
-   7️⃣ FOOTER
-   ========================================================= */
-.nsb-footer {
-  text-align: center;
-  font-size: 13px;
-  color: var(--color-muted);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  padding-top: 16px;
-}
-
-.nsb-footer em {
-  display: block;
-  color: var(--color-accent);
-  margin-bottom: 6px;
-}
-
-/* =========================================================
-   8️⃣ TRANSITION VISUELLE "PORTAIL VERS UNIVERS" — version sans halo
-   ========================================================= */
-#nsb-transition {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #000; /* fond noir uni */
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  z-index: 9999;
-}
-
-/* =========================================================
-   9️⃣ RESPONSIVITÉ MOBILE
-   ========================================================= */
-@media (max-width: 480px) {
-  .nsb-hero h1 {
-    font-size: 26px;
-  }
-  .nsb-subtitle {
-    font-size: 17px;
-    line-height: 1.6;
-  }
-  .nsb-hero blockquote,
-  .nsb-hero-quote {
-    font-size: 16px;
-    line-height: 1.8;
-  }
-  body, #nsb-app {
-    padding-bottom: 40px;
-  }
-}
+@media (max-width: 340px) { .nb-grid { grid-template-columns: 1fr; } }
