@@ -158,7 +158,7 @@
       "type": "Soda",
       "format": "Bouteille verre 33 cl",
       "bio": true,
-      "image": ""
+      "image": "img/fizz-cerise-hibiscus.jpg"
     },
     {
       "vague": 3,
@@ -208,7 +208,7 @@
       "type": "Eau protéinée",
       "format": "33 cl",
       "bio": false,
-      "image": ""
+      "image": "img/qnt-citron-gingembre.jpg"
     },
     {
       "vague": 3,
