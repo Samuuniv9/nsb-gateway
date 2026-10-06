@@ -92,13 +92,13 @@
 
     root.innerHTML = `
       <header class="nb-header">
-        <span class="nb-logo">NSB</span>
+        <span class="nb-brandbox"><span class="nb-logo">NSB</span><span class="nb-baseline">Communauté d'accès à des produits introuvables ailleurs</span></span>
         <span class="nb-badge">${ico('waves')} Drop ${v} / ${vagues} en cours</span>
       </header>
 
       <section class="nb-hero">
         <p class="nb-kicker">${ico('sparkle')} Nouveau</p>
-        <h1>Des boissons introuvables ailleurs en Guadeloupe.</h1>
+        <h1>Des boissons inédites en Guadeloupe.</h1>
         <p class="nb-lead">Un labo de découverte local : ${total} boissons, ${vagues} drops.
           <strong>À chaque drop, c'est toi qui décides lesquelles restent.</strong></p>
       </section>
