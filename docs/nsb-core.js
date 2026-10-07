@@ -117,7 +117,7 @@
         <div class="nb-dots"></div>
         ${vote
           ? `<a class="nb-cta" href="${esc(vote)}" target="_blank" rel="noopener">${ico('vote')} Vote pour tes préférées</a>
-             <p class="nb-hint">1 minute · pas besoin de goûter, juste au feeling</p>`
+             <p class="nb-hint">Code donné au stand</p>`
           : `<span class="nb-cta is-off">${ico('vote')} Vote bientôt ouvert</span>`}
       </section>
 
@@ -130,8 +130,8 @@
       ${avis ? `
       <section class="nb-block">
         <h2>${ico('pen')} Tu as déjà goûté ?</h2>
-        <p>Au stand ou chez toi, dis-nous ce que tu en as pensé. Ton avis compte pour la suite.</p>
         <a class="nb-btn" href="${esc(avis)}" target="_blank" rel="noopener">Donner mon avis</a>
+        <p class="nb-small">Code donné au stand</p>
       </section>` : ''}
 
       ${radar ? `
