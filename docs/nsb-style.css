@@ -296,3 +296,33 @@ body.nb-body[data-nb-theme="jungle"]   { --step1: hsl(330 85% 72%); --step2: hsl
 .nb-badge { order: 2; }
 #nb-app .nb-baseline { order: 3; flex-basis: 100%; max-width: none; }
 .nb-slide figcaption { text-wrap: balance; }
+
+/* =========================================================
+   v3.4 — La page suit le rituel : 1 rose → 2 vert → 3 bleu, puis or pour la suite
+   ========================================================= */
+body.nb-body[data-nb-theme="nuit"]     { --join: hsl(42 95% 62%); }
+body.nb-body[data-nb-theme="tropique"] { --join: hsl(38 90% 40%); }
+body.nb-body[data-nb-theme="jungle"]   { --join: hsl(42 95% 62%); }
+
+.nb-stepsec h2 { display: flex; align-items: center; gap: 12px; }
+.nb-num {
+  flex: none; width: 34px; height: 34px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 900; color: var(--on-step);
+}
+.nb-sec-1 .nb-num { background: var(--step1); }
+.nb-sec-2 .nb-num { background: var(--step2); }
+.nb-sec-3 .nb-num { background: var(--step3); }
+.nb-block.nb-sec-2 { border: 2px solid var(--step2); }
+.nb-block.nb-sec-3 { border: 2px solid var(--step3); }
+
+#nb-app .nb-go-1 { background: var(--step1) !important; color: var(--on-step) !important; box-shadow: 0 8px 24px hsl(330 90% 68% / .22); }
+#nb-app .nb-go-3 { background: var(--step3) !important; color: var(--on-step) !important; }
+#nb-app .nb-tag-2 {
+  align-self: flex-start; display: inline-flex; align-items: center; gap: 8px;
+  font-size: 18px; font-weight: 800; color: var(--step2) !important;
+}
+/* Or = rejoindre la suite du jeu (complémentaire du violet de fond) */
+#nb-app .nb-join { background: var(--join) !important; color: var(--on-step) !important; border: 0; font-size: 18px; }
+.nb-soft { border-color: var(--join); }
+.nb-soft h2 .nb-ico { color: var(--join); }

@@ -110,9 +110,9 @@
         ${(cat.rituel || '').split('·').map((t, i) => `<li class="nb-step-${i + 1}"><span>${i + 1}</span>${esc(t.trim())}</li>`).join('')}
       </ol>
 
-      <section class="nb-wave">
-        <h2>${ico('cup')} Le drop ${v}</h2>
-        <p class="nb-mystery">Boissons mystère : la marque se découvre au stand.</p>
+      <section class="nb-wave nb-stepsec nb-sec-1">
+        <h2><span class="nb-num">1</span> Choisis ton mood</h2>
+        <p class="nb-mystery">Le drop ${v} : ${list.length} boissons mystère. La marque se découvre au stand.</p>
         <div class="nb-chips">
           <button class="nb-chip is-on" data-filter="tout">Tout</button>
           ${Object.entries(cat.moods).map(([k, m]) => `<button class="nb-chip nb-chip-${esc(k)}" data-filter="${esc(k)}">${ico(m.icon)} ${esc(m.label)}</button>`).join('')}
@@ -120,21 +120,23 @@
         <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods)).join('')}</div>
         <div class="nb-dots"></div>
         ${vote
-          ? `<a class="nb-cta nb-vote" href="${esc(vote)}" target="_blank" rel="noopener">${ico('vote')} Vote pour tes préférées</a>
+          ? `<a class="nb-cta nb-go-1" href="${esc(vote)}" target="_blank" rel="noopener">${ico('sparkle')} Dis-nous ton mood</a>
              <p class="nb-hint">Code donné au stand</p>`
-          : `<span class="nb-cta is-off">${ico('vote')} Vote bientôt ouvert</span>`}
+          : ''}
       </section>
 
-      <section class="nb-block">
-        <h2>${ico('pin')} Viens goûter</h2>
+      <section class="nb-block nb-stepsec nb-sec-2">
+        <h2><span class="nb-num">2</span> Goûte une boisson</h2>
+        <p class="nb-tag-2">${ico('cup')} Demande ta dégustation au stand</p>
         <p>${esc(cat.stand)}</p>
-        <p class="nb-small">Tu as déjà vu une de ces boissons ailleurs en Guadeloupe ? Dis-le-nous au stand, ça nous intéresse.</p>
+        <p class="nb-small">Tu as déjà vu une de ces boissons ailleurs en Guadeloupe ? Dis-le-nous, ça nous intéresse.</p>
       </section>
 
       ${avis ? `
-      <section class="nb-block">
-        <h2>${ico('pen')} Tu as déjà goûté ?</h2>
-        <a class="nb-btn nb-taste" href="${esc(avis)}" target="_blank" rel="noopener">Donner mon avis</a>
+      <section class="nb-block nb-stepsec nb-sec-3">
+        <h2><span class="nb-num">3</span> Vote pour qu'elle reste</h2>
+        <p>Tu as goûté ? Ta note décide des boissons du prochain drop.</p>
+        <a class="nb-btn nb-go-3" href="${esc(avis)}" target="_blank" rel="noopener">${ico('vote')} Vote pour qu'elle reste</a>
         <p class="nb-small">Code donné au stand</p>
       </section>` : ''}
 
@@ -149,7 +151,7 @@
       <section class="nb-block nb-soft">
         <h2>${ico('bell')} Être prévenu du prochain drop</h2>
         <p>Annonces uniquement : nouveaux drops et dates du stand.</p>
-        <a class="nb-btn nb-btn-ghost" href="${esc(r.whatsapp_groupe)}" target="_blank" rel="noopener">${ico('chat')} Rejoindre les annonces WhatsApp</a>
+        <a class="nb-btn nb-join" href="${esc(r.whatsapp_groupe)}" target="_blank" rel="noopener">${ico('chat')} Rejoindre les annonces WhatsApp</a>
       </section>` : ''}
 
       <footer class="nb-footer">
