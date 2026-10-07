@@ -1,5 +1,5 @@
 /* =========================================================
-   NSB Gateway — v3.1 « Vagues » — charte en 3 thèmes
+   NSB Gateway — v3.3 « Mystère » — charte en 3 thèmes
    Thème choisi dans catalogue.json → "theme"
    Toutes les couleurs sont en HSL (teinte, saturation, clarté)
    et vérifiées en contraste (≥ 4,5:1, norme WCAG AA).
@@ -238,3 +238,61 @@ body.nb-body[data-nb-theme="tropique"] {
 .nb-brandbox { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 #nb-app .nb-baseline { font-size: 12px; line-height: 1.3; font-weight: 600; color: var(--muted) !important; max-width: 190px; }
 .nb-badge { flex: none; }
+
+/* =========================================================
+   v3.3 — Boisson mystère, code couleur du rituel, textes ≥ 16 px
+   rose = mood (choisir) · vert = goûter · bleu = voter
+   ========================================================= */
+body.nb-body[data-nb-theme="nuit"]     { --step1: hsl(330 90% 68%); --step2: hsl(80 85% 62%); --step3: hsl(205 95% 70%); --on-step: hsl(265 35% 10%); }
+body.nb-body[data-nb-theme="tropique"] { --step1: hsl(330 75% 42%); --step2: hsl(110 60% 28%); --step3: hsl(210 80% 38%); --on-step: hsl(0 0% 100%); }
+body.nb-body[data-nb-theme="jungle"]   { --step1: hsl(330 85% 72%); --step2: hsl(80 80% 62%); --step3: hsl(205 90% 72%); --on-step: hsl(155 50% 12%); }
+
+/* Tailles minimales lisibles sur téléphone */
+.nb-logo { font-size: 22px; }
+#nb-app .nb-baseline { font-size: 16px; max-width: 210px; }
+.nb-badge { font-size: 16px; padding: 6px 12px; }
+.nb-kicker { font-size: 16px; }
+#nb-app .nb-hint, #nb-app .nb-block .nb-small, #nb-app .nb-footer p { font-size: 16px; }
+.nb-chip { font-size: 16px; padding: 10px 15px; }
+.nb-btn { font-size: 18px; padding: 16px; }
+.nb-cta { font-size: 18px; }
+.nb-ritual li { font-size: 18px; }
+.nb-ritual li span { font-size: 16px; width: 32px; height: 32px; }
+
+/* Phrase rituelle : un chiffre = une couleur */
+.nb-ritual li.nb-step-1 span { background: var(--step1); color: var(--on-step); }
+.nb-ritual li.nb-step-2 span { background: var(--step2); color: var(--on-step); }
+.nb-ritual li.nb-step-3 span { background: var(--step3); color: var(--on-step); }
+
+/* Rose = mood : filtre actif */
+.nb-chip.is-on { background: var(--step1); color: var(--on-step); border-color: var(--step1); }
+.nb-dots span.is-on { background: var(--step1); }
+
+/* Vert = goûter */
+#nb-app .nb-taste { background: var(--step2) !important; color: var(--on-step) !important; }
+/* Bleu = voter */
+#nb-app .nb-vote { background: var(--step3) !important; color: var(--on-step) !important; box-shadow: 0 8px 24px hsl(205 95% 70% / .22); }
+
+/* Carte mystère : canette floutée en fond, mood au centre */
+#nb-app .nb-mystery { font-size: 16px; color: var(--muted) !important; }
+.nb-photo { position: relative; }
+.nb-photo img { width: 100%; height: 100%; object-fit: cover; mix-blend-mode: normal; transform: scale(1.08); }
+.nb-photo .nb-mood {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
+  padding: 12px 20px; border-radius: 999px;
+  background: hsl(265 35% 10% / .86); border: 2px solid var(--step1);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.nb-photo .nb-mood .nb-ico { width: 1.25em; height: 1.25em; }
+.nb-slide figcaption { font-size: 16px; }
+#nb-app .nb-slide figcaption strong { font-size: 18px; margin-bottom: 2px; }
+
+/* En-tête : NSB + badge sur une ligne, signature en pleine largeur dessous */
+.nb-header { flex-wrap: wrap; align-items: center; row-gap: 6px; }
+.nb-brandbox { display: contents; }
+.nb-logo { order: 1; }
+.nb-badge { order: 2; }
+#nb-app .nb-baseline { order: 3; flex-basis: 100%; max-width: none; }
+.nb-slide figcaption { text-wrap: balance; }

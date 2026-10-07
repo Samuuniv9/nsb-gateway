@@ -1,5 +1,5 @@
 /* =========================================================
-   NSB Gateway (cœur) — v3.2 « Vagues » (boissons, Cycle 1)
+   NSB Gateway (cœur) — v3.3 « Mystère » (boissons, Cycle 1)
    Auteur : Samuel Nubery
    ---------------------------------------------------------
    Ce script remplace la page Pwofeel par la page NSB.
@@ -56,25 +56,28 @@
     document.body.innerHTML = '';
     document.body.className = 'nb-body';
     document.body.dataset.nbTheme = THEME;
-    const meta = document.createElement('meta');
-    meta.name = 'viewport';
-    meta.content = 'width=device-width, initial-scale=1';
-    document.head.appendChild(meta);
+    // Une seule balise viewport : on modifie celle de Pwofeel au lieu d'en ajouter une
+    // (deux balises = le téléphone garde la première et zoome au chargement)
+    let meta = document.querySelector('meta[name="viewport"]');
+    if (!meta) { meta = document.createElement('meta'); meta.name = 'viewport'; document.head.appendChild(meta); }
+    meta.content = 'width=device-width, initial-scale=1, viewport-fit=cover';
+    document.title = 'NSB — Boissons inédites en Guadeloupe';
     const root = document.createElement('main');
     root.id = 'nb-app';
     document.body.appendChild(root);
     return root;
   }
 
+  // Boisson mystère : canette floutée en fond, mood au centre, saveurs dessous (pas de marque)
   function slide(b, moods) {
     const m = moods[b.mood] || { label: b.mood, icon: 'sparkle' };
     return `
       <figure class="nb-slide" data-mood="${esc(b.mood)}">
-        <span class="nb-mood nb-mood-${esc(b.mood)}">${ico(m.icon)} ${esc(m.label)}</span>
-        <div class="nb-photo">${b.image
-          ? `<img src="${esc(BASE + b.image)}" alt="${esc(b.marque + ' ' + b.nom)}" loading="lazy">`
-          : `<span>${esc(b.marque)}</span>`}</div>
-        <figcaption><strong>${esc(b.marque)}</strong>${esc(b.nom)}</figcaption>
+        <div class="nb-photo">
+          ${b.image ? `<img src="${esc(BASE + b.image)}" alt="" loading="lazy">` : ''}
+          <span class="nb-mood nb-mood-${esc(b.mood)}">${ico(m.icon)} ${esc(m.label)}</span>
+        </div>
+        <figcaption><strong>${esc(b.saveurs)}</strong>${esc(b.type)} · ${esc(b.format).replace(/ (cl)\b/g, '&nbsp;$1')}</figcaption>
       </figure>`;
   }
 
@@ -104,11 +107,12 @@
       </section>
 
       <ol class="nb-ritual">
-        ${(cat.rituel || '').split('·').map((t, i) => `<li><span>${i + 1}</span>${esc(t.trim())}</li>`).join('')}
+        ${(cat.rituel || '').split('·').map((t, i) => `<li class="nb-step-${i + 1}"><span>${i + 1}</span>${esc(t.trim())}</li>`).join('')}
       </ol>
 
       <section class="nb-wave">
         <h2>${ico('cup')} Le drop ${v}</h2>
+        <p class="nb-mystery">Boissons mystère : la marque se découvre au stand.</p>
         <div class="nb-chips">
           <button class="nb-chip is-on" data-filter="tout">Tout</button>
           ${Object.entries(cat.moods).map(([k, m]) => `<button class="nb-chip nb-chip-${esc(k)}" data-filter="${esc(k)}">${ico(m.icon)} ${esc(m.label)}</button>`).join('')}
@@ -116,7 +120,7 @@
         <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods)).join('')}</div>
         <div class="nb-dots"></div>
         ${vote
-          ? `<a class="nb-cta" href="${esc(vote)}" target="_blank" rel="noopener">${ico('vote')} Vote pour tes préférées</a>
+          ? `<a class="nb-cta nb-vote" href="${esc(vote)}" target="_blank" rel="noopener">${ico('vote')} Vote pour tes préférées</a>
              <p class="nb-hint">Code donné au stand</p>`
           : `<span class="nb-cta is-off">${ico('vote')} Vote bientôt ouvert</span>`}
       </section>
@@ -130,7 +134,7 @@
       ${avis ? `
       <section class="nb-block">
         <h2>${ico('pen')} Tu as déjà goûté ?</h2>
-        <a class="nb-btn" href="${esc(avis)}" target="_blank" rel="noopener">Donner mon avis</a>
+        <a class="nb-btn nb-taste" href="${esc(avis)}" target="_blank" rel="noopener">Donner mon avis</a>
         <p class="nb-small">Code donné au stand</p>
       </section>` : ''}
 
@@ -150,7 +154,7 @@
 
       <footer class="nb-footer">
         <nav>
-          ${r.tiktok ? `<a href="${esc(r.tiktok)}" target="_blank" rel="noopener">TikTok</a>` : '<span>TikTok (bientôt)</span>'}
+          ${r.tiktok ? `<a href="${esc(r.tiktok)}" target="_blank" rel="noopener">TikTok</a>` : ''}
           ${r.instagram ? `<a href="${esc(r.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}
         </nav>
         <p>NSB — North Star Business · Guadeloupe · 2026</p>
@@ -193,6 +197,7 @@
     .then(([cat, routes, css]) => {
       // Le style est injecté en <style> (GitHub sert les .css en text/plain, refusé en <link>)
       const style = document.createElement('style');
+      style.id = 'nb-style';
       style.textContent = css;
       document.head.appendChild(style);
       // Thème : catalogue.json → "theme" (ou ?theme=… pour tester)

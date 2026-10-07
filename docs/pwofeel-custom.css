@@ -1,0 +1,10 @@
+/* À coller dans Pwofeel > champ « CSS personnalisé ».
+   Cache la page Pwofeel pendant que la page NSB se charge (plus d'éclair avec le nom).
+   Sécurité : si la page NSB ne se charge pas, la page Pwofeel réapparaît après 6 s. */
+html { background: #181122 !important; }
+body:not(.nb-body) { visibility: hidden; animation: nbReveal 0s 6s forwards; }
+@keyframes nbReveal { to { visibility: visible; } }
+html:has(body:not(.nb-body))::before {
+  content: "NSB"; position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+  font: 900 28px/1 system-ui, sans-serif; letter-spacing: 4px; color: #f472b6; z-index: 2147483647;
+}
