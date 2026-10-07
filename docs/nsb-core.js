@@ -48,6 +48,8 @@
     bolt: '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
     drop: '<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5 12 2.5c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7Z"/>',
+    target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
+    run: '<circle cx="14" cy="4" r="2"/><path d="m6 21 3-6 3 2 1-5 3 3h3"/><path d="m8 10 3-3 4 1"/>',
     flask: '<path d="M10 2v7.3L4.5 18A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-3L14 9.3V2"/><path d="M8.5 2h7M7 16h10"/>'
   };
   const ico = (n) => `<svg class="nb-ico" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]}</svg>`;
@@ -115,7 +117,7 @@
         <p class="nb-mystery">Le drop ${v} : ${list.length} boissons mystère. La marque se découvre au stand.</p>
         <div class="nb-chips">
           <button class="nb-chip is-on" data-filter="tout">Tout</button>
-          ${Object.entries(cat.moods).map(([k, m]) => `<button class="nb-chip nb-chip-${esc(k)}" data-filter="${esc(k)}">${ico(m.icon)} ${esc(m.label)}</button>`).join('')}
+          ${Object.entries(cat.moods).filter(([k]) => list.some((b) => b.mood === k)).map(([k, m]) => `<button class="nb-chip nb-chip-${esc(k)}" data-filter="${esc(k)}">${ico(m.icon)} ${esc(m.label)}</button>`).join('')}
         </div>
         <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods)).join('')}</div>
         <div class="nb-dots"></div>

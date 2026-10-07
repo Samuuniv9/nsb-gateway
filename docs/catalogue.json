@@ -8,6 +8,10 @@
       "label": "Énergie",
       "icon": "bolt"
     },
+    "concentration": {
+      "label": "Concentration",
+      "icon": "target"
+    },
     "tropical": {
       "label": "Tropical",
       "icon": "sun"
@@ -15,6 +19,10 @@
     "leger": {
       "label": "Léger",
       "icon": "drop"
+    },
+    "sport": {
+      "label": "Après le sport",
+      "icon": "run"
     },
     "decouverte": {
       "label": "Découverte",
@@ -33,49 +41,9 @@
       "image": "img/d1-01.jpg"
     },
     {
-      "code": "d1-02",
-      "vague": 1,
-      "mood": "tropical",
-      "saveurs": "Citronnade glacée Mangue",
-      "type": "Citronnade",
-      "format": "Bouteille 35 cl",
-      "bio": true,
-      "image": "img/d1-02.jpg"
-    },
-    {
-      "code": "d1-03",
-      "vague": 1,
-      "mood": "decouverte",
-      "saveurs": "Pastèque · Citron vert",
-      "type": "Soda prébiotique",
-      "format": "Canette 33 cl",
-      "bio": false,
-      "image": "img/d1-03.jpg"
-    },
-    {
-      "code": "d1-04",
-      "vague": 1,
-      "mood": "leger",
-      "saveurs": "Pastèque · Menthe",
-      "type": "Eau pétillante",
-      "format": "Canette 33 cl",
-      "bio": false,
-      "image": "img/d1-04.jpg"
-    },
-    {
-      "code": "d1-05",
-      "vague": 1,
-      "mood": "energie",
-      "saveurs": "Myrtille · Framboise",
-      "type": "Boisson vitaminée",
-      "format": "Bouteille 50 cl",
-      "bio": false,
-      "image": "img/d1-05.jpg"
-    },
-    {
       "code": "d1-06",
       "vague": 1,
-      "mood": "energie",
+      "mood": "concentration",
       "saveurs": "Gingembre · Mangue · Matcha",
       "type": "Pétillant",
       "format": "Canette 25 cl",
@@ -83,14 +51,54 @@
       "image": "img/d1-06.jpg"
     },
     {
-      "code": "d1-07",
+      "code": "d2-05",
+      "vague": 1,
+      "mood": "sport",
+      "saveurs": "Fraise · Rhubarbe",
+      "type": "Boisson vitaminée",
+      "format": "Bouteille 50 cl",
+      "bio": false,
+      "image": "img/d2-05.jpg"
+    },
+    {
+      "code": "d2-06",
+      "vague": 1,
+      "mood": "energie",
+      "saveurs": "Gingembre · Pêche · Ginseng",
+      "type": "Pétillant",
+      "format": "Canette 25 cl",
+      "bio": true,
+      "image": "img/d2-06.jpg"
+    },
+    {
+      "code": "d3-01",
+      "vague": 1,
+      "mood": "leger",
+      "saveurs": "Citron · Gingembre",
+      "type": "Eau pétillante",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/d3-01.jpg"
+    },
+    {
+      "code": "d3-02",
       "vague": 1,
       "mood": "decouverte",
-      "saveurs": "Thé glacé Maté · Grenade · Litchi",
-      "type": "Thé glacé",
-      "format": "Bouteille 35 cl",
+      "saveurs": "Grenade · Cassis",
+      "type": "Soda",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/d3-02.jpg"
+    },
+    {
+      "code": "d3-07",
+      "vague": 1,
+      "mood": "decouverte",
+      "saveurs": "Schorle Rhubarbe",
+      "type": "Schorle",
+      "format": "Bouteille verre 33 cl",
       "bio": true,
-      "image": "img/d1-07.jpg"
+      "image": "img/d3-07.jpg"
     },
     {
       "code": "d2-01",
@@ -101,16 +109,6 @@
       "format": "Canette 33 cl",
       "bio": false,
       "image": "img/d2-01.jpg"
-    },
-    {
-      "code": "d2-02",
-      "vague": 2,
-      "mood": "tropical",
-      "saveurs": "Citronnade glacée Fruits rouges",
-      "type": "Citronnade",
-      "format": "Bouteille 35 cl",
-      "bio": true,
-      "image": "img/d2-02.jpg"
     },
     {
       "code": "d2-03",
@@ -133,26 +131,6 @@
       "image": "img/d2-04.jpg"
     },
     {
-      "code": "d2-05",
-      "vague": 2,
-      "mood": "leger",
-      "saveurs": "Fraise · Rhubarbe",
-      "type": "Boisson vitaminée",
-      "format": "Bouteille 50 cl",
-      "bio": false,
-      "image": "img/d2-05.jpg"
-    },
-    {
-      "code": "d2-06",
-      "vague": 2,
-      "mood": "energie",
-      "saveurs": "Gingembre · Pêche · Ginseng",
-      "type": "Pétillant",
-      "format": "Canette 25 cl",
-      "bio": true,
-      "image": "img/d2-06.jpg"
-    },
-    {
       "code": "d2-07",
       "vague": 2,
       "mood": "decouverte",
@@ -163,29 +141,9 @@
       "image": "img/d2-07.jpg"
     },
     {
-      "code": "d3-01",
-      "vague": 3,
-      "mood": "leger",
-      "saveurs": "Citron · Gingembre",
-      "type": "Eau pétillante",
-      "format": "Canette 33 cl",
-      "bio": false,
-      "image": "img/d3-01.jpg"
-    },
-    {
-      "code": "d3-02",
-      "vague": 3,
-      "mood": "decouverte",
-      "saveurs": "Grenade · Cassis",
-      "type": "Soda",
-      "format": "Canette 33 cl",
-      "bio": false,
-      "image": "img/d3-02.jpg"
-    },
-    {
       "code": "d3-03",
-      "vague": 3,
-      "mood": "leger",
+      "vague": 2,
+      "mood": "concentration",
       "saveurs": "Kiwi · Citron",
       "type": "Boisson vitaminée",
       "format": "Bouteille 50 cl",
@@ -194,7 +152,7 @@
     },
     {
       "code": "d3-04",
-      "vague": 3,
+      "vague": 2,
       "mood": "energie",
       "saveurs": "Gingembre · Framboise · Thé",
       "type": "Pétillant",
@@ -204,13 +162,73 @@
     },
     {
       "code": "d3-05",
-      "vague": 3,
-      "mood": "energie",
+      "vague": 2,
+      "mood": "sport",
       "saveurs": "Eau protéinée Citron · Gingembre",
       "type": "Eau protéinée",
       "format": "33 cl",
       "bio": false,
       "image": "img/d3-05.jpg"
+    },
+    {
+      "code": "d1-02",
+      "vague": 3,
+      "mood": "tropical",
+      "saveurs": "Citronnade glacée Mangue",
+      "type": "Citronnade",
+      "format": "Bouteille 35 cl",
+      "bio": true,
+      "image": "img/d1-02.jpg"
+    },
+    {
+      "code": "d1-03",
+      "vague": 3,
+      "mood": "leger",
+      "saveurs": "Pastèque · Citron vert",
+      "type": "Soda prébiotique",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/d1-03.jpg"
+    },
+    {
+      "code": "d1-04",
+      "vague": 3,
+      "mood": "leger",
+      "saveurs": "Pastèque · Menthe",
+      "type": "Eau pétillante",
+      "format": "Canette 33 cl",
+      "bio": false,
+      "image": "img/d1-04.jpg"
+    },
+    {
+      "code": "d1-05",
+      "vague": 3,
+      "mood": "energie",
+      "saveurs": "Myrtille · Framboise",
+      "type": "Boisson vitaminée",
+      "format": "Bouteille 50 cl",
+      "bio": false,
+      "image": "img/d1-05.jpg"
+    },
+    {
+      "code": "d1-07",
+      "vague": 3,
+      "mood": "concentration",
+      "saveurs": "Thé glacé Maté · Grenade · Litchi",
+      "type": "Thé glacé",
+      "format": "Bouteille 35 cl",
+      "bio": true,
+      "image": "img/d1-07.jpg"
+    },
+    {
+      "code": "d2-02",
+      "vague": 3,
+      "mood": "decouverte",
+      "saveurs": "Citronnade glacée Fruits rouges",
+      "type": "Citronnade",
+      "format": "Bouteille 35 cl",
+      "bio": true,
+      "image": "img/d2-02.jpg"
     },
     {
       "code": "d3-06",
@@ -221,16 +239,6 @@
       "format": "33 cl",
       "bio": false,
       "image": "img/d3-06.jpg"
-    },
-    {
-      "code": "d3-07",
-      "vague": 3,
-      "mood": "decouverte",
-      "saveurs": "Schorle Rhubarbe",
-      "type": "Schorle",
-      "format": "Bouteille verre 33 cl",
-      "bio": true,
-      "image": "img/d3-07.jpg"
     }
   ]
 }

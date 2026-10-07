@@ -326,3 +326,9 @@ body.nb-body[data-nb-theme="jungle"]   { --join: hsl(42 95% 62%); }
 #nb-app .nb-join { background: var(--join) !important; color: var(--on-step) !important; border: 0; font-size: 18px; }
 .nb-soft { border-color: var(--join); }
 .nb-soft h2 .nb-ico { color: var(--join); }
+
+/* v3.5 — 6 moods (mêmes que le formulaire Tally) ; seuls ceux du drop actif s'affichent */
+body.nb-body { --m-concentration: hsl(160 70% 60%); --m-sport: hsl(0 85% 72%); }
+body.nb-body[data-nb-theme="tropique"] { --m-concentration: hsl(160 70% 26%); --m-sport: hsl(0 70% 42%); }
+.nb-chip-concentration, .nb-mood-concentration { color: var(--m-concentration); }
+.nb-chip-sport, .nb-mood-sport { color: var(--m-sport); }
