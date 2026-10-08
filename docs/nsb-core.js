@@ -1,5 +1,5 @@
 /* =========================================================
-   NSB Gateway (cœur) — v3.3 « Mystère » (boissons, Cycle 1)
+   NSB Gateway (cœur) — v3.4 « Mystère » (boissons, Cycle 1) + stats GoatCounter
    Auteur : Samuel Nubery
    ---------------------------------------------------------
    Ce script remplace la page Pwofeel par la page NSB.
@@ -197,6 +197,48 @@
     setInterval(() => { if (!paused && visible.length > 1) show(idx + 1); }, 3000);
   }
 
+  // ---------------------------------------------------------
+  // Statistiques GoatCounter (sans cookies, donc sans bannière)
+  // Tableau de bord : https://nsb.goatcounter.com
+  // Pages comptées : visite-carte / visite-flyer
+  // Clics comptés : clic-mood-form, clic-vote, clic-radar,
+  //   clic-whatsapp, clic-tiktok, clic-instagram, mood-<nom>
+  // (chaque clic se termine par -carte ou -flyer)
+  // Pour couper les stats : mettre STATS = '' ci-dessous.
+  // ---------------------------------------------------------
+  const STATS = 'https://nsb.goatcounter.com/count';
+  const nbCount = (path, title, event) => {
+    try {
+      if (window.goatcounter && window.goatcounter.count) {
+        window.goatcounter.count({ path, title, event });
+      }
+    } catch (e) { /* les stats ne doivent jamais casser la page */ }
+  };
+  function startStats() {
+    if (!STATS) return;
+    window.goatcounter = { no_onload: true };
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://gc.zgo.at/count.js';
+    s.dataset.goatcounter = STATS;
+    s.onload = () => nbCount('visite-' + SOURCE, 'Visite page NSB (' + SOURCE + ')', false);
+    document.head.appendChild(s);
+
+    document.addEventListener('click', (e) => {
+      const el = e.target.closest('a, .nb-chip');
+      if (!el) return;
+      let name = '';
+      if (el.classList.contains('nb-chip')) name = 'mood-' + el.dataset.filter;
+      else if (el.classList.contains('nb-go-1')) name = 'clic-mood-form';
+      else if (el.classList.contains('nb-go-3')) name = 'clic-vote';
+      else if (el.classList.contains('nb-join')) name = 'clic-whatsapp';
+      else if (/tiktok/i.test(el.href)) name = 'clic-tiktok';
+      else if (/instagram/i.test(el.href)) name = 'clic-instagram';
+      else if (/tally/i.test(el.href)) name = 'clic-radar';
+      if (name) nbCount(name + '-' + SOURCE, el.textContent.trim().slice(0, 60), true);
+    }, true);
+  }
+
   Promise.all([get('catalogue.json', 'json'), get('routes.json', 'json'), get('nsb-style.css', 'text')])
     .then(([cat, routes, css]) => {
       // Le style est injecté en <style> (GitHub sert les .css en text/plain, refusé en <link>)
@@ -207,6 +249,7 @@
       // Thème : catalogue.json → "theme" (ou ?theme=… pour tester)
       THEME = new URLSearchParams(location.search).get('theme') || cat.theme || 'nuit';
       render(mount(), cat, routes.fr || {});
+      startStats();
     })
     .catch((err) => console.error('NSB Gateway :', err));
 })();
