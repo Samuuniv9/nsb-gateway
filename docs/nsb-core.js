@@ -1,5 +1,5 @@
 /* =========================================================
-   NSB Gateway (cœur) — v3.4 « Mystère » (boissons, Cycle 1) + stats GoatCounter
+   NSB Gateway (cœur) — v3.5 « Mystère » (boissons, Cycle 1) + stats GoatCounter + vague dans Tally
    Auteur : Samuel Nubery
    ---------------------------------------------------------
    Ce script remplace la page Pwofeel par la page NSB.
@@ -21,12 +21,19 @@
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
   ));
 
-  // Ajoute ?source=carte|flyer aux liens Tally (champ caché "source")
+  // Drop en cours, lu dans catalogue.json au chargement
+  let VAGUE = '';
+
+  // Ajoute ?source=carte|flyer&vague=N aux liens Tally (champs cachés "source" et "vague")
   const withSource = (url) => {
     if (!url) return '';
     try {
       const u = new URL(url);
-      if (u.hostname.includes('tally')) u.searchParams.set('source', SOURCE);
+      if (u.hostname.includes('tally')) {
+        u.searchParams.set('source', SOURCE);
+        // Numéro du drop en cours (catalogue.json → vague_active), rempli dans le champ caché "vague"
+        if (VAGUE !== '') u.searchParams.set('vague', String(VAGUE));
+      }
       return u.toString();
     } catch (e) { return url; }
   };
@@ -87,6 +94,7 @@
 
   function render(root, cat, r) {
     const v = cat.vague_active;
+    VAGUE = v ?? '';
     const list = cat.boissons.filter((b) => b.vague === v);
     const total = cat.boissons.length;
     const vagues = Math.max(...cat.boissons.map((b) => b.vague));
