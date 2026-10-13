@@ -3,288 +3,300 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>North Star Blueprint — NSB</title>
-<meta name="description" content="North Star Blueprint — connexion établie.">
+<title>North Star Blueprint — Saison 1</title>
+<meta name="description" content="Découvre les boissons de la vague 1 et donne ton premier avis.">
+<meta property="og:title" content="North Star Blueprint · Saison 1">
+<meta property="og:description" content="Découvre les boissons de la vague 1 et donne ton premier avis.">
+<meta property="og:image" content="https://samuuniv9.github.io/nsb-gateway/docs/img/blueprint/machine-poster.jpg">
+<meta property="og:type" content="website">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#120e09">
 <style>
 /* =========================================================
-   NORTH STAR BLUEPRINT — landing page du flyer (v0.3, test)
+   NORTH STAR BLUEPRINT — landing page du flyer (v1.0)
    Auteur : Samuel Nubery — NSB (North Star Business)
-   Référence visuelle : flyer Canva « Flyer A5 recto-verso North Star Blueprint »
    Page autonome : ne touche pas à index.html (carte NFC).
+   Même structure que la v1 (StoryBrand : accès → ce que tu fais → action → parcours → saison),
+   mais vocabulaire de machine / navigation, sans personnification.
    ========================================================= */
 :root{
   --bg:#120e09; --copper:#d98a4e; --copper-dim:#7a4a2b;
-  --ink:#f1e4d3; --muted:#b49b82; --violet:#a46bff; --violet-glow:#7b3cff;
-  --term:#c9b3ff;
+  --ink:#f1e4d3; --muted:#b49b82; --violet:#a46bff; --term:#c9b3ff;
   --mono:"Courier Prime","Courier New",ui-monospace,Menlo,Consolas,monospace;
 }
 *{box-sizing:border-box}
 html,body{margin:0;background:var(--bg);color:var(--ink)}
-body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100svh;
-  background:radial-gradient(120% 60% at 50% 0%,#2a1d12 0%,var(--bg) 60%) fixed}
-.bp{max-width:460px;margin:0 auto;padding:20px 16px 40px;position:relative}
+body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100svh;position:relative;overflow-x:hidden}
 
-/* Repères de coupe (croix) comme sur le flyer */
-.cross{position:fixed;width:22px;height:22px;opacity:.5;pointer-events:none}
-.cross::before,.cross::after{content:"";position:absolute;background:var(--copper-dim)}
-.cross::before{left:50%;top:0;width:1px;height:100%}
-.cross::after{top:50%;left:0;height:1px;width:100%}
-.c1{top:10px;left:10px}.c2{top:10px;right:10px}.c3{bottom:10px;left:10px}.c4{bottom:10px;right:10px}
+/* --- Symboles de l'interface en arrière-plan (décor, aucune action) --- */
+.glyphs{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.glyphs svg{position:absolute;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.glyphs .c{stroke:var(--copper)} .glyphs .v{stroke:var(--violet)}
+.glyphs .blink{animation:flick 6s ease-in-out infinite}
+@keyframes flick{0%,100%{opacity:var(--o)}45%{opacity:var(--o)}50%{opacity:calc(var(--o) * 3)}55%{opacity:var(--o)}}
 
-.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted)}
+.wrap{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:0 0 40px}
+
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .logo{color:var(--copper);font-weight:700;font-size:18px;letter-spacing:.12em}
-.logo span{font-size:12px;margin-left:2px;vertical-align:super}
+.logo span{font-size:12px;vertical-align:super}
 .status{display:inline-flex;align-items:center;gap:8px}
-.led{width:8px;height:8px;border-radius:50%;background:var(--copper-dim);animation:pulse 1s steps(2) infinite}
-.on .led{background:var(--violet);box-shadow:0 0 10px var(--violet);animation:none}
-@keyframes pulse{50%{opacity:.2}}
+.led{width:8px;height:8px;border-radius:50%;background:var(--violet);box-shadow:0 0 10px var(--violet)}
 
-/* Cadre de la machine (repris du verso) */
-.frame{position:relative;margin:16px 0 0;border:1px solid var(--copper-dim);padding:6px;background:#0d0a06}
-.machine{position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:#0d0a06}
-.machine img,.machine video{display:block;width:100%;height:100%;object-fit:cover}
-.machine video{position:absolute;inset:0}
+/* --- Premier écran --- */
+.hero{position:relative;height:44svh;min-height:280px;max-height:420px;overflow:hidden;background:#0d0a06}
+.hero img,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:60%;background:linear-gradient(to bottom,transparent,var(--bg))}
+.hero-title{position:absolute;left:16px;right:16px;bottom:10px;z-index:1;margin:0}
+.kicker{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper);margin-bottom:6px}
+.hero-title strong{display:block;font-size:clamp(26px,8vw,34px);line-height:1.1;letter-spacing:.04em;color:#fff;text-shadow:0 2px 12px #000}
 
-/* Titre façon verso */
-.title{text-align:center;margin:18px 0 0;color:var(--copper);font-weight:400;
-  font-size:clamp(20px,6.4vw,28px);letter-spacing:.16em;text-transform:uppercase}
-
-/* Mot de passe : l'énigme sous le titre */
-.intro{margin:0 0 16px;text-align:center;font-size:15px;line-height:1.6;color:var(--ink)}
-.lockline{margin:16px auto 0;width:max-content;max-width:100%;padding:6px 12px;border:1px solid #3d2a5e;
-  border-radius:8px;background:#140d20;color:var(--term);font-size:13px;letter-spacing:.18em;text-transform:uppercase}
-.cur{display:inline-block;margin-left:4px;animation:pulse 1s steps(2) infinite}
-.passhint{margin:8px 0 0;text-align:center;font-size:13px;color:var(--muted)}
-
-/* Mission + bouton principal */
-.mission{margin:26px 0 0}
-.mission-label{margin:0 0 8px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--copper-dim);text-align:center}
-.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:60px;
-  padding:14px 18px;border-radius:14px;text-decoration:none;font-family:var(--mono);
-  font-size:18px;font-weight:700;letter-spacing:.04em;color:#140b22;
-  background:linear-gradient(180deg,#c39bff,var(--violet));
-  box-shadow:0 0 0 1px #d9c2ff inset,0 8px 28px rgba(123,60,255,.45)}
-.cta:active{transform:translateY(1px)}
+.first{padding:14px 16px 0}
+.readout{margin:0;padding:12px 14px;border-left:2px solid var(--violet);background:rgba(20,13,32,.78);border-radius:0 10px 10px 0}
+.readout .label{display:block;margin-bottom:6px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--term)}
+.readout p{margin:0;font-size:16px;line-height:1.55}
+.readout p + p{margin-top:6px;color:var(--muted)}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;margin-top:16px;
+  padding:14px 18px;border-radius:14px;text-decoration:none;font-family:var(--mono);font-size:18px;font-weight:700;
+  color:#140b22;background:linear-gradient(180deg,#c39bff,var(--violet));box-shadow:0 0 0 1px #d9c2ff inset,0 8px 28px rgba(123,60,255,.45)}
 .cta:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
 .cta svg{width:18px;height:18px}
+.code,.share-msg{text-shadow:0 0 6px var(--bg),0 0 3px var(--bg)}
+.code{margin:10px 0 0;text-align:center;font-size:13px;color:var(--term)}
+.share{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:46px;margin-top:14px;
+  border-radius:12px;border:1px solid #5b3a8f;background:rgba(18,14,9,.92);color:var(--term);font:inherit;font-size:14px;cursor:pointer}
+.share svg{width:17px;height:17px}
+.share:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+.share-msg{margin:8px 0 0;min-height:1.2em;text-align:center;font-size:12px;color:var(--muted)}
+.share-fallback{display:flex;gap:6px;margin-top:8px}
+.share-fallback[hidden]{display:none}
+.share-fallback input{flex:1;min-width:0;padding:10px;border-radius:8px;border:1px solid #3d2a5e;background:#0e0916;color:var(--ink);font:inherit;font-size:12px}
 
-/* Commandes verrouillées */
-.panel{margin:30px 0 0;border-top:1px dashed var(--copper-dim);padding-top:14px}
-.panel-label{margin:0 0 10px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-dim)}
-.keys{display:flex;gap:10px}
-.key{flex:1;height:52px;border:1px solid #3a2a1c;border-radius:10px;display:grid;place-items:center;
-  color:#8a6a50;background:#17110b;font:inherit;font-size:20px;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.key::after{content:"🔒";font-size:9px;margin-top:2px;opacity:.6}
-.key{grid-template-rows:auto auto}
-.key.is-on{border-color:#5b3a8f;color:var(--term);background:#160f22}
-.key:focus-visible{outline:2px solid var(--copper);outline-offset:2px}
+/* --- Séquence (parcours) --- */
+.sec{margin:30px 16px 0}
+.sec h2{margin:0 0 12px;font-size:11px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--copper)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.steps li{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:start;padding:12px;border:1px solid #2e2217;border-radius:12px;background:rgba(23,17,11,.7)}
+.steps .n{font-size:13px;letter-spacing:.1em;color:var(--copper);padding-top:2px}
+.steps .now{border-color:#5b3a8f;background:rgba(22,15,34,.9)}
+.steps .now .n{color:var(--term)}
+.steps b{display:block;font-size:15px}
+.steps small{display:block;margin-top:3px;font-size:13px;line-height:1.45;color:var(--muted)}
+.tag{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;vertical-align:2px;background:#2a1a45;color:var(--term)}
 
-/* Terminal de réponse des commandes */
-.term{margin:12px 0 0;padding:12px;border:1px solid #3d2a5e;border-radius:10px;background:#0e0916;
-  color:var(--term);font-size:14px;line-height:1.5;min-height:0}
-.term[hidden]{display:none}
-.term p{margin:0 0 6px}
-.term .deny{color:#ff8a8a}
-.choices{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.choice{font:inherit;font-size:13px;padding:9px 12px;border-radius:999px;border:1px solid #5b3a8f;
-  background:transparent;color:var(--term);cursor:pointer}
-.choice:active{background:#2a1a45}
+/* --- Saison 1 --- */
+.season{padding:14px;border:1px dashed var(--copper-dim);border-radius:12px;background:rgba(18,14,9,.72)}
+.season p{margin:0 0 6px;font-size:13px;line-height:1.5;color:var(--muted)}
+.season p b{color:var(--ink);font-weight:400}
+.dates{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
+.d{display:grid;place-items:center;padding:8px 0;border-radius:8px;border:1px solid #3a2a1c;font-size:12px;line-height:1.25;text-align:center}
+.d small{font-size:9px;color:var(--muted)}
+.d.past{opacity:.35}
+.d.next{border-color:var(--violet);color:var(--term);box-shadow:0 0 12px rgba(164,107,255,.35)}
+.d.final{border-color:var(--copper);color:var(--copper)}
+.legend{display:flex;gap:12px;margin-top:10px;font-size:11px;color:var(--muted)}
+.wa{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;min-height:46px;border-radius:12px;
+  border:1px solid var(--copper-dim);color:var(--ink);text-decoration:none;font-size:14px}
+.wa svg{width:18px;height:18px}
 
-/* Séquence d'activation (ajoutée par JS) */
-.boot .title,.boot .mission{opacity:0;animation:in .5s ease-out forwards}
-.boot .title{animation-delay:.6s}.boot .mission{animation-delay:1s}
-.done .title,.done .mission{opacity:1!important}
-@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-
-@media (prefers-reduced-motion:reduce){*{animation:none!important}.boot *{opacity:1!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
-<span class="cross c1"></span><span class="cross c2"></span><span class="cross c3"></span><span class="cross c4"></span>
+<div class="glyphs" id="glyphs" aria-hidden="true"></div>
 
-<main class="bp" id="bp">
+<div class="wrap">
   <header class="top">
     <span class="logo" aria-label="NSB — North Star Business">NSB<span aria-hidden="true">★</span></span>
-    <span class="status" id="status" role="status"><span class="led"></span><span id="status-txt">Connexion…</span></span>
+    <span class="status" role="status"><span class="led"></span>Connexion établie</span>
   </header>
 
-  <div class="frame">
-    <div class="machine" id="machine">
-      <!-- Image fixe (1re image de la vidéo) : affichée si la vidéo ne se lance pas -->
-      <img id="poster" src="docs/img/blueprint/machine-poster.jpg" alt="La machine North Star Blueprint : un ordinateur sculpté couleur cuivre, avec un œil violet." width="720" height="900">
+  <section class="hero" id="hero">
+    <img src="docs/img/blueprint/machine-poster.jpg" alt="La machine North Star Blueprint : un ordinateur sculpté couleur cuivre, avec un œil violet." width="720" height="900">
+    <h1 class="hero-title"><span class="kicker">North Star Blueprint</span><strong>Saison 1 : fixer le cap</strong></h1>
+  </section>
+
+  <section class="first">
+    <div class="readout">
+      <span class="label">Mission 01 · Calibrage</span>
+      <p>Découvre les boissons de la vague&nbsp;1 et donne ton premier avis.</p>
+      <p>Tes retours aident à choisir celles qui restent dans la sélection.</p>
     </div>
-  </div>
-
-  <h1 class="title">North Star Blueprint</h1>
-
-  <section class="mission">
-    <p class="mission-label" id="mission-label">Mission 01 disponible</p>
-    <p class="intro" id="intro"></p>
-    <!-- Lien de repli (sans JavaScript) : formulaire Tally existant « NSB · Test 1 · Vague 1 » -->
+    <!-- Formulaire Tally existant « Calibrage · NSB ». La page ajoute origine_qr, source et vague. -->
     <a class="cta" id="cta" href="https://tally.so/r/XxKMvY?source=flyer" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8Z"/></svg>
-      <span id="cta-txt">Lancer : Calibrage</span>
+      Lancer le calibrage
     </a>
-    <p class="lockline"><span aria-hidden="true">⌁ </span><span id="lock-txt">Mot de passe requis</span><span class="cur" aria-hidden="true">▮</span></p>
-    <p class="passhint" id="passhint">Indice : il est imprimé sur le flyer.</p>
+    <p class="code">⌁ Code d'accès : imprimé sur le flyer</p>
+    <!-- Action secondaire : partage -->
+    <button class="share" id="share" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+      Partager cette expérience
+    </button>
+    <div class="share-fallback" id="share-fallback" hidden>
+      <input id="share-url" type="text" readonly aria-label="Lien à partager">
+    </div>
+    <p class="share-msg" id="share-msg" aria-live="polite"></p>
   </section>
 
-  <section class="panel">
-    <p class="panel-label">Autres commandes — verrouillées</p>
-    <div class="keys" id="keys">
-      <button class="key" type="button" data-k="1" aria-label="Commande verrouillée 1">⟁</button>
-      <button class="key" type="button" data-k="2" aria-label="Commande verrouillée 2">⌬</button>
-      <button class="key" type="button" data-k="3" aria-label="Commande verrouillée 3">⍜</button>
-    </div>
-    <div class="term" id="term" aria-live="polite" hidden></div>
+  <section class="sec">
+    <h2>Séquence</h2>
+    <ol class="steps">
+      <li class="now"><span class="n">01</span><div><b>Découvrir<span class="tag">en cours</span></b><small>Les boissons de la vague 1, notées sur 20. Sur ton téléphone, en quelques minutes.</small></div></li>
+      <li><span class="n">02</span><div><b>Goûter</b><small>Dégustation le mercredi, sur le campus.</small></div></li>
+      <li><span class="n">03</span><div><b>Voter</b><small>Ton vote compte pour les boissons qui restent.</small></div></li>
+    </ol>
   </section>
-</main>
+
+  <section class="sec">
+    <h2>Saison 1 · 7 mercredis</h2>
+    <div class="season">
+      <p>Du 7 octobre au 18 novembre 2026. Final le 18 novembre.</p>
+      <p>Lieu : <b>Université des Antilles, campus de Saint-Claude</b>.</p>
+      <p id="next-line"></p>
+      <p>Horaire : il peut changer d'une semaine à l'autre. Rejoins la communauté pour être tenu au courant.</p>
+      <div class="dates" id="dates"></div>
+      <div class="legend"><span>★ final</span></div>
+      <a class="wa" href="https://chat.whatsapp.com/GkBIFe7GjrGGSAKGkJBJbD" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16.5 14.5a5 5 0 0 1 5 5"/></svg>
+        Rejoindre la communauté
+      </a>
+    </div>
+  </section>
+</div>
 
 <script>
-/* =========================================================
-   RÉGLAGES — tout ce qui se modifie est ici
-   ========================================================= */
 var CONFIG = {
-  // Formulaire Tally existant « NSB · Test 1 · Vague 1 » (lien répondant)
   TALLY_URL: 'https://tally.so/r/XxKMvY',
-  SOURCE: 'flyer',                       // champ caché "source" (déjà dans le formulaire)
-  // Nom de jeu du test visuel 1 (affiché sur la page, pas dans Tally)
-  MISSION_LABEL: 'Mission 01 disponible',
-  MISSION_BUTTON: 'Lancer : Calibrage',
-  // Texte d'introduction au-dessus du bouton ('' pour le masquer). Suit l'ordre du formulaire : mood → notes → prix
-  INTRO: 'Calibrage requis. Choisis ton mood, note chaque boisson sur 20, devine son prix. La machine apprend tes goûts.',
-  // Énigme du mot de passe (jamais le code lui-même ici)
-  LOCK_TEXT: 'Mot de passe requis',
-  PASS_HINT: 'Indice : il est imprimé sur le flyer.',
-  // Vidéo de la machine (muette, en boucle).
-  // MP4 d'abord (iPhone), WebM en secours. [] = image fixe seulement.
+  SOURCE: 'flyer',                 // source par défaut (scan du flyer)
+  // Lieu précis connu pour un mercredi donné (sinon : seulement le campus)
+  LIEUX: { '2026-10-14': 'derrière la bibliothèque universitaire' },
+  // Statistiques GoatCounter (sans cookies, ton compte existant). '' pour couper.
+  STATS: 'https://nsb.goatcounter.com/count',
   VIDEO: ['docs/img/blueprint/machine.mp4', 'docs/img/blueprint/machine.webm'],
-  // Statistiques GoatCounter (ton compte existant, sans cookies). Désactivées.
-  // Pour activer : 'https://nsb.goatcounter.com/count'
-  STATS: ''
+  SAISON: ['2026-10-07','2026-10-14','2026-10-21','2026-10-28','2026-11-04','2026-11-11','2026-11-18']
 };
-
-/* Réponses des commandes verrouillées : rien n'est déverrouillé, rien n'est collecté
-   (sauf un comptage anonyme du choix si STATS est activé). */
-var LOCKS = {
-  '1': 'Module ⟁ — ACCÈS REFUSÉ.',
-  '2': 'Module ⌬ — SIGNAL INSUFFISANT.',
-  '3': 'Module ⍜ — CLÉ MANQUANTE.'
-};
-var QUESTION = 'Que serais-tu prêt à donner pour le déverrouiller ?';
-var OFFERS = [
-  ['avis', 'Mon avis'],
-  ['temps', '5 minutes de mon temps'],
-  ['idee', 'Une idée de boisson'],
-  ['rien', 'Rien, je regarde']
-];
-var AFTER = 'Proposition enregistrée par la machine. Le module reste verrouillé… pour l\'instant.';
-
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var params = new URLSearchParams(location.search);
 
-  // --- Origine du QR (?origine_qr=lieu_a), nettoyée et gardée pendant la visite
-  var raw = (params.get('origine_qr') || '').toLowerCase().trim();
+  // origine_qr → Tally (même logique que la version initiale)
+  var raw = (new URLSearchParams(location.search).get('origine_qr') || '').toLowerCase().trim();
   var origine = /^[a-z0-9_-]{1,40}$/.test(raw) ? raw : '';
-  try {
-    if (origine) sessionStorage.setItem('nsb_origine_qr', origine);
-    else origine = sessionStorage.getItem('nsb_origine_qr') || '';
-  } catch (e) {}
+  try { if (origine) sessionStorage.setItem('nsb_origine_qr', origine); else origine = sessionStorage.getItem('nsb_origine_qr') || ''; } catch (e) {}
   if (!origine) origine = raw ? 'inconnu' : 'direct';
-
-  // --- Lien vers Tally avec les champs cachés
-  var vague = '';
-  function buildLink() {
-    try {
-      var u = new URL(CONFIG.TALLY_URL);
-      u.searchParams.set('origine_qr', origine);
-      u.searchParams.set('source', CONFIG.SOURCE);
-      if (vague !== '') u.searchParams.set('vague', vague);
-      $('cta').href = u.toString();
-    } catch (e) {}
-  }
-  buildLink();
+  // Visite issue d'un partage ? (?source=partage) — on garde l'origine du QR d'origine
+  var srcParam = (new URLSearchParams(location.search).get('source') || '').toLowerCase();
+  var source = srcParam === 'partage' ? 'partage' : CONFIG.SOURCE;
+  var u = new URL(CONFIG.TALLY_URL);
+  u.searchParams.set('origine_qr', origine); u.searchParams.set('source', source); u.searchParams.set('vague', '1');
+  $('cta').href = u.toString();
+  // Numéro du drop en cours, comme sur la page de la carte (catalogue.json → vague_active)
   fetch('docs/catalogue.json', { cache: 'no-store' })
     .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (c) { if (c && c.vague_active != null) { vague = String(c.vague_active); buildLink(); } })
+    .then(function (c) { if (c && c.vague_active != null) { u.searchParams.set('vague', String(c.vague_active)); $('cta').href = u.toString(); } })
     .catch(function () {});
 
-  // --- Textes réglables
-  $('mission-label').textContent = CONFIG.MISSION_LABEL;
-  $('cta-txt').textContent = CONFIG.MISSION_BUTTON;
-  if (CONFIG.INTRO) $('intro').textContent = CONFIG.INTRO; else $('intro').remove();
-  $('lock-txt').textContent = CONFIG.LOCK_TEXT;
-  if (CONFIG.PASS_HINT) $('passhint').textContent = CONFIG.PASS_HINT; else $('passhint').remove();
-
-  // --- Vidéo de la machine (si fournie)
+  // Vidéo (repli : image fixe)
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var machine = $('machine');
-  if (CONFIG.VIDEO && CONFIG.VIDEO.length) {
-    var v = document.createElement('video');
-    v.poster = 'docs/img/blueprint/machine-poster.jpg';
-    v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
-    v.setAttribute('playsinline', ''); v.setAttribute('muted', ''); v.setAttribute('aria-hidden', 'true');
-    CONFIG.VIDEO.forEach(function (src, i) {
-      var so = document.createElement('source');
-      so.src = src; so.type = /\.webm$/.test(src) ? 'video/webm' : 'video/mp4';
-      // Repli : si aucune source ne passe, on retire la vidéo et l'image fixe reste
-      if (i === CONFIG.VIDEO.length - 1) so.addEventListener('error', function () { v.remove(); });
-      v.appendChild(so);
-    });
-    machine.appendChild(v);
-    if (!reduce) { v.autoplay = true; var pl = v.play(); if (pl && pl.catch) pl.catch(function () {}); }
+  var v = document.createElement('video');
+  v.poster = 'docs/img/blueprint/machine-poster.jpg'; v.muted = true; v.loop = true; v.playsInline = true;
+  v.setAttribute('playsinline', ''); v.setAttribute('muted', ''); v.setAttribute('aria-hidden', 'true');
+  CONFIG.VIDEO.forEach(function (src, i) {
+    var s = document.createElement('source'); s.src = src; s.type = /webm$/.test(src) ? 'video/webm' : 'video/mp4';
+    if (i === CONFIG.VIDEO.length - 1) s.addEventListener('error', function () { v.remove(); });
+    v.appendChild(s);
+  });
+  $('hero').insertBefore(v, $('hero').querySelector('.hero-title'));
+  if (!reduce) { v.autoplay = true; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+
+  // Calendrier
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var nextIso = null, last = CONFIG.SAISON.length - 1;
+  $('dates').innerHTML = CONFIG.SAISON.map(function (iso, i) {
+    var d = new Date(iso + 'T12:00:00'), cls = 'd', mark = '';
+    if (d < today) cls += ' past'; else if (!nextIso) { cls += ' next'; nextIso = iso; }
+    if (i === last) { cls += ' final'; mark += ' ★'; }
+    return '<span class="' + cls + '">' + d.getDate() + '<small>' + (d.getMonth() === 9 ? 'oct' : 'nov') + mark + '</small></span>';
+  }).join('');
+  var MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+  if (nextIso) {
+    var nd = new Date(nextIso + 'T12:00:00');
+    var where = CONFIG.LIEUX[nextIso];
+    $('next-line').innerHTML = 'Prochain mercredi : <b>' + nd.getDate() + ' ' + MOIS[nd.getMonth()] + '</b>' + (where ? ', ' + where + '.' : '.');
+  } else { $('next-line').remove(); }
+
+  // Symboles de l'interface dispersés en arrière-plan (toujours la même disposition)
+  var SHAPES = {
+    tri: '<path d="M12 3 21 19H3Z"/><path d="M12 9 16.5 17h-9Z"/>',
+    circ: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/>',
+    hex: '<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9Z"/><circle cx="12" cy="12" r="3"/>',
+    eye: '<circle cx="12" cy="10" r="6"/><path d="M9 20h6M12 16v4"/>',
+    bars: '<path d="M4 6h16M7 12h10M10 18h4"/>',
+    cross: '<path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="4"/>'
+  };
+  var names = Object.keys(SHAPES), seed = 7;
+  var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+  var H = document.documentElement.scrollHeight, W = document.documentElement.clientWidth;
+  var n = Math.round(H / 90), html = '';
+  for (var i = 0; i < n; i++) {
+    var size = 34 + Math.round(rnd() * 56), o = (0.14 + rnd() * 0.16).toFixed(2);
+    var x = Math.round(rnd() * (W - size)), y = Math.round(rnd() * (H - size)), r = Math.round(rnd() * 40 - 20);
+    html += '<svg viewBox="0 0 24 24" class="' + (rnd() < 0.3 ? 'v' : 'c') + (rnd() < 0.35 ? ' blink' : '') +
+      '" style="--o:' + o + ';opacity:' + o + ';width:' + size + 'px;height:' + size + 'px;left:' + x + 'px;top:' + y +
+      'px;transform:rotate(' + r + 'deg);animation-delay:' + (rnd() * 6).toFixed(1) + 's">' + SHAPES[names[i % names.length]] + '</svg>';
   }
+  $('glyphs').innerHTML = html;
 
-  // --- Séquence d'activation
-  var bp = $('bp');
-  if (!reduce) bp.classList.add('boot');
-  setTimeout(function () { bp.classList.add('done'); }, 3000); // filet de sécurité
-  setTimeout(function () {
-    $('status').classList.add('on');
-    $('status-txt').textContent = 'Connexion établie';
-  }, reduce ? 0 : 900);
-
-  // --- Statistiques (désactivées par défaut)
+  // --- Statistiques (no-op tant que STATS est vide)
   var count = function () {};
   if (CONFIG.STATS) {
-    count = function (path, title, event) {
-      try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: path, title: title, event: event }); } catch (e) {}
-    };
+    count = function (path, title, event) { try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: path, title: title, event: event }); } catch (e) {} };
     window.goatcounter = { no_onload: true };
-    var s = document.createElement('script');
-    s.async = true; s.src = 'https://gc.zgo.at/count.js';
-    s.setAttribute('data-goatcounter', CONFIG.STATS);
-    s.onload = function () { count('visite-blueprint-' + origine, 'Visite Blueprint (' + origine + ')', false); };
-    document.head.appendChild(s);
-    $('cta').addEventListener('click', function () {
-      count('clic-calibrage-' + origine, 'Clic Calibrage (' + origine + ')', true);
-    });
+    var gs = document.createElement('script'); gs.async = true; gs.src = 'https://gc.zgo.at/count.js';
+    gs.setAttribute('data-goatcounter', CONFIG.STATS);
+    gs.onload = function () { count('visite-blueprint-' + source + '-' + origine, 'Visite (' + source + ', ' + origine + ')', false); };
+    document.head.appendChild(gs);
+    $('cta').addEventListener('click', function () { count('clic-calibrage-' + source + '-' + origine, 'Clic calibrage', true); });
   }
 
-  // --- Commandes verrouillées : message + question, le module reste verrouillé
-  var term = $('term');
-  var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  document.querySelectorAll('.key').forEach(function (key) {
-    key.addEventListener('click', function () {
-      document.querySelectorAll('.key').forEach(function (k) { k.classList.toggle('is-on', k === key); });
-      var k = key.getAttribute('data-k');
-      term.hidden = false;
-      term.innerHTML = '<p class="deny">&gt; ' + esc(LOCKS[k]) + '</p><p>&gt; ' + esc(QUESTION) + '</p>' +
-        '<div class="choices">' + OFFERS.map(function (o) {
-          return '<button type="button" class="choice" data-o="' + o[0] + '">' + esc(o[1]) + '</button>';
-        }).join('') + '</div>';
-      term.querySelectorAll('.choice').forEach(function (c) {
-        c.addEventListener('click', function () {
-          count('verrou-' + k + '-' + c.getAttribute('data-o') + '-' + origine, 'Verrou ' + k + ' : ' + c.textContent, true);
-          term.innerHTML = '<p class="deny">&gt; ' + esc(LOCKS[k]) + '</p><p>&gt; ' + esc(AFTER) + '</p>';
-        });
+  // --- Partage : lien = cette page + source=partage + origine du QR conservée
+  var shareUrl = (function () {
+    var s = new URL(location.href.split('#')[0]);
+    s.search = '';
+    s.searchParams.set('source', 'partage');
+    if (origine !== 'direct' && origine !== 'inconnu') s.searchParams.set('origine_qr', origine);
+    return s.toString();
+  })();
+  var msg = $('share-msg');
+  function showFallback(text) {
+    $('share-url').value = shareUrl; $('share-fallback').hidden = false;
+    $('share-url').focus(); $('share-url').select();
+    msg.textContent = text;
+  }
+  $('share').addEventListener('click', function () {
+    count('partage-clic-' + origine, 'Clic sur Partager', true);            // un clic, pas un partage
+    msg.textContent = '';
+    var data = { title: 'North Star Blueprint · Saison 1', text: 'Découvre les boissons de la vague 1 et donne ton premier avis.', url: shareUrl };
+    if (navigator.share && (!navigator.canShare || navigator.canShare(data))) {
+      navigator.share(data).then(function () {
+        // Le téléphone confirme que le lien a été transmis à une application (pas qu'il a été reçu)
+        count('partage-transmis-' + origine, 'Partage transmis à une appli', true);
+        msg.textContent = 'Lien transmis.';
+      }).catch(function (err) {
+        if (err && err.name === 'AbortError') { count('partage-annule-' + origine, 'Partage annulé', true); return; }
+        copyLink();
       });
-    });
+    } else { copyLink(); }
   });
+  function copyLink() {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(shareUrl).then(function () {
+        count('partage-lien-copie-' + origine, 'Lien copié', true);
+        msg.textContent = 'Lien copié. Colle-le dans la conversation de ton choix.';
+      }).catch(function () { showFallback('Copie automatique impossible : sélectionne le lien ci-dessus.'); });
+    } else { showFallback('Sélectionne et copie le lien ci-dessus.'); }
+  }
 })();
 </script>
 </body>
