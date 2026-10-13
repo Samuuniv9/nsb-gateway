@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>North Star Blueprint — NSB</title>
+<meta name="description" content="North Star Blueprint — la machine est allumée. Lance le test visuel 1.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#120e09">
+<style>
+/* =========================================================
+   NORTH STAR BLUEPRINT — landing page du flyer (v0.1, test)
+   Auteur : Samuel Nubery — NSB (North Star Business)
+   Référence visuelle : flyer Canva « Flyer A5 recto-verso North Star Blueprint »
+   Page autonome : ne touche pas à index.html (carte NFC).
+   ========================================================= */
+:root{
+  --bg:#120e09;          /* fond brun-noir du flyer */
+  --bg2:#1c150e;
+  --copper:#d98a4e;      /* titres cuivre du flyer */
+  --copper-dim:#7a4a2b;  /* filets et cadres */
+  --ink:#f1e4d3;         /* texte crème */
+  --muted:#b49b82;
+  --violet:#a46bff;      /* œil de la machine */
+  --violet-glow:#7b3cff;
+  --mono:"Courier Prime","Courier New",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100svh;
+  background:radial-gradient(120% 60% at 50% 0%,#2a1d12 0%,var(--bg) 60%) fixed}
+.bp{max-width:460px;margin:0 auto;padding:20px 16px 36px;position:relative}
+
+/* Repères de coupe (croix) comme sur le flyer */
+.cross{position:fixed;width:22px;height:22px;opacity:.55;pointer-events:none}
+.cross::before,.cross::after{content:"";position:absolute;background:var(--copper-dim)}
+.cross::before{left:50%;top:0;width:1px;height:100%}
+.cross::after{top:50%;left:0;height:1px;width:100%}
+.c1{top:10px;left:10px}.c2{top:10px;right:10px}.c3{bottom:10px;left:10px}.c4{bottom:10px;right:10px}
+
+.top{display:flex;justify-content:space-between;align-items:center;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted)}
+.logo{color:var(--copper);font-weight:700;font-size:18px;letter-spacing:.12em}
+.logo span{font-size:12px;margin-left:2px;vertical-align:super}
+.status{display:inline-flex;align-items:center;gap:8px}
+.led{width:8px;height:8px;border-radius:50%;background:var(--copper-dim)}
+.on .led{background:var(--violet);box-shadow:0 0 10px var(--violet)}
+
+/* Cadre de la machine (repris du verso) */
+.frame{position:relative;margin:16px 0 0;border:1px solid var(--copper-dim);padding:6px;background:#0d0a06}
+.machine{position:relative;display:block;width:100%;aspect-ratio:303/317;overflow:hidden}
+.machine > img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* Écran : couvre l'emplacement du QR code du verso */
+.screen{position:absolute;left:34.6%;top:29.9%;width:29.8%;height:28.8%;
+  background:#0b0714;border-radius:6%;overflow:hidden;
+  box-shadow:inset 0 0 18px #000, 0 0 0 1px #2a1838}
+.screen svg{position:absolute;inset:0;width:100%;height:100%}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px);mix-blend-mode:screen}
+.glow{position:absolute;left:30%;top:24%;width:40%;height:40%;border-radius:50%;
+  background:radial-gradient(circle,var(--violet-glow) 0%,transparent 70%);opacity:.55;filter:blur(8px)}
+
+/* État final par défaut (sans JS / mouvement réduit) */
+.eye-lid{transform-origin:50% 50%}
+.smile{stroke-dasharray:60;stroke-dashoffset:0}
+
+/* Séquence d'activation (ajoutée par JS) */
+.boot .screen{animation:flick .9s steps(2) 1}
+.boot .eye-lid{animation:open .7s .9s cubic-bezier(.2,.8,.2,1) both}
+.boot .smile{animation:smile .6s 1.5s ease-out both}
+.boot .glow{animation:breathe 3.2s 1.6s ease-in-out infinite both}
+.boot .line{opacity:0;animation:in .6s ease-out forwards}
+.boot .l1{animation-delay:1.7s}.boot .l2{animation-delay:2.3s}.boot .l3{animation-delay:2.9s}
+.boot .cta-wrap{opacity:0;animation:in .5s 3.3s ease-out forwards}
+.boot .rune{animation:rune 2.6s ease-in-out infinite}
+@keyframes flick{0%{background:#000}30%{background:#2b1a44}60%{background:#000}100%{background:#0b0714}}
+@keyframes open{from{transform:scaleY(.05)}to{transform:scaleY(1)}}
+@keyframes smile{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+@keyframes breathe{0%,100%{opacity:.35}50%{opacity:.75}}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@keyframes rune{0%,100%{opacity:.25}50%{opacity:.9}}
+.blink .eye-lid{animation:blink .28s ease-in-out}
+@keyframes blink{50%{transform:scaleY(.08)}}
+
+/* Titre façon verso */
+.title{text-align:center;margin:18px 0 2px;color:var(--copper);font-weight:400;
+  font-size:clamp(20px,6.4vw,28px);letter-spacing:.16em;text-transform:uppercase}
+.date{text-align:center;margin:0;color:var(--muted);font-size:13px;letter-spacing:.3em}
+
+/* Récit (prolonge le flyer) */
+.story{margin:22px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.line{margin:0;font-size:16px;line-height:1.55}
+.l1{color:var(--muted)}
+.l3{color:var(--ink)}
+.l3 strong{color:var(--copper);font-weight:700}
+
+/* Action principale : un seul bouton */
+.cta-wrap{margin:24px 0 0}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:58px;
+  padding:14px 18px;border-radius:14px;text-decoration:none;font-family:var(--mono);
+  font-size:18px;font-weight:700;letter-spacing:.04em;color:#140b22;
+  background:linear-gradient(180deg,#c39bff,var(--violet));
+  box-shadow:0 0 0 1px #d9c2ff inset,0 8px 28px rgba(123,60,255,.45)}
+.cta:active{transform:translateY(1px)}
+.cta:focus-visible{outline:3px solid var(--copper);outline-offset:3px}
+.cta svg{width:20px;height:20px}
+.hint{margin:10px 0 0;text-align:center;font-size:13px;color:var(--muted)}
+
+/* Commandes de la machine : décoratives, visiblement verrouillées */
+.panel{margin:28px 0 0;border-top:1px dashed var(--copper-dim);padding-top:14px}
+.panel p{margin:0 0 10px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--copper-dim)}
+.keys{display:flex;gap:10px}
+.key{flex:1;height:44px;border:1px solid #3a2a1c;border-radius:10px;display:grid;place-items:center;
+  color:#6e5440;background:#17110b;font-size:18px;user-select:none}
+.key small{display:block;font-size:9px;letter-spacing:.15em;color:#5b4534;text-transform:uppercase}
+.rune{display:block;line-height:1}
+
+.sig{margin:28px 0 0;text-align:center;font-size:11px;line-height:1.6;color:#8a735e;letter-spacing:.04em}
+.sig b{color:var(--muted);font-weight:400}
+
+@media (prefers-reduced-motion:reduce){
+  .boot *{animation:none!important;opacity:1!important}
+}
+</style>
+</head>
+<body>
+<span class="cross c1"></span><span class="cross c2"></span><span class="cross c3"></span><span class="cross c4"></span>
+
+<main class="bp" id="bp">
+  <header class="top">
+    <span class="logo" aria-label="NSB — North Star Business">NSB<span aria-hidden="true">★</span></span>
+    <span class="status" id="status"><span class="led"></span><span id="status-txt">Machine en veille</span></span>
+  </header>
+
+  <div class="frame">
+    <div class="machine" id="machine">
+      <!-- Image temporaire tirée de l'aperçu Canva (basse définition).
+           À remplacer par l'export HD : docs/img/blueprint/machine.jpg (même cadrage) -->
+      <img src="docs/img/blueprint/machine-apercu.jpg" alt="La machine North Star Blueprint : un ordinateur sculpté, couleur cuivre, avec un œil violet sur l'écran." width="606" height="634">
+      <div class="screen" aria-hidden="true">
+        <div class="glow"></div>
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <radialGradient id="iris" cx="50%" cy="45%" r="55%">
+              <stop offset="0" stop-color="#e9dcff"/>
+              <stop offset=".35" stop-color="#a46bff"/>
+              <stop offset="1" stop-color="#3b1773"/>
+            </radialGradient>
+          </defs>
+          <g class="eye-lid">
+            <ellipse cx="50" cy="44" rx="30" ry="22" fill="#f4eefc"/>
+            <circle cx="50" cy="44" r="17" fill="url(#iris)"/>
+            <path d="M50 33l2.6 8.4 8.4 2.6-8.4 2.6L50 55l-2.6-8.4L39 44l8.4-2.6Z" fill="#fff"/>
+          </g>
+          <path class="smile" d="M34 74q16 12 32 0" fill="none" stroke="#c39bff" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+        <div class="scan"></div>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="title">North Star Blueprint</h1>
+  <p class="date">14/10/2026</p>
+
+  <ul class="story">
+    <li class="line l1">Tu as scanné le code. La machine s'est allumée.</li>
+    <li class="line l2">Je l'ai construite pièce par pièce. Toutes ses commandes ne s'expliquent pas encore — certaines attendent leur tour.</li>
+    <li class="line l3">Pour l'instant, une seule est active&nbsp;: <strong>le test visuel 1</strong>. Elle a besoin de ton regard. 1 minute.</li>
+  </ul>
+
+  <div class="cta-wrap">
+    <!-- Lien de repli (sans JavaScript) : formulaire Tally existant « NSB · Test 1 · Vague 1 » -->
+    <a class="cta" id="cta" href="https://tally.so/r/XxKMvY?source=flyer" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+      Lancer le test visuel 1
+    </a>
+    <p class="hint" id="hint">Code d'accès donné au stand</p>
+  </div>
+
+  <!-- Commandes décoratives : ce ne sont pas des boutons (aria-hidden, aucune action) -->
+  <section class="panel" aria-hidden="true">
+    <p>Autres commandes — verrouillées</p>
+    <div class="keys">
+      <div class="key"><span><span class="rune">⟁</span><small>bientôt</small></span></div>
+      <div class="key"><span><span class="rune" style="animation-delay:.6s">⌬</span><small>bientôt</small></span></div>
+      <div class="key"><span><span class="rune" style="animation-delay:1.2s">⍜</span><small>bientôt</small></span></div>
+    </div>
+  </section>
+
+  <footer class="sig">
+    <b>NSB — North Star Business</b> · Guadeloupe<br>
+    Data Builder for Emerging Communities – Applying DataCon &amp; CoMotion to Guadeloupe.
+  </footer>
+</main>
+
+<script>
+/* =========================================================
+   RÉGLAGES — tout ce qui se modifie est ici
+   ========================================================= */
+var CONFIG = {
+  // Formulaire Tally existant « NSB · Test 1 · Vague 1 » (lien répondant)
+  TALLY_URL: 'https://tally.so/r/XxKMvY',
+  // Valeur du champ caché "source" (déjà présent dans le formulaire)
+  SOURCE: 'flyer',
+  // Texte sous le bouton ('' pour le masquer). Jamais le code lui-même.
+  HINT: "Code d'accès donné au stand",
+  // Statistiques GoatCounter (ton compte existant, sans cookies).
+  // Désactivées : mettre 'https://nsb.goatcounter.com/count' pour les activer.
+  STATS: ''
+};
+
+(function () {
+  var params = new URLSearchParams(location.search);
+
+  // 1. Lire l'origine du QR code (?origine_qr=lieu_a) et la nettoyer
+  var raw = (params.get('origine_qr') || '').toLowerCase().trim();
+  var origine = /^[a-z0-9_-]{1,40}$/.test(raw) ? raw : '';
+  // 2. La garder pendant la visite (si la page est rechargée sans paramètre)
+  try {
+    if (origine) sessionStorage.setItem('nsb_origine_qr', origine);
+    else origine = sessionStorage.getItem('nsb_origine_qr') || '';
+  } catch (e) {}
+  if (!origine) origine = raw ? 'inconnu' : 'direct';
+
+  // 3. Construire le lien vers Tally avec les champs cachés
+  var vague = '';
+  function buildLink() {
+    try {
+      var u = new URL(CONFIG.TALLY_URL);
+      u.searchParams.set('origine_qr', origine);
+      u.searchParams.set('source', CONFIG.SOURCE);
+      if (vague !== '') u.searchParams.set('vague', vague);
+      document.getElementById('cta').href = u.toString();
+    } catch (e) { /* le lien de repli du HTML reste en place */ }
+  }
+  buildLink();
+  // Numéro du drop en cours, comme sur la page de la carte (catalogue.json → vague_active)
+  fetch('docs/catalogue.json', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (c) { if (c && c.vague_active != null) { vague = String(c.vague_active); buildLink(); } })
+    .catch(function () {});
+
+  // Texte sous le bouton
+  var hint = document.getElementById('hint');
+  if (CONFIG.HINT) hint.textContent = CONFIG.HINT; else hint.remove();
+
+  // 4. Séquence d'activation (ignorée si l'utilisateur préfère moins d'animations)
+  var bp = document.getElementById('bp');
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) bp.classList.add('boot');
+  setTimeout(function () {
+    document.getElementById('status').classList.add('on');
+    document.getElementById('status-txt').textContent = 'Accès ouvert';
+  }, reduce ? 0 : 900);
+
+  // Petit clin d'œil quand on touche l'écran (purement visuel)
+  var m = document.getElementById('machine');
+  m.addEventListener('click', function () {
+    bp.classList.remove('blink'); void bp.offsetWidth; bp.classList.add('blink');
+  });
+
+  // 5. Statistiques (désactivées par défaut — voir CONFIG.STATS)
+  if (CONFIG.STATS) {
+    var count = function (path, title, event) {
+      try { if (window.goatcounter && goatcounter.count) goatcounter.count({ path: path, title: title, event: event }); } catch (e) {}
+    };
+    window.goatcounter = { no_onload: true };
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://gc.zgo.at/count.js';
+    s.setAttribute('data-goatcounter', CONFIG.STATS);
+    s.onload = function () { count('visite-blueprint-' + origine, 'Visite Blueprint (' + origine + ')', false); };
+    document.head.appendChild(s);
+    document.getElementById('cta').addEventListener('click', function () {
+      count('clic-test1-blueprint-' + origine, 'Clic test visuel 1 (' + origine + ')', true);
+    });
+  }
+})();
+</script>
+</body>
+</html>
