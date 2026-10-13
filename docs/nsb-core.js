@@ -24,13 +24,15 @@
   // Drop en cours, lu dans catalogue.json au chargement
   let VAGUE = '';
 
-  // Ajoute ?source=carte|flyer&vague=N aux liens Tally (champs cachés "source" et "vague")
+  // Ajoute ?source=carte|flyer&vague=N&origine_qr=… aux liens Tally (champs cachés "source", "vague", "origine_qr")
   const withSource = (url) => {
     if (!url) return '';
     try {
       const u = new URL(url);
       if (u.hostname.includes('tally')) {
         u.searchParams.set('source', SOURCE);
+        // Champ caché "origine_qr" : 3 entrées possibles → carte_nfc (cette page), lieu_a / lieu_b (QR du flyer, via blueprint.html)
+        u.searchParams.set('origine_qr', SOURCE === 'carte' ? 'carte_nfc' : SOURCE);
         // Numéro du drop en cours (catalogue.json → vague_active), rempli dans le champ caché "vague"
         if (VAGUE !== '') u.searchParams.set('vague', String(VAGUE));
       }
