@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#120e09">
 <style>
 /* =========================================================
-   NORTH STAR BLUEPRINT — landing page du flyer (v0.2, test)
+   NORTH STAR BLUEPRINT — landing page du flyer (v0.3, test)
    Auteur : Samuel Nubery — NSB (North Star Business)
    Référence visuelle : flyer Canva « Flyer A5 recto-verso North Star Blueprint »
    Page autonome : ne touche pas à index.html (carte NFC).
@@ -44,26 +44,17 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
 
 /* Cadre de la machine (repris du verso) */
 .frame{position:relative;margin:16px 0 0;border:1px solid var(--copper-dim);padding:6px;background:#0d0a06}
-.machine{position:relative;display:block;width:100%;aspect-ratio:303/317;overflow:hidden;background:#0d0a06}
+.machine{position:relative;display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:#0d0a06}
 .machine img,.machine video{display:block;width:100%;height:100%;object-fit:cover}
 .machine video{position:absolute;inset:0}
-
-/* Écran provisoire (masque le carré blanc du QR) — disparaît quand la vidéo est branchée */
-.screen{position:absolute;left:34.6%;top:29.9%;width:29.8%;height:28.8%;
-  background:#0b0714;border-radius:6%;overflow:hidden;box-shadow:inset 0 0 18px #000,0 0 0 1px #2a1838}
-.has-video .screen{display:none}
-.screen svg{position:absolute;inset:0;width:100%;height:100%}
-.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px)}
-.glow{position:absolute;left:30%;top:24%;width:40%;height:40%;border-radius:50%;
-  background:radial-gradient(circle,var(--violet-glow) 0%,transparent 70%);opacity:.55;filter:blur(8px)}
-.eye-lid{transform-origin:50% 50%}
 
 /* Titre façon verso */
 .title{text-align:center;margin:18px 0 0;color:var(--copper);font-weight:400;
   font-size:clamp(20px,6.4vw,28px);letter-spacing:.16em;text-transform:uppercase}
 
 /* Mot de passe : l'énigme sous le titre */
-.lockline{margin:10px auto 0;width:max-content;max-width:100%;padding:6px 12px;border:1px solid #3d2a5e;
+.intro{margin:0 0 16px;text-align:center;font-size:15px;line-height:1.6;color:var(--ink)}
+.lockline{margin:16px auto 0;width:max-content;max-width:100%;padding:6px 12px;border:1px solid #3d2a5e;
   border-radius:8px;background:#140d20;color:var(--term);font-size:13px;letter-spacing:.18em;text-transform:uppercase}
 .cur{display:inline-block;margin-left:4px;animation:pulse 1s steps(2) infinite}
 .passhint{margin:8px 0 0;text-align:center;font-size:13px;color:var(--muted)}
@@ -103,17 +94,10 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
 .choice:active{background:#2a1a45}
 
 /* Séquence d'activation (ajoutée par JS) */
-.boot .screen{animation:flick .9s steps(2) 1}
-.boot .eye-lid{animation:open .7s .9s cubic-bezier(.2,.8,.2,1) both}
-.boot .title,.boot .lockline,.boot .passhint,.boot .mission{opacity:0;animation:in .5s ease-out forwards}
-.boot .title{animation-delay:1.1s}.boot .lockline{animation-delay:1.4s}
-.boot .passhint{animation-delay:1.7s}.boot .mission{animation-delay:2s}
-.done .title,.done .lockline,.done .passhint,.done .mission{opacity:1!important}
-@keyframes flick{0%{background:#000}30%{background:#2b1a44}60%{background:#000}100%{background:#0b0714}}
-@keyframes open{from{transform:scaleY(.05)}to{transform:scaleY(1)}}
+.boot .title,.boot .mission{opacity:0;animation:in .5s ease-out forwards}
+.boot .title{animation-delay:.6s}.boot .mission{animation-delay:1s}
+.done .title,.done .mission{opacity:1!important}
 @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.blink .eye-lid{animation:blink .28s ease-in-out}
-@keyframes blink{50%{transform:scaleY(.08)}}
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important}.boot *{opacity:1!important}}
 </style>
@@ -129,36 +113,23 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
 
   <div class="frame">
     <div class="machine" id="machine">
-      <!-- Image provisoire (aperçu Canva, basse définition) -->
-      <img id="poster" src="docs/img/blueprint/machine-apercu.jpg" alt="La machine North Star Blueprint : un ordinateur sculpté couleur cuivre." width="606" height="634">
-      <!-- Œil provisoire : masqué automatiquement dès que la vidéo est branchée (CONFIG.VIDEO) -->
-      <div class="screen" aria-hidden="true">
-        <div class="glow"></div>
-        <svg viewBox="0 0 100 100">
-          <defs><radialGradient id="iris" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#e9dcff"/><stop offset=".35" stop-color="#a46bff"/><stop offset="1" stop-color="#3b1773"/></radialGradient></defs>
-          <g class="eye-lid">
-            <ellipse cx="50" cy="44" rx="30" ry="22" fill="#f4eefc"/>
-            <circle cx="50" cy="44" r="17" fill="url(#iris)"/>
-            <path d="M50 33l2.6 8.4 8.4 2.6-8.4 2.6L50 55l-2.6-8.4L39 44l8.4-2.6Z" fill="#fff"/>
-          </g>
-          <path d="M34 74q16 12 32 0" fill="none" stroke="#c39bff" stroke-width="3.5" stroke-linecap="round"/>
-        </svg>
-        <div class="scan"></div>
-      </div>
+      <!-- Image fixe (1re image de la vidéo) : affichée si la vidéo ne se lance pas -->
+      <img id="poster" src="docs/img/blueprint/machine-poster.jpg" alt="La machine North Star Blueprint : un ordinateur sculpté couleur cuivre, avec un œil violet." width="720" height="900">
     </div>
   </div>
 
   <h1 class="title">North Star Blueprint</h1>
-  <p class="lockline"><span aria-hidden="true">⌁ </span><span id="lock-txt">Mot de passe requis</span><span class="cur" aria-hidden="true">▮</span></p>
-  <p class="passhint" id="passhint">Indice : il est imprimé sur le flyer.</p>
 
   <section class="mission">
     <p class="mission-label" id="mission-label">Mission 01 disponible</p>
+    <p class="intro" id="intro"></p>
     <!-- Lien de repli (sans JavaScript) : formulaire Tally existant « NSB · Test 1 · Vague 1 » -->
     <a class="cta" id="cta" href="https://tally.so/r/XxKMvY?source=flyer" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8Z"/></svg>
-      <span id="cta-txt">Lancer : Premier Regard</span>
+      <span id="cta-txt">Lancer : Calibrage</span>
     </a>
+    <p class="lockline"><span aria-hidden="true">⌁ </span><span id="lock-txt">Mot de passe requis</span><span class="cur" aria-hidden="true">▮</span></p>
+    <p class="passhint" id="passhint">Indice : il est imprimé sur le flyer.</p>
   </section>
 
   <section class="panel">
@@ -182,13 +153,15 @@ var CONFIG = {
   SOURCE: 'flyer',                       // champ caché "source" (déjà dans le formulaire)
   // Nom de jeu du test visuel 1 (affiché sur la page, pas dans Tally)
   MISSION_LABEL: 'Mission 01 disponible',
-  MISSION_BUTTON: 'Lancer : Premier Regard',
+  MISSION_BUTTON: 'Lancer : Calibrage',
+  // Petit texte d'introduction au-dessus du bouton ('' pour le masquer) — PROPOSITION, à valider
+  INTRO: 'La machine ne connaît pas encore tes goûts. Montre-lui des boissons, note-les sur 20, devine leur prix : elle s\'ajuste à toi.',
   // Énigme du mot de passe (jamais le code lui-même ici)
   LOCK_TEXT: 'Mot de passe requis',
   PASS_HINT: 'Indice : il est imprimé sur le flyer.',
-  // Vidéo de la machine (MP4 muet, en boucle). '' = image + œil provisoire.
-  // Exemple : 'docs/img/blueprint/machine.mp4'
-  VIDEO: '',
+  // Vidéo de la machine (muette, en boucle).
+  // MP4 d'abord (iPhone), WebM en secours. [] = image fixe seulement.
+  VIDEO: ['docs/img/blueprint/machine.mp4', 'docs/img/blueprint/machine.webm'],
   // Statistiques GoatCounter (ton compte existant, sans cookies). Désactivées.
   // Pour activer : 'https://nsb.goatcounter.com/count'
   STATS: ''
@@ -243,21 +216,27 @@ var AFTER = 'Proposition enregistrée par la machine. Le module reste verrouill�
   // --- Textes réglables
   $('mission-label').textContent = CONFIG.MISSION_LABEL;
   $('cta-txt').textContent = CONFIG.MISSION_BUTTON;
+  if (CONFIG.INTRO) $('intro').textContent = CONFIG.INTRO; else $('intro').remove();
   $('lock-txt').textContent = CONFIG.LOCK_TEXT;
   if (CONFIG.PASS_HINT) $('passhint').textContent = CONFIG.PASS_HINT; else $('passhint').remove();
 
   // --- Vidéo de la machine (si fournie)
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   var machine = $('machine');
-  if (CONFIG.VIDEO) {
+  if (CONFIG.VIDEO && CONFIG.VIDEO.length) {
     var v = document.createElement('video');
-    v.src = CONFIG.VIDEO; v.muted = true; v.loop = true; v.playsInline = true;
-    v.setAttribute('playsinline', ''); v.setAttribute('muted', ''); v.preload = 'metadata';
-    v.setAttribute('aria-hidden', 'true');
-    v.addEventListener('playing', function () { machine.classList.add('has-video'); });
-    v.addEventListener('error', function () { v.remove(); }); // repli : on garde l'image
+    v.poster = 'docs/img/blueprint/machine-poster.jpg';
+    v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+    v.setAttribute('playsinline', ''); v.setAttribute('muted', ''); v.setAttribute('aria-hidden', 'true');
+    CONFIG.VIDEO.forEach(function (src, i) {
+      var so = document.createElement('source');
+      so.src = src; so.type = /\.webm$/.test(src) ? 'video/webm' : 'video/mp4';
+      // Repli : si aucune source ne passe, on retire la vidéo et l'image fixe reste
+      if (i === CONFIG.VIDEO.length - 1) so.addEventListener('error', function () { v.remove(); });
+      v.appendChild(so);
+    });
     machine.appendChild(v);
-    if (!reduce) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    if (!reduce) { v.autoplay = true; var pl = v.play(); if (pl && pl.catch) pl.catch(function () {}); }
   }
 
   // --- Séquence d'activation
@@ -268,9 +247,6 @@ var AFTER = 'Proposition enregistrée par la machine. Le module reste verrouill�
     $('status').classList.add('on');
     $('status-txt').textContent = 'Connexion établie';
   }, reduce ? 0 : 900);
-  machine.addEventListener('click', function () {
-    bp.classList.remove('blink'); void bp.offsetWidth; bp.classList.add('blink');
-  });
 
   // --- Statistiques (désactivées par défaut)
   var count = function () {};
@@ -285,7 +261,7 @@ var AFTER = 'Proposition enregistrée par la machine. Le module reste verrouill�
     s.onload = function () { count('visite-blueprint-' + origine, 'Visite Blueprint (' + origine + ')', false); };
     document.head.appendChild(s);
     $('cta').addEventListener('click', function () {
-      count('clic-mission01-' + origine, 'Clic mission 01 (' + origine + ')', true);
+      count('clic-calibrage-' + origine, 'Clic Calibrage (' + origine + ')', true);
     });
   }
 
