@@ -332,3 +332,32 @@ body.nb-body { --m-concentration: hsl(160 70% 60%); --m-sport: hsl(0 85% 72%); }
 body.nb-body[data-nb-theme="tropique"] { --m-concentration: hsl(160 70% 26%); --m-sport: hsl(0 70% 42%); }
 .nb-chip-concentration, .nb-mood-concentration { color: var(--m-concentration); }
 .nb-chip-sport, .nb-mood-sport { color: var(--m-sport); }
+
+/* =========================================================
+   v3.6 — Défloutage au toucher
+   ========================================================= */
+.nb-reveal { cursor: pointer; }
+.nb-reveal .nb-tap {
+  position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  font-size: 13px; font-weight: 800; padding: 6px 12px; border-radius: 999px;
+  background: hsl(265 35% 10% / .86); color: #fff; border: 1px solid var(--step1);
+  animation: nbTap 1.8s ease-in-out infinite;
+}
+.nb-reveal .nb-tap .nb-ico { width: 1em; height: 1em; }
+@keyframes nbTap { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+/* Une fois découverte : photo nette en entier, mood en petit en haut, indice retiré */
+.nb-reveal.is-on { cursor: default; }
+.nb-reveal.is-sharp { background: #fff; }
+.nb-reveal.is-sharp img { object-fit: contain; transform: none; animation: nbSharp .5s ease-out; }
+@keyframes nbSharp { from { filter: blur(14px); opacity: .6; } to { filter: none; opacity: 1; } }
+.nb-reveal.is-on .nb-tap { display: none; }
+.nb-reveal.is-on .nb-mood { top: 10px; left: 10px; transform: none; font-size: 12px; padding: 6px 10px; }
+#nb-app .nb-slide .nb-name { display: block; font-size: 13px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: var(--step1) !important; margin-bottom: 2px; }
+#nb-app .nb-slide .nb-want {
+  display: inline-flex; margin-top: 8px; padding: 8px 16px; border-radius: 999px;
+  font-size: 14px; font-weight: 800; text-decoration: none;
+  background: var(--step1) !important; color: var(--on-step) !important;
+}
+#nb-app .nb-slide .nb-want[hidden], #nb-app .nb-slide .nb-name[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) { .nb-reveal .nb-tap, .nb-reveal.is-sharp img { animation: none; } }

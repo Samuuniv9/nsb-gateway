@@ -80,15 +80,23 @@
   }
 
   // Boisson mystère : canette floutée en fond, mood au centre, saveurs dessous (pas de marque)
-  function slide(b, moods) {
+  // Défloutage au toucher (v3.6) : si la boisson a une photo nette, l'image devient un bouton.
+  // Au toucher : photo nette + nom + bouton « Je la veux » (ouvre le Calibrage).
+  function slide(b, moods, want) {
     const m = moods[b.mood] || { label: b.mood, icon: 'sparkle' };
+    const reveal = !!b.image_nette;
     return `
-      <figure class="nb-slide" data-mood="${esc(b.mood)}">
-        <div class="nb-photo">
+      <figure class="nb-slide" data-mood="${esc(b.mood)}" data-code="${esc(b.code)}">
+        <div class="nb-photo${reveal ? ' nb-reveal' : ''}"${reveal ? ` role="button" tabindex="0" aria-label="Toucher pour découvrir la boisson" data-sharp="${esc(b.image_nette)}"` : ''}>
           ${b.image ? `<img src="${esc(BASE + b.image)}" alt="" loading="lazy">` : ''}
           <span class="nb-mood nb-mood-${esc(b.mood)}">${ico(m.icon)} ${esc(m.label)}</span>
+          ${reveal ? `<span class="nb-tap">${ico('sparkle')} Touche pour découvrir</span>` : ''}
         </div>
-        <figcaption><strong>${esc(b.saveurs)}</strong>${esc(b.type)} · ${esc(b.format).replace(/ (cl)\b/g, '&nbsp;$1')}</figcaption>
+        <figcaption>
+          ${reveal ? `<span class="nb-name" hidden>${esc(b.nom || '')}</span>` : ''}
+          <strong>${esc(b.saveurs)}</strong>${esc(b.type)} · ${esc(b.format).replace(/ (cl)\b/g, '&nbsp;$1')}
+          ${reveal && want ? `<a class="nb-want" data-code="${esc(b.code)}" href="${esc(want)}" target="_blank" rel="noopener" hidden>Je la veux</a>` : ''}
+        </figcaption>
       </figure>`;
   }
 
@@ -124,12 +132,12 @@
 
       <section class="nb-wave nb-stepsec nb-sec-1">
         <h2><span class="nb-num">1</span> Choisis ton mood</h2>
-        <p class="nb-mystery">Le drop ${v} : ${list.length} boissons mystère. La marque se découvre au stand.</p>
+        <p class="nb-mystery">Le drop ${v} : ${list.length} boissons mystère. Touche une image pour la découvrir.</p>
         <div class="nb-chips">
           <button class="nb-chip is-on" data-filter="tout">Tout</button>
           ${Object.entries(cat.moods).filter(([k]) => list.some((b) => b.mood === k)).map(([k, m]) => `<button class="nb-chip nb-chip-${esc(k)}" data-filter="${esc(k)}">${ico(m.icon)} ${esc(m.label)}</button>`).join('')}
         </div>
-        <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods)).join('')}</div>
+        <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods, vote)).join('')}</div>
         <div class="nb-dots"></div>
         ${vote
           ? `<a class="nb-cta nb-go-1" href="${esc(vote)}" target="_blank" rel="noopener">${ico('sparkle')} Choisis tes préférées · 2 min</a>`
@@ -202,6 +210,27 @@
       idx = 0; track.scrollLeft = 0; drawDots(); paused = true;
     }));
     ['touchstart', 'mousedown'].forEach((e) => track.addEventListener(e, () => { paused = true; }, { passive: true }));
+    // Défloutage au toucher : une fois découverte, la boisson reste découverte
+    const revealCard = (photo) => {
+      if (photo.classList.contains('is-on')) return;
+      photo.classList.add('is-on');
+      const img = photo.querySelector('img');
+      // On charge d'abord la photo nette ; si elle ne charge pas, l'image floutée reste en place
+      if (img) {
+        const sharp = new Image();
+        sharp.onload = () => { img.src = sharp.src; photo.classList.add('is-sharp'); };
+        sharp.src = photo.dataset.sharp;
+      }
+      const fig = photo.closest('.nb-slide');
+      fig.querySelectorAll('.nb-name, .nb-want').forEach((el) => { el.hidden = false; });
+      photo.removeAttribute('role'); photo.removeAttribute('tabindex');
+      paused = true;
+      nbCount('decouvre-' + fig.dataset.code + '-' + SOURCE, 'Boisson découverte : ' + (fig.querySelector('.nb-name') || {}).textContent, true);
+    };
+    root.querySelectorAll('.nb-reveal').forEach((photo) => {
+      photo.addEventListener('click', () => revealCard(photo));
+      photo.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); revealCard(photo); } });
+    });
     drawDots();
     setInterval(() => { if (!paused && visible.length > 1) show(idx + 1); }, 3000);
   }
@@ -211,7 +240,8 @@
   // Tableau de bord : https://nsb.goatcounter.com
   // Pages comptées : visite-carte / visite-flyer
   // Clics comptés : clic-mood-form, clic-vote, clic-radar,
-  //   clic-whatsapp, clic-tiktok, clic-instagram, mood-<nom>
+  //   clic-whatsapp, clic-tiktok, clic-instagram, mood-<nom>,
+  //   decouvre-<code> (image défloutée), clic-veux-<code> (bouton « Je la veux »)
   // (chaque clic se termine par -carte ou -flyer)
   // Pour couper les stats : mettre STATS = '' ci-dessous.
   // ---------------------------------------------------------
@@ -238,6 +268,7 @@
       if (!el) return;
       let name = '';
       if (el.classList.contains('nb-chip')) name = 'mood-' + el.dataset.filter;
+      else if (el.classList.contains('nb-want')) name = 'clic-veux-' + el.dataset.code;
       else if (el.classList.contains('nb-go-1')) name = 'clic-mood-form';
       else if (el.classList.contains('nb-go-3')) name = 'clic-vote';
       else if (el.classList.contains('nb-join')) name = 'clic-whatsapp';
