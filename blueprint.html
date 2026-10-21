@@ -153,7 +153,6 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
     <div class="season">
       <p>Du 7 octobre au 18 novembre 2026. Final le 18 novembre.</p>
       <p>Lieu : <b>Université des Antilles, campus de Saint-Claude</b>.</p>
-      <p id="next-line"></p>
       <div class="dates" id="dates"></div>
       <div class="legend"><span>★ final</span></div>
       <a class="wa" href="https://chat.whatsapp.com/GkBIFe7GjrGGSAKGkJBJbD" rel="noopener">
@@ -217,12 +216,6 @@ var CONFIG = {
     if (i === last) { cls += ' final'; mark += ' ★'; }
     return '<span class="' + cls + '">' + d.getDate() + '<small>' + (d.getMonth() === 9 ? 'oct' : 'nov') + mark + '</small></span>';
   }).join('');
-  var MOIS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-  if (nextIso) {
-    var nd = new Date(nextIso + 'T12:00:00');
-    var where = CONFIG.LIEUX[nextIso];
-    $('next-line').innerHTML = 'Prochain mercredi : <b>' + nd.getDate() + ' ' + MOIS[nd.getMonth()] + '</b>' + (where ? ', ' + where + '.' : '.');
-  } else { $('next-line').remove(); }
 
   // Symboles de l'interface dispersés en arrière-plan (toujours la même disposition)
   var SHAPES = {
