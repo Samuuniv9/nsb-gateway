@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>North Star Blueprint — Saison 1</title>
-<meta name="description" content="Découvre les boissons de la vague 1 et donne ton premier avis.">
+<meta name="description" content="Découvre les boissons du Drop 2 et donne ton premier avis.">
 <meta property="og:title" content="North Star Blueprint · Saison 1">
-<meta property="og:description" content="Découvre les boissons de la vague 1 et donne ton premier avis.">
+<meta property="og:description" content="Découvre les boissons du Drop 2 et donne ton premier avis.">
 <meta property="og:image" content="https://samuuniv9.github.io/nsb-gateway/docs/img/blueprint/machine-poster.jpg">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex">
@@ -120,11 +120,11 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
   <section class="first">
     <div class="readout">
       <span class="label">Mission 01 · Calibrage</span>
-      <p>Découvre les boissons de la vague&nbsp;1 et donne ton premier avis.</p>
+      <p>Découvre les boissons du Drop&nbsp;2 et donne ton premier avis.</p>
       <p>Tes retours aident à choisir celles qui restent dans la sélection.</p>
     </div>
     <!-- Formulaire Tally existant « Calibrage · NSB ». La page ajoute origine_qr, source et vague. -->
-    <a class="cta" id="cta" href="https://tally.so/r/XxKMvY?source=flyer" rel="noopener">
+    <a class="cta" id="cta" href="https://tally.so/r/PRdOW5?source=flyer" rel="noopener">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4v16l13-8Z"/></svg>
       Lancer le calibrage
     </a>
@@ -143,7 +143,7 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
   <section class="sec">
     <h2>Séquence</h2>
     <ol class="steps">
-      <li class="now"><span class="n">01</span><div><b>Découvrir<span class="tag">en cours</span></b><small>Les boissons de la vague 1, notées sur 20. Sur ton téléphone, en quelques minutes.</small></div></li>
+      <li class="now"><span class="n">01</span><div><b>Découvrir<span class="tag">en cours</span></b><small>Les boissons du Drop 2 : choisis tes préférées et devine leur prix. Sur ton téléphone, en deux minutes.</small></div></li>
       <li><span class="n">02</span><div><b>Goûter</b><small>Dégustation le mercredi, sur le campus.</small></div></li>
       <li><span class="n">03</span><div><b>Voter</b><small>Ton vote compte pour les boissons qui restent.</small></div></li>
     </ol>
@@ -168,7 +168,7 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
 
 <script>
 var CONFIG = {
-  TALLY_URL: 'https://tally.so/r/XxKMvY',
+  TALLY_URL: 'https://tally.so/r/PRdOW5',
   SOURCE: 'flyer',                 // source par défaut (scan du flyer)
   // Lieu précis connu pour un mercredi donné (sinon : seulement le campus)
   LIEUX: { '2026-10-14': 'derrière la bibliothèque universitaire' },
@@ -189,7 +189,7 @@ var CONFIG = {
   var srcParam = (new URLSearchParams(location.search).get('source') || '').toLowerCase();
   var source = srcParam === 'partage' ? 'partage' : CONFIG.SOURCE;
   var u = new URL(CONFIG.TALLY_URL);
-  u.searchParams.set('origine_qr', origine); u.searchParams.set('source', source); u.searchParams.set('vague', '1');
+  u.searchParams.set('origine_qr', origine); u.searchParams.set('source', source); u.searchParams.set('vague', '2');
   $('cta').href = u.toString();
   // Numéro du drop en cours, comme sur la page de la carte (catalogue.json → vague_active)
   fetch('docs/catalogue.json', { cache: 'no-store' })
@@ -277,7 +277,7 @@ var CONFIG = {
   $('share').addEventListener('click', function () {
     count('partage-clic-' + origine, 'Clic sur Partager', true);            // un clic, pas un partage
     msg.textContent = '';
-    var data = { title: 'North Star Blueprint · Saison 1', text: 'Découvre les boissons de la vague 1 et donne ton premier avis.', url: shareUrl };
+    var data = { title: 'North Star Blueprint · Saison 1', text: 'Découvre les boissons du Drop 2 et donne ton premier avis.', url: shareUrl };
     if (navigator.share && (!navigator.canShare || navigator.canShare(data))) {
       navigator.share(data).then(function () {
         // Le téléphone confirme que le lien a été transmis à une application (pas qu'il a été reçu)
