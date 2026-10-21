@@ -108,9 +108,7 @@
       "type": "Jus",
       "format": "Canette 33 cl",
       "bio": false,
-      "image": "img/d2-01.jpg",
-      "nom": "Maya Litchi",
-      "image_nette": "https://storage.tally.so/7ea32563-c327-445a-aaf6-61a6d92a3e5a/PRD-021_maya-litchi.jpg"
+      "image": "img/d2-01.jpg"
     },
     {
       "code": "d2-03",
@@ -120,9 +118,7 @@
       "type": "Soda prébiotique",
       "format": "Canette 33 cl",
       "bio": false,
-      "image": "img/d2-03.jpg",
-      "nom": "Living Things Framboise Grenade",
-      "image_nette": "https://storage.tally.so/056814f8-7bf6-4a65-b247-0eb8884a5b62/PRD-010_living-things-framboise-grenade.jpg"
+      "image": "img/d2-03.jpg"
     },
     {
       "code": "d2-04",
@@ -132,9 +128,7 @@
       "type": "Eau pétillante",
       "format": "Canette 33 cl",
       "bio": false,
-      "image": "img/d2-04.jpg",
-      "nom": "Embrace Palermo Citron Pamplemousse",
-      "image_nette": "https://storage.tally.so/771b3f89-d130-4f17-826b-34ef5bdd9a70/PRD-005_embrace-palermo-citron-pamplemousse.jpg"
+      "image": "img/d2-04.jpg"
     },
     {
       "code": "d2-07",
@@ -144,9 +138,7 @@
       "type": "Soda",
       "format": "Bouteille verre 33 cl",
       "bio": true,
-      "image": "img/d2-07.jpg",
-      "nom": "Fizz Hibiscus Cerise",
-      "image_nette": "https://storage.tally.so/cb5596a2-ee52-417d-ac54-b75d0fcb7f9f/PRD-018_fizz-cerise-hibiscus.jpg"
+      "image": "img/d2-07.jpg"
     },
     {
       "code": "d3-03",
@@ -156,9 +148,7 @@
       "type": "Boisson vitaminée",
       "format": "Bouteille 50 cl",
       "bio": false,
-      "image": "img/d3-03.jpg",
-      "nom": "Vitamin Well Refresh Kiwi Citron",
-      "image_nette": "https://storage.tally.so/44289125-c42a-403a-9648-0ac471199698/PRD-017_vitamin-well-refresh-kiwi-citron.jpg"
+      "image": "img/d3-03.jpg"
     },
     {
       "code": "d3-04",
@@ -168,9 +158,7 @@
       "type": "Pétillant",
       "format": "Canette 25 cl",
       "bio": true,
-      "image": "img/d3-04.jpg",
-      "nom": "Gimber Gingembre Framboise Thé des montagnes",
-      "image_nette": "https://storage.tally.so/1da7d524-3ac2-4f48-afdd-2ac416f7ab9e/PRD-013_gimber-immunite-gingembre-framboise-the.jpg"
+      "image": "img/d3-04.jpg"
     },
     {
       "code": "d3-05",
@@ -180,9 +168,7 @@
       "type": "Eau protéinée",
       "format": "33 cl",
       "bio": false,
-      "image": "img/d3-05.jpg",
-      "nom": "QNT Liife Citron Gingembre",
-      "image_nette": "https://storage.tally.so/39d911df-a98c-492a-bfb3-e6576a6a5c5d/PRD-015_qnt-citron-gingembre.jpg"
+      "image": "img/d3-05.jpg"
     },
     {
       "code": "d1-02",
