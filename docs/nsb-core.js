@@ -132,8 +132,7 @@
         <div class="nb-carousel" tabindex="0">${list.map((b) => slide(b, cat.moods)).join('')}</div>
         <div class="nb-dots"></div>
         ${vote
-          ? `<a class="nb-cta nb-go-1" href="${esc(vote)}" target="_blank" rel="noopener">${ico('sparkle')} Dis-nous ton mood</a>
-             <p class="nb-hint">Code donné au stand</p>`
+          ? `<a class="nb-cta nb-go-1" href="${esc(vote)}" target="_blank" rel="noopener">${ico('sparkle')} Choisis tes préférées · 2 min</a>`
           : ''}
       </section>
 
@@ -148,7 +147,7 @@
       <section class="nb-block nb-stepsec nb-sec-3">
         <h2><span class="nb-num">3</span> Vote pour qu'elle reste</h2>
         <p>Tu as goûté ? Ta note décide des boissons du prochain drop.</p>
-        <a class="nb-btn nb-go-3" href="${esc(avis)}" target="_blank" rel="noopener">${ico('vote')} Vote pour qu'elle reste</a>
+        <a class="nb-btn nb-go-3" href="${esc(avis)}" target="_blank" rel="noopener">${ico('vote')} J'ai goûté : je donne mon avis</a>
         <p class="nb-small">Code donné au stand</p>
       </section>` : ''}
 
