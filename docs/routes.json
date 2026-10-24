@@ -1,6 +1,12 @@
 {
   "fr": {
+    "ouverture_directe": true,
     "test_visuel_stock": "https://tally.so/r/PRdOW5",
+    "premier_regard": {
+      "A": "https://tally.so/r/e5qgzQ",
+      "B": "https://tally.so/r/e5qg2q",
+      "C": "https://tally.so/r/Yj579v"
+    },
     "test_degustation": "https://tally.so/r/Dq4zEq",
     "test_radar": "",
     "whatsapp_groupe": "https://chat.whatsapp.com/GkBIFe7GjrGGSAKGkJBJbD",

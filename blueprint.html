@@ -102,6 +102,48 @@ body{font-family:var(--mono);-webkit-font-smoothing:antialiased;min-height:100sv
 
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
+<script>
+/* Premier regard (v2) : le QR du flyer ouvre directement un formulaire A, B ou C au hasard.
+   - QR A (origine_qr=lieu_a) = flyer DÉPOSÉ (réponse sans Sam)
+   - QR B (origine_qr=lieu_b) = flyer REMIS EN MAIN PROPRE
+   Liens des 3 groupes : docs/routes.json → "premier_regard". Pour couper : "ouverture_directe": false.
+   Pour revoir cette page : ajouter &page=nsb à l'adresse. Pour tester un groupe : &groupe=B */
+(function () {
+  var q = new URLSearchParams(location.search);
+  if (q.get('page') === 'nsb') return;
+  document.documentElement.style.visibility = 'hidden';
+  var montre = function () { document.documentElement.style.visibility = ''; };
+  var raw = (q.get('origine_qr') || '').toLowerCase().trim();
+  var origine = /^[a-z0-9_-]{1,40}$/.test(raw) ? raw : (raw ? 'inconnu' : 'direct');
+  var source = (q.get('source') || '').toLowerCase() === 'partage' ? 'partage' : 'flyer';
+  fetch('docs/routes.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (routes) {
+      var r = routes.fr || {}, g = r.premier_regard || {};
+      var dispo = Object.keys(g).filter(function (k) { return g[k]; });
+      if (r.ouverture_directe === false || !dispo.length) return montre();
+      var force = (q.get('groupe') || '').toUpperCase(), groupe = '';
+      if (dispo.indexOf(force) > -1) groupe = force;
+      else {
+        try { groupe = localStorage.getItem('nsb_groupe_premier_regard') || ''; } catch (e) {}
+        if (dispo.indexOf(groupe) < 0) {
+          groupe = dispo[Math.floor(Math.random() * dispo.length)];
+          try { localStorage.setItem('nsb_groupe_premier_regard', groupe); } catch (e) {}
+        }
+      }
+      var u = new URL(g[groupe]);
+      u.searchParams.set('groupe', groupe);
+      u.searchParams.set('source', source);
+      u.searchParams.set('origine_qr', origine);
+      try {
+        fetch('https://nsb.goatcounter.com/count?p=' + encodeURIComponent('ouverture-directe-' + groupe + '-' + origine) +
+          '&e=true&rnd=' + Math.random(), { mode: 'no-cors', keepalive: true });
+      } catch (e) {}
+      location.replace(u.toString());
+    })
+    .catch(montre); // en cas de souci réseau, la page s'affiche normalement
+})();
+</script>
 </head>
 <body>
 <div class="glyphs" id="glyphs" aria-hidden="true"></div>

@@ -1,5 +1,5 @@
 /* =========================================================
-   NSB Gateway (cœur) — v3.5 « Mystère » (boissons, Cycle 1) + stats GoatCounter + vague dans Tally
+   NSB Gateway (cœur) — v3.7 « Premier regard » : la carte ouvre directement un formulaire A/B/C au hasard
    Auteur : Samuel Nubery
    ---------------------------------------------------------
    Ce script remplace la page Pwofeel par la page NSB.
@@ -39,6 +39,43 @@
       return u.toString();
     } catch (e) { return url; }
   };
+
+  // Premier regard : chaque visiteur est envoyé au hasard vers le groupe A, B ou C.
+  // Le groupe est gardé sur son téléphone : s'il rescanne la carte, il retombe sur le même formulaire.
+  // routes.json → "premier_regard": { "A": "...", "B": "...", "C": "..." } (un lien vide retire le groupe)
+  const KEY_GROUPE = 'nsb_groupe_premier_regard';
+  const pickGroupe = (groupes) => {
+    const dispo = Object.keys(groupes || {}).filter((g) => groupes[g]);
+    if (!dispo.length) return '';
+    const force = (new URLSearchParams(location.search).get('groupe') || '').toUpperCase(); // test : ?groupe=B
+    if (dispo.includes(force)) return force;
+    let g = '';
+    try { g = localStorage.getItem(KEY_GROUPE) || ''; } catch (e) {}
+    if (!dispo.includes(g)) {
+      g = dispo[Math.floor(Math.random() * dispo.length)];
+      try { localStorage.setItem(KEY_GROUPE, g); } catch (e) {}
+    }
+    return g;
+  };
+  let GROUPE = '';
+
+  // Lien « Premier regard » : groupe A, B ou C au hasard ; sinon l'ancien formulaire
+  const lienPremierRegard = (r) => {
+    GROUPE = pickGroupe(r.premier_regard);
+    let url = withSource(GROUPE ? r.premier_regard[GROUPE] : r.test_visuel_stock);
+    if (GROUPE && url) {
+      const u = new URL(url);
+      u.searchParams.set('groupe', GROUPE); // champ caché "groupe" dans Tally
+      url = u.toString();
+    }
+    return url;
+  };
+
+  // Ouverture directe : la carte ouvre le formulaire sans afficher la page NSB.
+  // Pour revoir la page NSB : ajouter ?page=nsb à l'adresse. Pour couper : "ouverture_directe": false dans routes.json.
+  const VOIR_PAGE = new URLSearchParams(location.search).get('page') === 'nsb';
+  const cache = (on) => { try { document.documentElement.style.visibility = on ? 'hidden' : ''; } catch (e) {} };
+  if (!VOIR_PAGE) cache(true); // évite d'apercevoir la page Pwofeel pendant la redirection
 
   const get = (file, type) => fetch(BASE + file + BUST)
     .then((r) => { if (!r.ok) throw new Error(file + ' ' + r.status); return r[type](); });
@@ -106,7 +143,7 @@
     const total = cat.boissons.length;
     const vagues = Math.max(...cat.boissons.map((b) => b.vague));
 
-    const vote = withSource(r.test_visuel_stock);
+    const vote = lienPremierRegard(r);
     const avis = withSource(r.test_degustation);
     const radar = withSource(r.test_radar);
 
@@ -251,21 +288,48 @@
       else if (/tiktok/i.test(el.href)) name = 'clic-tiktok';
       else if (/instagram/i.test(el.href)) name = 'clic-instagram';
       else if (/tally/i.test(el.href)) name = 'clic-radar';
+      if (name === 'clic-vote' && GROUPE) name += '-' + GROUPE; // stats : clics par groupe
       if (name) nbCount(name + '-' + SOURCE, el.textContent.trim().slice(0, 60), true);
     }, true);
   }
 
-  Promise.all([get('catalogue.json', 'json'), get('routes.json', 'json'), get('nsb-style.css', 'text')])
-    .then(([cat, routes, css]) => {
-      // Le style est injecté en <style> (GitHub sert les .css en text/plain, refusé en <link>)
-      const style = document.createElement('style');
-      style.id = 'nb-style';
-      style.textContent = css;
-      document.head.appendChild(style);
-      // Thème : catalogue.json → "theme" (ou ?theme=… pour tester)
-      THEME = new URLSearchParams(location.search).get('theme') || cat.theme || 'nuit';
-      render(mount(), cat, routes.fr || {});
-      startStats();
+  // Compte la redirection dans GoatCounter, même si la page se ferme tout de suite
+  const compteRedirection = (path) => {
+    if (!STATS) return;
+    try {
+      fetch(STATS + '?p=' + encodeURIComponent(path) + '&e=true&rnd=' + Math.random(),
+        { mode: 'no-cors', keepalive: true });
+    } catch (e) {}
+  };
+
+  function afficherPage(routes) {
+    return Promise.all([get('catalogue.json', 'json'), get('nsb-style.css', 'text')])
+      .then(([cat, css]) => {
+        // Le style est injecté en <style> (GitHub sert les .css en text/plain, refusé en <link>)
+        const style = document.createElement('style');
+        style.id = 'nb-style';
+        style.textContent = css;
+        document.head.appendChild(style);
+        // Thème : catalogue.json → "theme" (ou ?theme=… pour tester)
+        THEME = new URLSearchParams(location.search).get('theme') || cat.theme || 'nuit';
+        render(mount(), cat, routes.fr || {});
+        cache(false);
+        startStats();
+      });
+  }
+
+  get('routes.json', 'json')
+    .then((routes) => {
+      const r = routes.fr || {};
+      if (!VOIR_PAGE && r.ouverture_directe !== false) {
+        const url = lienPremierRegard(r);
+        if (url) {
+          compteRedirection('ouverture-directe-' + (GROUPE || 'ancien') + '-' + SOURCE);
+          location.replace(url);
+          return;
+        }
+      }
+      return afficherPage(routes);
     })
-    .catch((err) => console.error('NSB Gateway :', err));
+    .catch((err) => { cache(false); console.error('NSB Gateway :', err); });
 })();
