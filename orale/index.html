@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>NSB · Saisie orale</title>
+  <meta name="theme-color" content="#181122">
+  <style>
+    :root{--bg:#181122;--card:#241a33;--txt:#f3eefb;--mut:#b7aacb;--lime:#c6f432}
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--txt);font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    main{max-width:420px;margin:0 auto;padding:28px 16px 40px;display:flex;flex-direction:column;gap:16px}
+    h1{font-size:20px;margin:0}
+    p{margin:0;color:var(--mut);font-size:14px;line-height:1.4}
+    .card{background:var(--card);border-radius:16px;padding:18px;text-align:center}
+    .next{font-size:56px;font-weight:800;color:var(--lime);letter-spacing:.02em;margin:4px 0}
+    .go{display:block;width:100%;padding:18px;border:0;border-radius:14px;background:var(--lime);color:#181122;font-size:18px;font-weight:800;text-decoration:none;text-align:center}
+    .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+    .row button{flex:1 0 28%;padding:10px 0;border-radius:10px;border:1px solid #4a3d60;background:transparent;color:var(--txt);font-size:15px}
+    .row button.on{border-color:var(--lime);color:var(--lime)}
+    small{color:var(--mut);font-size:12px;text-align:center}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Saisie orale · Premier regard</h1>
+  <p>Une personne = une réponse. Chaque appui ouvre le groupe suivant (G1 → G6), avec <b>source = oral</b>.</p>
+  <div class="card">
+    <p>Prochain groupe</p>
+    <div class="next" id="next">G1</div>
+    <p id="count"></p>
+  </div>
+  <a class="go" id="go" href="#">Nouvelle réponse</a>
+  <p>Choisir un autre groupe pour la prochaine réponse :</p>
+  <div class="row" id="pick"></div>
+  <small>Après l'envoi du formulaire, reviens sur cette page (favori) pour la personne suivante.</small>
+</main>
+<script>
+/* Page de saisie orale NSB.
+   Les liens viennent de docs/routes.json ("premier_regard"), comme pour la carte NFC.
+   La rotation G1 → G6 est gardée dans ce téléphone (localStorage). */
+(function () {
+  var FALLBACK = {
+    G1: 'https://tally.so/r/PRpJA1', G2: 'https://tally.so/r/bZqQ8L', G3: 'https://tally.so/r/8Nq4P5',
+    G4: 'https://tally.so/r/vXM5x0', G5: 'https://tally.so/r/2jXGbj', G6: 'https://tally.so/r/WJ2Vej'
+  };
+  var KEY = 'nsb_orale_index', KEYN = 'nsb_orale_total';
+  var groupes = FALLBACK, noms = Object.keys(FALLBACK);
+  var get = function (k, d) { try { var v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } };
+  var set = function (k, v) { try { localStorage.setItem(k, String(v)); } catch (e) {} };
+  var idx = parseInt(get(KEY, '0'), 10) || 0;
+
+  function lien(g) {
+    var u = new URL(groupes[g]);
+    u.searchParams.set('source', 'oral');
+    return u.toString();
+  }
+  function rendu() {
+    idx = ((idx % noms.length) + noms.length) % noms.length;
+    var g = noms[idx];
+    document.getElementById('next').textContent = g;
+    document.getElementById('go').href = lien(g);
+    var n = parseInt(get(KEYN, '0'), 10) || 0;
+    document.getElementById('count').textContent = n ? n + ' réponse(s) lancée(s) depuis ce téléphone' : '';
+    var pick = document.getElementById('pick');
+    pick.innerHTML = '';
+    noms.forEach(function (nom, i) {
+      var b = document.createElement('button');
+      b.textContent = nom;
+      if (i === idx) b.className = 'on';
+      b.onclick = function () { idx = i; set(KEY, idx); rendu(); };
+      pick.appendChild(b);
+    });
+  }
+  document.getElementById('go').addEventListener('click', function () {
+    set(KEY, (idx + 1) % noms.length);
+    set(KEYN, (parseInt(get(KEYN, '0'), 10) || 0) + 1);
+  });
+
+  rendu();
+  fetch('../docs/routes.json?t=' + Date.now())
+    .then(function (r) { return r.json(); })
+    .then(function (d) {
+      var pr = d && d.fr && d.fr.premier_regard;
+      var ok = pr && Object.keys(pr).filter(function (k) { return pr[k]; });
+      if (ok && ok.length) {
+        groupes = {}; ok.forEach(function (k) { groupes[k] = pr[k]; });
+        noms = ok; rendu();
+      }
+    })
+    .catch(function () {});
+})();
+</script>
+</body>
+</html>

@@ -10,6 +10,9 @@ en Guadeloupe, choisies avec la communauté.
   et son téléphone la garde. Sans `source=qr`, le formulaire demande la commune.
 - **QR du flyer** (`blueprint.html`) : même questionnaire.
   `?origine_qr=lieu_a` = flyer déposé, `?origine_qr=lieu_b` = flyer remis en main propre.
+- **Saisie orale** (`orale/`) : pour remplir le questionnaire à la place
+  de quelqu'un. Chaque appui ouvre le groupe suivant (G1 → G6) avec
+  `source=oral`. Adresse : https://samuuniv9.github.io/nsb-gateway/orale/
 - **Lien de partage** (page de remerciement) : `?src=partage`.
 - Chaque réponse Tally est marquée par sa source : carte, flyer ou partage.
 
