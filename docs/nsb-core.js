@@ -1,5 +1,5 @@
 /* =========================================================
-   NSB Gateway (cœur) — v3.7 « Premier regard » : la carte ouvre directement un formulaire A/B/C au hasard
+   NSB Gateway (cœur) — v3.8 « Premier regard · Drop » : la carte ouvre directement un formulaire G1 à G6 au hasard
    Auteur : Samuel Nubery
    ---------------------------------------------------------
    Ce script remplace la page Pwofeel par la page NSB.
@@ -40,14 +40,14 @@
     } catch (e) { return url; }
   };
 
-  // Premier regard : chaque visiteur est envoyé au hasard vers le groupe A, B ou C.
+  // Premier regard : chaque visiteur est envoyé au hasard vers un groupe (G1 à G6).
   // Le groupe est gardé sur son téléphone : s'il rescanne la carte, il retombe sur le même formulaire.
-  // routes.json → "premier_regard": { "A": "...", "B": "...", "C": "..." } (un lien vide retire le groupe)
+  // routes.json → "premier_regard": { "G1": "...", …, "G6": "..." } (un lien vide retire le groupe)
   const KEY_GROUPE = 'nsb_groupe_premier_regard';
   const pickGroupe = (groupes) => {
     const dispo = Object.keys(groupes || {}).filter((g) => groupes[g]);
     if (!dispo.length) return '';
-    const force = (new URLSearchParams(location.search).get('groupe') || '').toUpperCase(); // test : ?groupe=B
+    const force = (new URLSearchParams(location.search).get('groupe') || '').toUpperCase(); // test : ?groupe=G3
     if (dispo.includes(force)) return force;
     let g = '';
     try { g = localStorage.getItem(KEY_GROUPE) || ''; } catch (e) {}
@@ -59,7 +59,7 @@
   };
   let GROUPE = '';
 
-  // Lien « Premier regard » : groupe A, B ou C au hasard ; sinon l'ancien formulaire
+  // Lien « Premier regard » : un groupe G1 à G6 au hasard ; sinon l'ancien formulaire
   const lienPremierRegard = (r) => {
     GROUPE = pickGroupe(r.premier_regard);
     let url = withSource(GROUPE ? r.premier_regard[GROUPE] : r.test_visuel_stock);
